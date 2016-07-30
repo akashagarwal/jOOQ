@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -53,7 +53,7 @@ import org.jooq.impl.DSL;
 public class MariaDBDSL extends DSL {
 
     /**
-     * No instances
+     * No instances.
      */
     protected MariaDBDSL() {
     }
@@ -81,168 +81,168 @@ public class MariaDBDSL extends DSL {
     }
 
     /**
-     * Get the MariaDB-specific <code>ENCODE()</code> function
+     * Get the MariaDB-specific <code>ENCODE()</code> function.
      */
     public static Field<String> encode(String string, String keyString) {
         return encode(val(string), val(keyString));
     }
 
     /**
-     * Get the MariaDB-specific <code>ENCODE()</code> function
+     * Get the MariaDB-specific <code>ENCODE()</code> function.
      */
     public static Field<String> encode(Field<String> string, Field<String> keyString) {
         return function("encode", String.class, string, keyString);
     }
 
     /**
-     * Get the MariaDB-specific <code>AES_DECRYPT()</code> function
+     * Get the MariaDB-specific <code>AES_DECRYPT()</code> function.
      */
     public static Field<String> aesDecrypt(String cryptString, String keyString) {
         return aesDecrypt(val(cryptString), val(keyString));
     }
 
     /**
-     * Get the MariaDB-specific <code>AES_DECRYPT()</code> function
+     * Get the MariaDB-specific <code>AES_DECRYPT()</code> function.
      */
     public static Field<String> aesDecrypt(Field<String> cryptString, Field<String> keyString) {
         return function("aes_decrypt", String.class, cryptString, keyString);
     }
 
     /**
-     * Get the MariaDB-specific <code>AES_ENCRYPT()</code> function
+     * Get the MariaDB-specific <code>AES_ENCRYPT()</code> function.
      */
     public static Field<String> aesEncrypt(String string, String keyString) {
         return aesEncrypt(val(string), val(keyString));
     }
 
     /**
-     * Get the MariaDB-specific <code>AES_ENCRYPT()</code> function
+     * Get the MariaDB-specific <code>AES_ENCRYPT()</code> function.
      */
     public static Field<String> aesEncrypt(Field<String> string, Field<String> keyString) {
         return function("aes_encrypt", String.class, string, keyString);
     }
 
     /**
-     * Get the MariaDB-specific <code>DES_DECRYPT()</code> function
+     * Get the MariaDB-specific <code>DES_DECRYPT()</code> function.
      */
     public static Field<String> desDecrypt(String cryptString) {
         return desDecrypt(val(cryptString));
     }
 
     /**
-     * Get the MariaDB-specific <code>DES_DECRYPT()</code> function
+     * Get the MariaDB-specific <code>DES_DECRYPT()</code> function.
      */
     public static Field<String> desDecrypt(Field<String> cryptString) {
         return function("des_decrypt", String.class, cryptString);
     }
 
     /**
-     * Get the MariaDB-specific <code>DES_DECRYPT()</code> function
+     * Get the MariaDB-specific <code>DES_DECRYPT()</code> function.
      */
     public static Field<String> desDecrypt(String cryptString, String keyString) {
         return desDecrypt(val(cryptString), val(keyString));
     }
 
     /**
-     * Get the MariaDB-specific <code>DES_DECRYPT()</code> function
+     * Get the MariaDB-specific <code>DES_DECRYPT()</code> function.
      */
     public static Field<String> desDecrypt(Field<String> cryptString, Field<String> keyString) {
         return function("des_decrypt", String.class, cryptString, keyString);
     }
 
     /**
-     * Get the MariaDB-specific <code>DES_ENCRYPT()</code> function
+     * Get the MariaDB-specific <code>DES_ENCRYPT()</code> function.
      */
     public static Field<String> desEncrypt(String string) {
         return desEncrypt(val(string));
     }
 
     /**
-     * Get the MariaDB-specific <code>DES_ENCRYPT()</code> function
+     * Get the MariaDB-specific <code>DES_ENCRYPT()</code> function.
      */
     public static Field<String> desEncrypt(Field<String> string) {
         return function("des_encrypt", String.class, string);
     }
 
     /**
-     * Get the MariaDB-specific <code>DES_ENCRYPT()</code> function
+     * Get the MariaDB-specific <code>DES_ENCRYPT()</code> function.
      */
     public static Field<String> desEncrypt(String string, String keyString) {
         return desEncrypt(val(string), val(keyString));
     }
 
     /**
-     * Get the MariaDB-specific <code>DES_ENCRYPT()</code> function
+     * Get the MariaDB-specific <code>DES_ENCRYPT()</code> function.
      */
     public static Field<String> desEncrypt(Field<String> string, Field<String> keyString) {
         return function("des_encrypt", String.class, string, keyString);
     }
 
     /**
-     * Get the MariaDB-specific <code>COMPRESS()</code> function
+     * Get the MariaDB-specific <code>COMPRESS()</code> function.
      */
     public static Field<String> compress(String string) {
         return compress(val(string));
     }
 
     /**
-     * Get the MariaDB-specific <code>COMPRESS()</code> function
+     * Get the MariaDB-specific <code>COMPRESS()</code> function.
      */
     public static Field<String> compress(Field<String> string) {
         return function("compress", String.class, string);
     }
 
     /**
-     * Get the MariaDB-specific <code>UNCOMPRESS()</code> function
+     * Get the MariaDB-specific <code>UNCOMPRESS()</code> function.
      */
     public static Field<String> uncompress(String string) {
         return uncompress(val(string));
     }
 
     /**
-     * Get the MariaDB-specific <code>UNCOMPRESS()</code> function
+     * Get the MariaDB-specific <code>UNCOMPRESS()</code> function.
      */
     public static Field<String> uncompress(Field<String> string) {
         return function("uncompress", String.class, string);
     }
 
     /**
-     * Get the MariaDB-specific <code>UNCOMPRESSED_LENGTH()</code> function
+     * Get the MariaDB-specific <code>UNCOMPRESSED_LENGTH()</code> function.
      */
     public static Field<Integer> uncompressedLength(String string) {
         return uncompressedLength(val(string));
     }
 
     /**
-     * Get the MariaDB-specific <code>UNCOMPRESSED_LENGTH()</code> function
+     * Get the MariaDB-specific <code>UNCOMPRESSED_LENGTH()</code> function.
      */
     public static Field<Integer> uncompressedLength(Field<String> string) {
         return function("uncompressed_length", Integer.class, string);
     }
 
     /**
-     * Get the MariaDB-specific <code>SHA1()</code> function
+     * Get the MariaDB-specific <code>SHA1()</code> function.
      */
     public static Field<String> sha1(String string) {
         return sha1(val(string));
     }
 
     /**
-     * Get the MariaDB-specific <code>SHA1()</code> function
+     * Get the MariaDB-specific <code>SHA1()</code> function.
      */
     public static Field<String> sha1(Field<String> string) {
         return function("sha1", String.class, string);
     }
 
     /**
-     * Get the MariaDB-specific <code>PASSWORD()</code> function
+     * Get the MariaDB-specific <code>PASSWORD()</code> function.
      */
     public static Field<String> password(String string) {
         return password(val(string));
     }
 
     /**
-     * Get the MariaDB-specific <code>PASSWORD()</code> function
+     * Get the MariaDB-specific <code>PASSWORD()</code> function.
      */
     public static Field<String> password(Field<String> string) {
         return function("password", String.class, string);

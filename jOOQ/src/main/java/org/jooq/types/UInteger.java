@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2011-2016, Lukas Eder, lukas.eder@gmail.com
  * All rights reserved.
  *
@@ -38,7 +38,7 @@ package org.jooq.types;
 import java.io.ObjectStreamException;
 
 /**
- * The <code>unsigned int</code> type
+ * The <code>unsigned int</code> type.
  *
  * @author Lukas Eder
  * @author Ed Schaller
@@ -58,12 +58,12 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
     private static final int             DEFAULT_PRECACHE_SIZE = 256;
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long            serialVersionUID      = -6821055240959745390L;
 
     /**
-     * Cached values
+     * Cached values.
      */
     private static final UInteger[]      VALUES                = mkValues();
 
@@ -80,7 +80,7 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
     public static final long             MAX_VALUE             = 0xffffffffL;
 
     /**
-     * The value modelling the content of this <code>unsigned int</code>
+     * The value modelling the content of this <code>unsigned int</code>.
      */
     private final long                   value;
 
@@ -94,7 +94,7 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
      *         negative no cache will be created. If the value is larger than
      *         {@link Integer#MAX_VALUE} then Integer#MAX_VALUE will be used.
      */
-    private static final int getPrecacheSize() {
+    private static int getPrecacheSize() {
         String prop = null;
         long propParsed;
 
@@ -106,8 +106,9 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
             // FIXME: should we log this somewhere?
             return DEFAULT_PRECACHE_SIZE;
         }
-        if (prop == null)
-            return DEFAULT_PRECACHE_SIZE;
+        if (prop == null) {
+			return DEFAULT_PRECACHE_SIZE;
+		}
         if (prop.length() <= 0) {
             // empty value
             // FIXME: should we log this somewhere?
@@ -122,8 +123,9 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
             return DEFAULT_PRECACHE_SIZE;
         }
         // treat negative value as no cache...
-        if (propParsed < 0)
-            return 0;
+        if (propParsed < 0) {
+			return 0;
+		}
         if (propParsed > Integer.MAX_VALUE) {
             // FIXME: should we log this somewhere
             return Integer.MAX_VALUE;
@@ -136,15 +138,17 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
      *
      * @return Array of cached values for UInteger
      */
-    private static final UInteger[] mkValues() {
+    private static UInteger[] mkValues() {
         int precacheSize = getPrecacheSize();
         UInteger[] ret;
 
-        if (precacheSize <= 0)
-            return null;
+        if (precacheSize <= 0) {
+			return null;
+		}
         ret = new UInteger[precacheSize];
-        for (int i = 0; i < precacheSize; i++)
-            ret[i] = new UInteger(i);
+        for (int i = 0; i < precacheSize; i++) {
+			ret[i] = new UInteger(i);
+		}
         return ret;
     }
 
@@ -168,8 +172,9 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
      * @return Cached value if one exists. Null otherwise.
      */
     private static UInteger getCached(long value) {
-        if (VALUES != null && value < VALUES.length)
-            return VALUES[(int) value];
+        if (VALUES != null && value < VALUES.length) {
+			return VALUES[(int) value];
+		}
         return null;
     }
 
@@ -177,10 +182,11 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
      * Get the value of a long without checking the value.
      */
     private static UInteger valueOfUnchecked(long value) {
-        UInteger cached;
+        UInteger cached = getCached(value);
 
-        if ((cached = getCached(value)) != null)
-            return cached;
+        if (cached != null) {
+			return cached;
+		}
         return new UInteger(value, true);
     }
 
@@ -204,7 +210,7 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
     }
 
     /**
-     * Create an <code>unsigned int</code>
+     * Create an <code>unsigned int</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned byte</code>
@@ -214,7 +220,7 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
     }
 
     /**
-     * Create an <code>unsigned int</code>
+     * Create an <code>unsigned int</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned int</code>
@@ -243,7 +249,7 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
     }
 
     /**
-     * Throw exception if value out of range (long version)
+     * Throw exception if value out of range (long version).
      *
      * @param value Value to check
      * @return value if it is in range
@@ -268,8 +274,10 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
 
         // the value read could be invalid so check it
         rangeCheck(value);
-        if ((cached = getCached(value)) != null)
-            return cached;
+        cached = getCached(value);
+		if (cached != null) {
+			return cached;
+		}
         return this;
     }
 
@@ -300,13 +308,7 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj instanceof UInteger) {
-            return value == ((UInteger) obj).value;
-        }
-
-        return false;
+        return this == obj || (obj instanceof UInteger && value == ((UInteger) obj).value);
     }
 
     @Override
@@ -316,6 +318,6 @@ public final class UInteger extends UNumber implements Comparable<UInteger> {
 
     @Override
     public int compareTo(UInteger o) {
-        return (value < o.value ? -1 : (value == o.value ? 0 : 1));
+        return value < o.value ? -1 : (value == o.value ? 0 : 1);
     }
 }

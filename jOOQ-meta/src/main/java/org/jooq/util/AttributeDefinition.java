@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -41,7 +41,7 @@
 package org.jooq.util;
 
 /**
- * An attribute in a {@link UDTDefinition}
+ * An attribute in a {@link UDTDefinition}.
  *
  * @author Lukas Eder
  */

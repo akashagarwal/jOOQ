@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2011-2016, Lukas Eder, lukas.eder@gmail.com
  * All rights reserved.
  *
@@ -70,7 +70,7 @@ public final class Unsigned {
     }
 
     /**
-     * Create an <code>unsigned byte</code>
+     * Create an <code>unsigned byte</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned byte</code>
@@ -81,7 +81,7 @@ public final class Unsigned {
     }
 
     /**
-     * Create an <code>unsigned byte</code>
+     * Create an <code>unsigned byte</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned byte</code>
@@ -92,7 +92,7 @@ public final class Unsigned {
     }
 
     /**
-     * Create an <code>unsigned byte</code>
+     * Create an <code>unsigned byte</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned byte</code>
@@ -125,7 +125,7 @@ public final class Unsigned {
     }
 
     /**
-     * Create an <code>unsigned short</code>
+     * Create an <code>unsigned short</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned short</code>
@@ -158,7 +158,7 @@ public final class Unsigned {
     }
 
     /**
-     * Create an <code>unsigned int</code>
+     * Create an <code>unsigned int</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned int</code>
@@ -191,7 +191,7 @@ public final class Unsigned {
     }
 
     /**
-     * Create an <code>unsigned long</code>
+     * Create an <code>unsigned long</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned long</code>
@@ -202,7 +202,7 @@ public final class Unsigned {
     }
 
     /**
-     * No instances
+     * No instances.
      */
     private Unsigned() {}
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -72,7 +72,7 @@ public class PostgresUtils {
 
     private static final String POSTGRESQL_HEX_STRING_PREFIX = "\\x";
 
-    // PGobject parsing state machine
+    /** PGobject parsing state machine. */
     private static final int    PG_OBJECT_INIT               = 0;
     private static final int    PG_OBJECT_BEFORE_VALUE       = 1;
     private static final int    PG_OBJECT_QUOTED_VALUE       = 2;
@@ -81,7 +81,7 @@ public class PostgresUtils {
     private static final int    PG_OBJECT_END                = 5;
 
     /**
-     * Parse a Postgres-encoded <code>bytea</code> string
+     * Parse a Postgres-encoded <code>bytea</code> string.
      */
     public static byte[] toBytes(final String string) {
 
@@ -147,8 +147,9 @@ public class PostgresUtils {
 
         try {
             while ((hexDigit = input.read()) != -1) {
-                byteValue = (hexValue(hexDigit) << 4);
-                if ((hexDigit = input.read()) == -1) {
+                byteValue = hexValue(hexDigit) << 4;
+                hexDigit = input.read();
+				if (hexDigit == -1) {
                     break;
                 }
                 byteValue += hexValue(hexDigit);
@@ -166,7 +167,7 @@ public class PostgresUtils {
     }
 
     /**
-     * Get the hex value of a <code>char</code> digit
+     * Get the hex value of a <code>char</code> digit.
      */
     private static int hexValue(final int hexDigit) {
         if (hexDigit >= '0' && hexDigit <= '9') {
@@ -183,7 +184,7 @@ public class PostgresUtils {
     }
 
     /**
-     * Get the octal value of a {@code char} digit
+     * Get the octal value of a {@code char} digit.
      */
     private static int octalValue(final int octalDigit) {
         if (octalDigit < '0' || octalDigit > '7') {
@@ -195,7 +196,7 @@ public class PostgresUtils {
 
 
     /**
-     * Convert a jOOQ <code>DAY TO SECOND</code> interval to a Postgres representation
+     * Convert a jOOQ <code>DAY TO SECOND</code> interval to a Postgres representation.
      */
     public static Object toPGInterval(DayToSecond interval) {
         return on("org.postgresql.util.PGInterval").create(0, 0,
@@ -207,7 +208,7 @@ public class PostgresUtils {
     }
 
     /**
-     * Convert a jOOQ <code>YEAR TO MONTH</code> interval to a Postgres representation
+     * Convert a jOOQ <code>YEAR TO MONTH</code> interval to a Postgres representation.
      */
     public static Object toPGInterval(YearToMonth interval) {
         return on("org.postgresql.util.PGInterval").create(
@@ -217,7 +218,7 @@ public class PostgresUtils {
     }
 
     /**
-     * Convert a Postgres interval to a jOOQ <code>DAY TO SECOND</code> interval
+     * Convert a Postgres interval to a jOOQ <code>DAY TO SECOND</code> interval.
      */
     public static DayToSecond toDayToSecond(Object pgInterval) {
         boolean negative = pgInterval.toString().contains("-");
@@ -243,7 +244,7 @@ public class PostgresUtils {
     }
 
     /**
-     * Convert a Postgres interval to a jOOQ <code>YEAR TO MONTH</code> interval
+     * Convert a Postgres interval to a jOOQ <code>YEAR TO MONTH</code> interval.
      */
     public static YearToMonth toYearToMonth(Object pgInterval) {
         boolean negative = pgInterval.toString().contains("-");
@@ -265,7 +266,7 @@ public class PostgresUtils {
     }
 
     /**
-     * Tokenize a PGObject input string
+     * Tokenize a PGObject input string.
      */
     @SuppressWarnings("null")
     public static List<String> toPGObject(String input) {
@@ -310,8 +311,8 @@ public class PostgresUtils {
                     }
 
                     // Consume "null"
-                    else if ((c == 'n' || c == 'N') && (i + 4 < input.length())
-                        && input.substring(i, i + 4).equalsIgnoreCase("null")) {
+                    else if ((c == 'n' || c == 'N') && i + 4 < input.length()
+                        && "null".equalsIgnoreCase(input.substring(i, i + 4))) {
                         values.add(null);
                         i += 3;
                         state = PG_OBJECT_AFTER_VALUE;
@@ -412,7 +413,7 @@ public class PostgresUtils {
     }
 
     /**
-     * Create a Postgres string representation of an array
+     * Create a Postgres string representation of an array.
      */
     public static String toPGArrayString(Object[] value) {
         StringBuilder sb = new StringBuilder();
@@ -423,14 +424,15 @@ public class PostgresUtils {
             sb.append(separator);
 
             // [#753] null must be set as a literal
-            if (o == null)
-                sb.append(o);
-            else if (o instanceof byte[])
-                sb.append(toPGString((byte[]) o));
-            else
-                sb.append("\"")
+            if (o == null) {
+				sb.append(o);
+			} else if (o instanceof byte[]) {
+				sb.append(toPGString((byte[]) o));
+			} else {
+				sb.append("\"")
                   .append(toPGString(o).replace("\\", "\\\\").replace("\"", "\\\""))
                   .append("\"");
+			}
 
             separator = ",";
         }
@@ -470,12 +472,13 @@ public class PostgresUtils {
 
             // [#753] null must not be set as a literal
             if (a != null) {
-                if (a instanceof byte[])
-                    sb.append(toPGString((byte[]) a));
-                else
-                    sb.append("\"")
+                if (a instanceof byte[]) {
+					sb.append(toPGString((byte[]) a));
+				} else {
+					sb.append("\"")
                       .append(toPGString(a).replace("\\", "\\\\").replace("\"", "\\\""))
                       .append("\"");
+				}
             }
 
             separator = ",";

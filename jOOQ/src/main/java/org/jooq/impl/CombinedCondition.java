@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -70,13 +70,17 @@ final class CombinedCondition extends AbstractCondition {
     private final List<Condition> conditions;
 
     CombinedCondition(Operator operator, Collection<? extends Condition> conditions) {
-        if (operator == null)
-            throw new IllegalArgumentException("The argument 'operator' must not be null");
-        if (conditions == null)
-            throw new IllegalArgumentException("The argument 'conditions' must not be null");
-        for (Condition condition : conditions)
-            if (condition == null)
-                throw new IllegalArgumentException("The argument 'conditions' must not contain null");
+        if (operator == null) {
+			throw new IllegalArgumentException("The argument 'operator' must not be null");
+		}
+        if (conditions == null) {
+			throw new IllegalArgumentException("The argument 'conditions' must not be null");
+		}
+        for (Condition condition : conditions) {
+			if (condition == null) {
+				throw new IllegalArgumentException("The argument 'conditions' must not contain null");
+			}
+		}
 
         this.operator = operator;
         this.conditions = new ArrayList<Condition>(conditions.size());
@@ -89,10 +93,11 @@ final class CombinedCondition extends AbstractCondition {
             if (condition instanceof CombinedCondition) {
                 CombinedCondition combinedCondition = (CombinedCondition) condition;
 
-                if (combinedCondition.operator == op)
-                    this.conditions.addAll(combinedCondition.conditions);
-                else
-                    this.conditions.add(condition);
+                if (combinedCondition.operator == op) {
+					this.conditions.addAll(combinedCondition.conditions);
+				} else {
+					this.conditions.add(condition);
+				}
             }
             else {
                 this.conditions.add(condition);
@@ -108,10 +113,11 @@ final class CombinedCondition extends AbstractCondition {
     @Override
     public final void accept(Context<?> ctx) {
         if (conditions.isEmpty()) {
-            if (operator == AND)
-                ctx.visit(trueCondition());
-            else
-                ctx.visit(falseCondition());
+            if (operator == AND) {
+				ctx.visit(trueCondition());
+			} else {
+				ctx.visit(falseCondition());
+			}
         }
         else if (conditions.size() == 1) {
             ctx.visit(conditions.get(0));
@@ -125,10 +131,12 @@ final class CombinedCondition extends AbstractCondition {
             String separator = null;
 
             for (int i = 0; i < conditions.size(); i++) {
-                if (i > 0)
-                    ctx.formatSeparator();
-                if (separator != null)
-                    ctx.keyword(separator).sql(' ');
+                if (i > 0) {
+					ctx.formatSeparator();
+				}
+                if (separator != null) {
+					ctx.keyword(separator).sql(' ');
+				}
 
                 ctx.visit(conditions.get(i));
                 separator = operatorName;

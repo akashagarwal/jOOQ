@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -62,9 +62,8 @@ public abstract class AbstractPackageDefinition extends AbstractDefinition imple
 
     @Override
     public List<Definition> getDefinitionPath() {
-        List<Definition> result = new ArrayList<Definition>();
+        List<Definition> result = new ArrayList<Definition>(getSchema().getDefinitionPath());
 
-        result.addAll(getSchema().getDefinitionPath());
         result.add(this);
 
         return result;

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -74,8 +74,9 @@ public class DefaultColumnDefinition
         String[] syntheticIdentities = db.getSyntheticIdentities();
         boolean match = !db.filterExcludeInclude(singletonList(column), null, syntheticIdentities, db.getFilters()).isEmpty();
 
-        if (match)
-            log.info("Synthetic Identity: " + column.getQualifiedName());
+        if (match) {
+			log.info("Synthetic Identity: " + column.getQualifiedName());
+		}
 
         return match;
     }

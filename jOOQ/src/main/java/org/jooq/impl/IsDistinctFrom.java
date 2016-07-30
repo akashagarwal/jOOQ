@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -81,7 +81,7 @@ import org.jooq.SQLDialect;
 final class IsDistinctFrom<T> extends AbstractCondition {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long           serialVersionUID = 4568269684824736461L;
 
@@ -152,20 +152,22 @@ final class IsDistinctFrom<T> extends AbstractCondition {
 
         // MySQL knows the <=> operator
         else if (asList(MARIADB, MYSQL).contains(configuration.family())) {
-            if (mySQLCondition == null)
-                mySQLCondition = (QueryPartInternal) ((comparator == IS_DISTINCT_FROM)
+            if (mySQLCondition == null) {
+				mySQLCondition = (QueryPartInternal) ((comparator == IS_DISTINCT_FROM)
                     ? condition("{not}({0} <=> {1})", lhs, rhs)
                     : condition("{0} <=> {1}", lhs, rhs));
+			}
 
             return mySQLCondition;
         }
 
         // SQLite knows the IS / IS NOT predicate
         else if (SQLITE == configuration.family()) {
-            if (sqliteCondition == null)
-                sqliteCondition = (QueryPartInternal) ((comparator == IS_DISTINCT_FROM)
+            if (sqliteCondition == null) {
+				sqliteCondition = (QueryPartInternal) ((comparator == IS_DISTINCT_FROM)
                     ? condition("{0} {is not} {1}", lhs, rhs)
                     : condition("{0} {is} {1}", lhs, rhs));
+			}
 
             return sqliteCondition;
         }
@@ -187,8 +189,9 @@ final class IsDistinctFrom<T> extends AbstractCondition {
         // These dialects natively support the IS DISTINCT FROM predicate:
         // H2, Postgres
         else {
-            if (compareCondition == null)
-                compareCondition = new CompareCondition(lhs, rhs, comparator);
+            if (compareCondition == null) {
+				compareCondition = new CompareCondition(lhs, rhs, comparator);
+			}
 
             return compareCondition;
         }

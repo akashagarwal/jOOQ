@@ -264,7 +264,7 @@ public final class StringUtils {
             return true;
         }
         for (int i = 0; i < strLen; i++) {
-            if ((Character.isWhitespace(str.charAt(i)) == false)) {
+            if (!Character.isWhitespace(str.charAt(i))) {
                 return false;
             }
         }
@@ -654,7 +654,7 @@ public final class StringUtils {
         if (offset > str.length()) {
             offset = str.length();
         }
-        if ((str.length() - offset) < (maxWidth - 3)) {
+        if (str.length() - offset < maxWidth - 3) {
             offset = str.length() - (maxWidth - 3);
         }
         if (offset <= 4) {
@@ -663,7 +663,7 @@ public final class StringUtils {
         if (maxWidth < 7) {
             throw new IllegalArgumentException("Minimum abbreviation width with offset is 7");
         }
-        if ((offset + (maxWidth - 3)) < str.length()) {
+        if (offset + (maxWidth - 3) < str.length()) {
             return "..." + abbreviate(str.substring(offset), maxWidth - 3);
         }
         return "..." + str.substring(str.length() - (maxWidth - 3));
@@ -775,11 +775,11 @@ public final class StringUtils {
         }
         int replLength = searchString.length();
         int increase = replacement.length() - replLength;
-        increase = (increase < 0 ? 0 : increase);
-        increase *= (max < 0 ? 16 : (max > 64 ? 64 : max));
+        increase = increase < 0 ? 0 : increase;
+        increase *= max < 0 ? 16 : (max > 64 ? 64 : max);
         StringBuilder buf = new StringBuilder(text.length() + increase);
         while (end != INDEX_NOT_FOUND) {
-            buf.append(text.substring(start, end)).append(replacement);
+            buf.append(text, start, end).append(replacement);
             start = end + replLength;
             if (--max == 0) {
                 break;
@@ -931,12 +931,10 @@ public final class StringUtils {
             // see if we need to keep searching for this
             if (tempIndex == -1) {
                 noMoreMatchesForReplIndex[i] = true;
-            } else {
-                if (textIndex == -1 || tempIndex < textIndex) {
-                    textIndex = tempIndex;
-                    replaceIndex = i;
-                }
-            }
+            } else if (textIndex == -1 || tempIndex < textIndex) {
+			    textIndex = tempIndex;
+			    replaceIndex = i;
+			}
         }
         // NOTE: logic mostly below END
 
@@ -987,12 +985,10 @@ public final class StringUtils {
                 // see if we need to keep searching for this
                 if (tempIndex == -1) {
                     noMoreMatchesForReplIndex[i] = true;
-                } else {
-                    if (textIndex == -1 || tempIndex < textIndex) {
-                        textIndex = tempIndex;
-                        replaceIndex = i;
-                    }
-                }
+                } else if (textIndex == -1 || tempIndex < textIndex) {
+				    textIndex = tempIndex;
+				    replaceIndex = i;
+				}
             }
             // NOTE: logic duplicated above END
 
@@ -1063,11 +1059,11 @@ public final class StringUtils {
      * @since 2.0
      */
     public static String join(Object[] array, char separator) {
-        if (array == null) {
-            return null;
+        if (array != null) {
+            return join(array, separator, 0, array.length);
         }
 
-        return join(array, separator, 0, array.length);
+        return null;
     }
 
     /**
@@ -1100,7 +1096,7 @@ public final class StringUtils {
         if (array == null) {
             return null;
         }
-        int noOfItems = (endIndex - startIndex);
+        int noOfItems = endIndex - startIndex;
         if (noOfItems <= 0) {
             return EMPTY;
         }
@@ -1142,10 +1138,10 @@ public final class StringUtils {
      * @return the joined String, {@code null} if null array input
      */
     public static String join(Object[] array, String separator) {
-        if (array == null) {
-            return null;
+        if (array != null) {
+            return join(array, separator, 0, array.length);
         }
-        return join(array, separator, 0, array.length);
+        return null;
     }
 
     /**
@@ -1185,7 +1181,7 @@ public final class StringUtils {
 
         // endIndex - startIndex > 0:   Len = NofStrings *(len(firstString) + len(separator))
         //           (Assuming that all Strings are roughly equally long)
-        int noOfItems = (endIndex - startIndex);
+        int noOfItems = endIndex - startIndex;
         if (noOfItems <= 0) {
             return EMPTY;
         }
@@ -1229,13 +1225,7 @@ public final class StringUtils {
      * @return {@code true} if the values of both objects are the same
      */
     public static boolean equals(Object object1, Object object2) {
-        if (object1 == object2) {
-            return true;
-        }
-        if ((object1 == null) || (object2 == null)) {
-            return false;
-        }
-        return object1.equals(object2);
+        return object1 == object2 || (object1 != null && object2 != null && object1.equals(object2));
     }
 
     /**
@@ -1263,7 +1253,7 @@ public final class StringUtils {
     // -------------------------------------------------------------------------
 
     /**
-     * Convert a string to camel case
+     * Convert a string to camel case.
      */
     public static String toCamelCase(String string) {
         StringBuilder result = new StringBuilder();
@@ -1295,14 +1285,14 @@ public final class StringUtils {
     }
 
     /**
-     * Convert a string to camel case starting with a lower case letter
+     * Convert a string to camel case starting with a lower case letter.
      */
     public static String toCamelCaseLC(String string) {
         return toLC(toCamelCase(string));
     }
 
     /**
-     * Change a string's first letter to lower case
+     * Change a string's first letter to lower case.
      */
     public static String toLC(String string) {
         if (string == null || string.isEmpty()) {
@@ -1338,8 +1328,9 @@ public final class StringUtils {
         }
 
         // If no match was found, return this
-        if (index == 0)
-            return new String[] { input.toString() };
+        if (index == 0) {
+			return new String[] { input.toString() };
+		}
 
         // Add remaining segment
         matchList.add(input.subSequence(index, input.length()).toString());

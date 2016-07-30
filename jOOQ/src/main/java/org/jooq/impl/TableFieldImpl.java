@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -77,9 +77,11 @@ final class TableFieldImpl<R extends Record, T> extends AbstractField<T> impleme
         return table;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: QueryPart API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: QueryPart API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final Clause[] clauses(Context<?> ctx) {
@@ -99,9 +101,11 @@ final class TableFieldImpl<R extends Record, T> extends AbstractField<T> impleme
         ctx.data(DATA_OMIT_CLAUSE_EVENT_EMISSION, null);
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: Object API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Object API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public boolean equals(Object that) {

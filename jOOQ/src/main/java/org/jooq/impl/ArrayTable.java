@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -57,14 +57,14 @@ import org.jooq.exception.DataTypeException;
 import org.jooq.util.h2.H2DataType;
 
 /**
- * An unnested array
+ * An unnested array.
  *
  * @author Lukas Eder
  */
 final class ArrayTable extends AbstractTable<Record> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long    serialVersionUID = 2380426377794577041L;
 
@@ -121,7 +121,7 @@ final class ArrayTable extends AbstractTable<Record> {
         throw new UnsupportedOperationException("This constructor is not yet implemented");
     }
 
-    private static final Fields<Record> init(String alias, Class<?> arrayType) {
+    private static Fields<Record> init(String alias, Class<?> arrayType) {
         List<Field<?>> result = new ArrayList<Field<?>>();
 
         // [#1114] VARRAY/TABLE of OBJECT have more than one field
@@ -220,7 +220,7 @@ final class ArrayTable extends AbstractTable<Record> {
     private class PostgresHSQLDBTable extends DialectArrayTable {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long serialVersionUID = 6989279597964488457L;
 
@@ -236,7 +236,7 @@ final class ArrayTable extends AbstractTable<Record> {
     private class H2ArrayTable extends DialectArrayTable {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long serialVersionUID = 8679404596822098711L;
 
@@ -276,7 +276,7 @@ final class ArrayTable extends AbstractTable<Record> {
     private abstract class DialectArrayTable extends AbstractTable<Record> {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long serialVersionUID = 2662639259338694177L;
 

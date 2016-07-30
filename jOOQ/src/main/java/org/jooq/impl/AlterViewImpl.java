@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -64,7 +64,7 @@ final class AlterViewImpl extends AbstractQuery implements
     AlterViewFinalStep {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long     serialVersionUID = 8904572826501186329L;
     private static final Clause[] CLAUSES          = { ALTER_VIEW };
@@ -84,9 +84,11 @@ final class AlterViewImpl extends AbstractQuery implements
         this.ifExists = ifExists;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: DSL API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: DSL API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final AlterViewImpl renameTo(Table<?> newName) {
@@ -104,9 +106,11 @@ final class AlterViewImpl extends AbstractQuery implements
         return renameTo(name(newName));
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: QueryPart API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: QueryPart API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final void accept(Context<?> ctx) {
@@ -114,8 +118,9 @@ final class AlterViewImpl extends AbstractQuery implements
            .keyword("alter").sql(' ')
            .keyword(ctx.family() == HSQLDB ? "table" : "view");
 
-        if (ifExists)
-            ctx.sql(' ').keyword("if exists");
+        if (ifExists) {
+			ctx.sql(' ').keyword("if exists");
+		}
 
         ctx.sql(' ').visit(view)
            .end(ALTER_VIEW_VIEW)

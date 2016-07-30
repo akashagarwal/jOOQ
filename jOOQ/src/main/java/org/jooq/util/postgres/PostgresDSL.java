@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -61,7 +61,7 @@ import org.jooq.impl.SQLDataType;
 public class PostgresDSL extends DSL {
 
     /**
-     * No instances
+     * No instances.
      */
     protected PostgresDSL() {}
 
@@ -130,8 +130,10 @@ public class PostgresDSL extends DSL {
         return arrayAppend0(array, value);
     }
 
-    // Java 8 is stricter than Java 7 with respect to generics and overload
-    // resolution (http://stackoverflow.com/q/5361513/521799)
+    /**
+     * Java 8 is stricter than Java 7 with respect to generics and overload
+     * resolution (http://stackoverflow.com/q/5361513/521799)
+     */
     static <T> Field<T[]> arrayAppend0(Field<T[]> array, Field<T> value) {
         return field("{array_append}({0}, {1})", nullSafe(array).getDataType(), nullSafe(array), nullSafe(value));
     }
@@ -184,8 +186,10 @@ public class PostgresDSL extends DSL {
         return arrayPrepend0(value, array);
     }
 
-    // Java 8 is stricter than Java 7 with respect to generics and overload
-    // resolution (http://stackoverflow.com/q/5361513/521799)
+    /**
+     * Java 8 is stricter than Java 7 with respect to generics and overload
+     * resolution (http://stackoverflow.com/q/5361513/521799)
+     */
     static <T> Field<T[]> arrayPrepend0(Field<T> value, Field<T[]> array) {
         return field("{array_prepend}({0}, {1})", nullSafe(array).getDataType(), nullSafe(value), nullSafe(array));
     }
@@ -286,8 +290,10 @@ public class PostgresDSL extends DSL {
         return arrayRemove0(array, element);
     }
 
-    // Java 8 is stricter than Java 7 with respect to generics and overload
-    // resolution (http://stackoverflow.com/q/5361513/521799)
+    /**
+     * Java 8 is stricter than Java 7 with respect to generics and overload
+     * resolution (http://stackoverflow.com/q/5361513/521799)
+     */
     static <T> Field<T[]> arrayRemove0(Field<T[]> array, Field<T> element) {
         return field("{array_remove}({0}, {1})", array.getDataType(), array, element);
     }
@@ -344,8 +350,10 @@ public class PostgresDSL extends DSL {
         return arrayReplace0(array, search, replace);
     }
 
-    // Java 8 is stricter than Java 7 with respect to generics and overload
-    // resolution (http://stackoverflow.com/q/5361513/521799)
+    /**
+     * Java 8 is stricter than Java 7 with respect to generics and overload
+     * resolution (http://stackoverflow.com/q/5361513/521799)
+     */
     static <T> Field<T[]> arrayReplace0(Field<T[]> array, Field<T> search, Field<T> replace) {
         return field("{array_replace}({0}, {1}, {2})", array.getDataType(), nullSafe(array), nullSafe(search), nullSafe(replace));
     }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -59,7 +59,7 @@ import org.jooq.Select;
 final class CaseConditionStepImpl<T> extends AbstractFunction<T> implements CaseConditionStep<T> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long     serialVersionUID = -1735676153683257465L;
 
@@ -127,7 +127,7 @@ final class CaseConditionStepImpl<T> extends AbstractFunction<T> implements Case
     private abstract class Base extends AbstractQueryPart {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long serialVersionUID = 6146002888421945901L;
 
@@ -177,7 +177,7 @@ final class CaseConditionStepImpl<T> extends AbstractFunction<T> implements Case
     private class Native extends Base {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long serialVersionUID = 7850713333675233736L;
 

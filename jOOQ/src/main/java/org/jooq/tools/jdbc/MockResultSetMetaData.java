@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -62,7 +62,7 @@ import org.jooq.types.UNumber;
 public class MockResultSetMetaData implements ResultSetMetaData, Serializable {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long   serialVersionUID = -6859273409631070434L;
 
@@ -72,7 +72,7 @@ public class MockResultSetMetaData implements ResultSetMetaData, Serializable {
     private final MockResultSet rs;
 
     /**
-     * Create a new mock result set meta data object
+     * Create a new mock result set meta data object.
      */
     public MockResultSetMetaData(MockResultSet rs) {
         this.rs = rs;

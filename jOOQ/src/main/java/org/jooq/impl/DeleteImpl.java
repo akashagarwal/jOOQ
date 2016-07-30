@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -74,7 +74,7 @@ final class DeleteImpl<R extends Record>
     DeleteResultStep<R> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long        serialVersionUID = 2747566322757517382L;
 

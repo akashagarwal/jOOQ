@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -54,7 +54,7 @@ import org.jooq.tools.JooqLogger;
 import org.jooq.tools.StringUtils;
 
 /**
- * A base implementation for element container definitions
+ * A base implementation for element container definitions.
  *
  * @author Lukas Eder
  */
@@ -63,7 +63,7 @@ extends AbstractDefinition {
 
     /**
      * Precision and scale for those dialects that don't formally provide that
-     * information in a separate field
+     * information in a separate field.
      */
     protected static final Pattern  PRECISION_SCALE = Pattern.compile("\\((\\d+)\\s*(?:,\\s*(\\d+))?\\)");
     private static final JooqLogger log             = JooqLogger.getLogger(AbstractElementContainerDefinition.class);
@@ -76,9 +76,8 @@ extends AbstractDefinition {
 
     @Override
     public final List<Definition> getDefinitionPath() {
-        List<Definition> result = new ArrayList<Definition>();
+        List<Definition> result = new ArrayList<Definition>(getSchema().getDefinitionPath());
 
-        result.addAll(getSchema().getDefinitionPath());
         result.add(this);
 
         return result;
@@ -145,11 +144,9 @@ extends AbstractDefinition {
         if (typeName.contains("(")) {
             Matcher m = PRECISION_SCALE.matcher(typeName);
 
-            if (m.find()) {
-                if (!StringUtils.isBlank(m.group(1))) {
-                    return Integer.valueOf(m.group(1));
-                }
-            }
+            if (m.find() && !StringUtils.isBlank(m.group(1))) {
+			    return Integer.valueOf(m.group(1));
+			}
         }
 
         return 0;
@@ -159,11 +156,9 @@ extends AbstractDefinition {
         if (typeName.contains("(")) {
             Matcher m = PRECISION_SCALE.matcher(typeName);
 
-            if (m.find()) {
-                if (!StringUtils.isBlank(m.group(2))) {
-                    return Integer.valueOf(m.group(2));
-                }
-            }
+            if (m.find() && !StringUtils.isBlank(m.group(2))) {
+			    return Integer.valueOf(m.group(2));
+			}
         }
 
         return 0;

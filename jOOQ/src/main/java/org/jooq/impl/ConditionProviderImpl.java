@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -70,16 +70,18 @@ final class ConditionProviderImpl extends AbstractQueryPart implements Condition
     }
 
     final Condition getWhere() {
-        if (condition == null) {
-            return trueCondition();
+        if (condition != null) {
+            return condition;
         }
 
-        return condition;
+        return trueCondition();
     }
 
-    // -------------------------------------------------------------------------
-    // ConditionProvider API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * ConditionProvider API
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public final void addConditions(Condition... conditions) {
@@ -127,9 +129,11 @@ final class ConditionProviderImpl extends AbstractQueryPart implements Condition
         return null;
     }
 
-    // -------------------------------------------------------------------------
-    // Condition API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Condition API
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public final Condition and(Condition other) {

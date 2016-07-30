@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -54,7 +54,7 @@ import org.jooq.QueryPart;
 final class Rollup extends AbstractField<Object> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long         serialVersionUID = -5820608758939548704L;
     private QueryPartList<FieldOrRow> arguments;

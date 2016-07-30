@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -59,7 +59,7 @@ public abstract class AbstractDefinition implements Definition {
     private final String           comment;
     private final String           overload;
 
-    // [#2238] Some caches for strings that are heavy to calculate in large schemas
+    /** [#2238] Some caches for strings that are heavy to calculate in large schemas. */
     private transient String       qualifiedInputName;
     private transient String       qualifiedOutputName;
     private transient Integer      hashCode;
@@ -112,7 +112,7 @@ public abstract class AbstractDefinition implements Definition {
     /**
      * Subclasses may override this method
      *
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public String getOutputName() {
@@ -132,7 +132,7 @@ public abstract class AbstractDefinition implements Definition {
     /**
      * Subclasses may override this method
      *
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public final String getQualifiedInputName() {
@@ -141,10 +141,11 @@ public abstract class AbstractDefinition implements Definition {
 
             String separator = "";
             for (Definition part : getDefinitionPath()) {
-                if (part instanceof CatalogDefinition && ((CatalogDefinition) part).isDefaultCatalog())
-                    continue;
-                else if (part instanceof SchemaDefinition && ((SchemaDefinition) part).isDefaultSchema())
-                    continue;
+                if (part instanceof CatalogDefinition && ((CatalogDefinition) part).isDefaultCatalog()) {
+					continue;
+				} else if (part instanceof SchemaDefinition && ((SchemaDefinition) part).isDefaultSchema()) {
+					continue;
+				}
 
                 sb.append(separator);
                 sb.append(part.getInputName());
@@ -161,7 +162,7 @@ public abstract class AbstractDefinition implements Definition {
     /**
      * Subclasses may override this method
      *
-     * {@inheritDoc}
+     * {@inheritDoc}.
      */
     @Override
     public final String getQualifiedOutputName() {
@@ -170,10 +171,11 @@ public abstract class AbstractDefinition implements Definition {
 
             String separator = "";
             for (Definition part : getDefinitionPath()) {
-                if (part instanceof CatalogDefinition && ((CatalogDefinition) part).isDefaultCatalog())
-                    continue;
-                else if (part instanceof SchemaDefinition && ((SchemaDefinition) part).isDefaultSchema())
-                    continue;
+                if (part instanceof CatalogDefinition && ((CatalogDefinition) part).isDefaultCatalog()) {
+					continue;
+				} else if (part instanceof SchemaDefinition && ((SchemaDefinition) part).isDefaultSchema()) {
+					continue;
+				}
 
                 sb.append(separator);
                 sb.append(part.getOutputName());
@@ -203,8 +205,9 @@ public abstract class AbstractDefinition implements Definition {
 
     @Override
     public final boolean equals(Object obj) {
-        if (this == obj)
-            return true;
+        if (this == obj) {
+			return true;
+		}
 
         if (obj instanceof Definition) {
             Definition that = (Definition) obj;
@@ -228,10 +231,11 @@ public abstract class AbstractDefinition implements Definition {
     }
 
     protected final DSLContext create(boolean muteExceptions) {
-        if (database instanceof AbstractDatabase)
-            return ((AbstractDatabase) database).create(muteExceptions);
-        else
-            return database.create();
+        if (database instanceof AbstractDatabase) {
+			return ((AbstractDatabase) database).create(muteExceptions);
+		} else {
+			return database.create();
+		}
     }
 
     protected final SQLDialect getDialect() {

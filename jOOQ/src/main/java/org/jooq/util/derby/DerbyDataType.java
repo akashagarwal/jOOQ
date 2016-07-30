@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -65,9 +65,11 @@ import org.jooq.types.UShort;
  */
 public class DerbyDataType {
 
-    // -------------------------------------------------------------------------
-    // Default SQL data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Default SQL data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Short>      SMALLINT                   = new DefaultDataType<Short>(SQLDialect.DERBY, SQLDataType.SMALLINT, "smallint");
     public static final DataType<Integer>    INT                        = new DefaultDataType<Integer>(SQLDialect.DERBY, SQLDataType.INTEGER, "int");
@@ -95,9 +97,11 @@ public class DerbyDataType {
     public static final DataType<byte[]>     BLOB                       = new DefaultDataType<byte[]>(SQLDialect.DERBY, SQLDataType.BLOB, "blob");
     public static final DataType<byte[]>     BINARYLARGEOBJECT          = new DefaultDataType<byte[]>(SQLDialect.DERBY, SQLDataType.BLOB, "binary large object");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported SQLDialect.DERBY, SQLDataTypes
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported SQLDialect.DERBY, SQLDataTypes
+     * -------------------------------------------------------------------------
+     */
 
     protected static final DataType<byte[]>     __BINARY                = new DefaultDataType<byte[]>(SQLDialect.DERBY, SQLDataType.BINARY, "blob");
     protected static final DataType<Boolean>    __BIT                   = new DefaultDataType<Boolean>(SQLDialect.DERBY, SQLDataType.BIT, "boolean");
@@ -113,16 +117,20 @@ public class DerbyDataType {
     protected static final DataType<UInteger>   __INTEGERUNSIGNED       = new DefaultDataType<UInteger>(SQLDialect.DERBY, SQLDataType.INTEGERUNSIGNED, "bigint");
     protected static final DataType<ULong>      __BIGINTUNSIGNED        = new DefaultDataType<ULong>(SQLDialect.DERBY, SQLDataType.BIGINTUNSIGNED, "decimal", "decimal(20)");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported Java types
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported Java types
+     * -------------------------------------------------------------------------.
+     */
 
     protected static final DataType<BigInteger> __BIGINTEGER            = new DefaultDataType<BigInteger>(SQLDialect.DERBY, SQLDataType.DECIMAL_INTEGER, "decimal", "decimal(31)");
     protected static final DataType<UUID>       __UUID                  = new DefaultDataType<UUID>(SQLDialect.DERBY, SQLDataType.UUID, "varchar", "varchar(36)");
 
-    // -------------------------------------------------------------------------
-    // Dialect-specific data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Dialect-specific data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<byte[]>     CHARFORBITDATA             = new DefaultDataType<byte[]>(SQLDialect.DERBY, SQLDataType.BINARY, "char for bit data");
     public static final DataType<byte[]>     CHARACTERFORBITDATA        = new DefaultDataType<byte[]>(SQLDialect.DERBY, SQLDataType.BINARY, "character for bit data");

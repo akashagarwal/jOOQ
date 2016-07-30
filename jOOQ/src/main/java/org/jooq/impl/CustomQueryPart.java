@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -74,7 +74,7 @@ import org.jooq.QueryPart;
 public abstract class CustomQueryPart extends AbstractQueryPart {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long     serialVersionUID = -3439681086987884991L;
     private static final Clause[] CLAUSES          = { CUSTOM };
@@ -94,9 +94,11 @@ public abstract class CustomQueryPart extends AbstractQueryPart {
     @Override
     public abstract void accept(Context<?> ctx);
 
-    // -------------------------------------------------------------------------
-    // No further overrides allowed
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * No further overrides allowed
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public final Clause[] clauses(Context<?> ctx) {

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -53,14 +53,14 @@ import org.jooq.TableField;
 
 /**
  * A <code>QualifiedField</code> is a {@link Field} that always renders a field name
- * or alias as a literal using {@link RenderContext#literal(String)}
+ * or alias as a literal using {@link RenderContext#literal(String)}.
  *
  * @author Lukas Eder
  */
 final class QualifiedField<T> extends AbstractField<T> implements TableField<Record, T> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long   serialVersionUID = 6937002867156868761L;
 
@@ -76,9 +76,11 @@ final class QualifiedField<T> extends AbstractField<T> implements TableField<Rec
             : null;
     }
 
-    // ------------------------------------------------------------------------
-    // Field API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * Field API
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public final void accept(Context<?> ctx) {

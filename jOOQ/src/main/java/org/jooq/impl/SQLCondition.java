@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -46,7 +46,7 @@ import org.jooq.QueryPart;
 final class SQLCondition extends AbstractCondition {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = -7661748411414898501L;
 
@@ -56,9 +56,11 @@ final class SQLCondition extends AbstractCondition {
         this.delegate = delegate;
     }
 
-    // ------------------------------------------------------------------------
-    // QueryPart API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * QueryPart API
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public final void accept(Context<?> ctx) {

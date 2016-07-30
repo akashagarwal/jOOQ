@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -77,8 +77,7 @@ implements TableDefinition {
 
         for (ColumnDefinition column : getColumns()) {
             if (column.getPrimaryKey() != null) {
-                primaryKey = column.getPrimaryKey();
-                return primaryKey;
+                return column.getPrimaryKey();
             }
         }
 

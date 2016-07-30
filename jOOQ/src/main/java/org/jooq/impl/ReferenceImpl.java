@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -68,7 +68,7 @@ import org.jooq.exception.DetachedException;
 final class ReferenceImpl<R extends Record, O extends Record> extends AbstractKey<R> implements ForeignKey<R, O> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long  serialVersionUID = 3636724364192618701L;
 
@@ -142,7 +142,7 @@ final class ReferenceImpl<R extends Record, O extends Record> extends AbstractKe
     }
 
     /**
-     * Do the actual fetching
+     * Do the actual fetching.
      */
     @SuppressWarnings("unchecked")
     private static <R1 extends Record, R2 extends Record> Result<R1> fetch(
@@ -170,19 +170,20 @@ final class ReferenceImpl<R extends Record, O extends Record> extends AbstractKe
     }
 
     /**
-     * Extract a list of values from a set of records given some fields
+     * Extract a list of values from a set of records given some fields.
      */
     private static <R extends Record> List<Object> extractValues(Collection<? extends R> records, TableField<R, ?> field2) {
         List<Object> result = new ArrayList<Object>();
 
-        for (R record : records)
-            result.add(record.get(field2));
+        for (R record : records) {
+			result.add(record.get(field2));
+		}
 
         return result;
     }
 
     /**
-     * Extract a list of row value expressions from a set of records given some fields
+     * Extract a list of row value expressions from a set of records given some fields.
      */
     private static <R extends Record> List<RowN> extractRows(Collection<? extends R> records, TableField<R, ?>[] fields) {
         List<RowN> rows = new ArrayList<RowN>();
@@ -190,8 +191,9 @@ final class ReferenceImpl<R extends Record, O extends Record> extends AbstractKe
         for (R record : records) {
             Object[] values = new Object[fields.length];
 
-            for (int i = 0; i < fields.length; i++)
-                values[i] = record.get(fields[i]);
+            for (int i = 0; i < fields.length; i++) {
+				values[i] = record.get(fields[i]);
+			}
 
             rows.add(row(values));
         }
@@ -200,16 +202,17 @@ final class ReferenceImpl<R extends Record, O extends Record> extends AbstractKe
     }
 
     /**
-     * Extract a configuration from the first record of a collection of records
+     * Extract a configuration from the first record of a collection of records.
      */
     private static <R extends Record> DSLContext extractDSLContext(Collection<? extends R> records)
         throws DetachedException {
         R first = first(records);
 
-        if (first instanceof AttachableInternal)
-            return DSL.using(((AttachableInternal) first).configuration());
-        else
-            throw new DetachedException("Supply at least one attachable record");
+        if (first instanceof AttachableInternal) {
+			return DSL.using(((AttachableInternal) first).configuration());
+		} else {
+			throw new DetachedException("Supply at least one attachable record");
+		}
     }
 
     @Override

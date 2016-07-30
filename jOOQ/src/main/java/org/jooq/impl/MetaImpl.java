@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -38,7 +38,7 @@
  *
  *
  */
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -134,7 +134,7 @@ import org.jooq.exception.SQLDialectNotSupportedException;
 final class MetaImpl implements Meta, Serializable {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long                   serialVersionUID = 3582980783173033809L;
 
@@ -164,8 +164,9 @@ final class MetaImpl implements Meta, Serializable {
             throw new DataAccessException("Error while accessing DatabaseMetaData", e);
         }
         finally {
-            if (connection != null)
-                provider.release(connection);
+            if (connection != null) {
+				provider.release(connection);
+			}
         }
     }
 
@@ -185,13 +186,15 @@ final class MetaImpl implements Meta, Serializable {
                 }
             });
 
-            for (String name : catalogs.getValues(0, String.class))
-                result.add(new MetaCatalog(name));
+            for (String name : catalogs.getValues(0, String.class)) {
+				result.add(new MetaCatalog(name));
+			}
         }
 
         // There should always be at least one (empty) catalog in a database
-        if (result.isEmpty())
-            result.add(new MetaCatalog(""));
+        if (result.isEmpty()) {
+			result.add(new MetaCatalog(""));
+		}
 
         return result;
     }
@@ -200,8 +203,9 @@ final class MetaImpl implements Meta, Serializable {
     public final List<Schema> getSchemas() {
         List<Schema> result = new ArrayList<Schema>();
 
-        for (Catalog catalog : getCatalogs())
-            result.addAll(catalog.getSchemas());
+        for (Catalog catalog : getCatalogs()) {
+			result.addAll(catalog.getSchemas());
+		}
 
         return result;
     }
@@ -210,8 +214,9 @@ final class MetaImpl implements Meta, Serializable {
     public final List<Table<?>> getTables() {
         List<Table<?>> result = new ArrayList<Table<?>>();
 
-        for (Schema schema : getSchemas())
-            result.addAll(schema.getTables());
+        for (Schema schema : getSchemas()) {
+			result.addAll(schema.getTables());
+		}
 
         return result;
     }
@@ -220,8 +225,9 @@ final class MetaImpl implements Meta, Serializable {
     public final List<Sequence<?>> getSequences() {
         List<Sequence<?>> result = new ArrayList<Sequence<?>>();
 
-        for (Schema schema : getSchemas())
-            result.addAll(schema.getSequences());
+        for (Schema schema : getSchemas()) {
+			result.addAll(schema.getSequences());
+		}
 
         return result;
     }
@@ -233,8 +239,9 @@ final class MetaImpl implements Meta, Serializable {
         for (Table<?> table : getTables()) {
             UniqueKey<?> pk = table.getPrimaryKey();
 
-            if (pk != null)
-                result.add(pk);
+            if (pk != null) {
+				result.add(pk);
+			}
         }
 
         return result;
@@ -243,7 +250,7 @@ final class MetaImpl implements Meta, Serializable {
     private class MetaCatalog extends CatalogImpl {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long serialVersionUID = -2821093577201327275L;
 
@@ -276,11 +283,6 @@ final class MetaImpl implements Meta, Serializable {
                         );
                     }
                 });
-
-
-                for (String name : schemas.getValues(0, String.class)) {
-                    result.add(new MetaSchema(name, MetaCatalog.this));
-                }
             }
 
             // [#2760] MySQL JDBC confuses "catalog" and "schema"
@@ -294,11 +296,10 @@ final class MetaImpl implements Meta, Serializable {
                         );
                     }
                 });
-
-                for (String name : schemas.getValues(0, String.class)) {
-                    result.add(new MetaSchema(name, MetaCatalog.this));
-                }
             }
+			for (String name : schemas.getValues(0, String.class)) {
+			    result.add(new MetaSchema(name, MetaCatalog.this));
+			}
 
             // There should always be at least one (empty) schema in a database
             if (result.isEmpty()) {
@@ -312,7 +313,7 @@ final class MetaImpl implements Meta, Serializable {
     private class MetaSchema extends SchemaImpl {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long                            serialVersionUID = -2621899850912554198L;
         private transient volatile Map<Name, Result<Record>> columnCache;
@@ -399,7 +400,6 @@ final class MetaImpl implements Meta, Serializable {
 //              TODO: Find a more efficient way to do this
 //              Result<Record> pkColumns = executor.fetch(meta().getPrimaryKeys(catalog, schema, name))
 //                                                 .sortAsc("KEY_SEQ");
-//
 //              result.add(new MetaTable(name, this, columnCache.get(name)));
             }
 
@@ -482,7 +482,7 @@ final class MetaImpl implements Meta, Serializable {
     private class MetaTable extends TableImpl<Record> {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long serialVersionUID = 4843841667753000233L;
 
@@ -661,13 +661,15 @@ final class MetaImpl implements Meta, Serializable {
                     f[i] = (TableField<Record, ?>) field(name);
 
                     // [#5097] Work around a bug in the Xerial JDBC driver for SQLite
-                    if (f[i] == null && configuration.family() == SQLITE)
-
-                        // [#2656] Use native support for case-insensitive column
+                    if (f[i] == null && configuration.family() == SQLITE) {
+						// [#2656] Use native support for case-insensitive column
                         //         lookup, once this is implemented
-                        for (Field<?> field : fields())
-                            if (field.getName().equalsIgnoreCase(name))
-                                f[i] = (TableField<Record, ?>) field;
+                        for (Field<?> field : fields()) {
+							if (field.getName().equalsIgnoreCase(name)) {
+								f[i] = (TableField<Record, ?>) field;
+							}
+						}
+					}
                 }
 
                 String indexName = result.get(0).get(5, String.class);
@@ -695,8 +697,9 @@ final class MetaImpl implements Meta, Serializable {
                     type = type.precision(precision, scale);
                     type = type.length(precision);
 
-                    if (nullable == DatabaseMetaData.columnNoNulls)
-                        type = type.nullable(false);
+                    if (nullable == DatabaseMetaData.columnNoNulls) {
+						type = type.nullable(false);
+					}
                 }
                 catch (SQLDialectNotSupportedException e) {
                     type = SQLDataType.OTHER;
@@ -710,7 +713,7 @@ final class MetaImpl implements Meta, Serializable {
     private class MetaPrimaryKey implements UniqueKey<Record> {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long             serialVersionUID = 6997258619475953490L;
 
@@ -811,10 +814,11 @@ final class MetaImpl implements Meta, Serializable {
 
         @Override
         public final Constraint constraint() {
-            if (isPrimary())
-                return DSL.constraint(getName()).primaryKey(getFieldsArray());
-            else
-                return DSL.constraint(getName()).unique(getFieldsArray());
+            if (isPrimary()) {
+				return DSL.constraint(getName()).primaryKey(getFieldsArray());
+			} else {
+				return DSL.constraint(getName()).unique(getFieldsArray());
+			}
         }
     }
 }

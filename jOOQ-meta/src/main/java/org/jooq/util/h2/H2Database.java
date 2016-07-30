@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -88,7 +88,7 @@ import org.jooq.util.h2.information_schema.tables.Tables;
 import org.jooq.util.h2.information_schema.tables.TypeInfo;
 
 /**
- * H2 implementation of {@link AbstractDatabase}
+ * H2 implementation of {@link AbstractDatabase}.
  *
  * @author Espen Stromsnes
  */
@@ -347,31 +347,26 @@ public class H2Database extends AbstractDatabase {
 
     @Override
     protected List<PackageDefinition> getPackages0() throws SQLException {
-        List<PackageDefinition> result = new ArrayList<PackageDefinition>();
-        return result;
+        return new ArrayList<PackageDefinition>();
     }
 
     @Override
     protected List<EnumDefinition> getEnums0() throws SQLException {
-        List<EnumDefinition> result = new ArrayList<EnumDefinition>();
-        return result;
+        return new ArrayList<EnumDefinition>();
     }
 
     @Override
     protected List<DomainDefinition> getDomains0() throws SQLException {
-        List<DomainDefinition> result = new ArrayList<DomainDefinition>();
-        return result;
+        return new ArrayList<DomainDefinition>();
     }
 
     @Override
     protected List<UDTDefinition> getUDTs0() throws SQLException {
-        List<UDTDefinition> result = new ArrayList<UDTDefinition>();
-        return result;
+        return new ArrayList<UDTDefinition>();
     }
 
     @Override
     protected List<ArrayDefinition> getArrays0() throws SQLException {
-        List<ArrayDefinition> result = new ArrayList<ArrayDefinition>();
-        return result;
+        return new ArrayList<ArrayDefinition>();
     }
 }

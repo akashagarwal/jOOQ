@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -61,7 +61,7 @@ import org.jooq.util.ParameterDefinition;
 import org.jooq.util.SchemaDefinition;
 
 /**
- * Postgres implementation of {@link AbstractRoutineDefinition}
+ * Postgres implementation of {@link AbstractRoutineDefinition}.
  *
  * @author Lukas Eder
  */
@@ -81,8 +81,9 @@ public class PostgresRoutineDefinition extends AbstractRoutineDefinition {
             SchemaDefinition typeSchema = null;
 
             String schemaName = record.get(ROUTINES.TYPE_UDT_SCHEMA);
-            if (schemaName != null)
-                typeSchema = getDatabase().getSchema(schemaName);
+            if (schemaName != null) {
+				typeSchema = getDatabase().getSchema(schemaName);
+			}
 
             DataTypeDefinition type = new DefaultDataTypeDefinition(
                 getDatabase(),
@@ -104,7 +105,7 @@ public class PostgresRoutineDefinition extends AbstractRoutineDefinition {
         specificName = record.get(ROUTINES.SPECIFIC_NAME);
     }
 
-    // [#3375] This internal constructor is used for table-valued functions. It should not be used otherwise
+    /** [#3375] This internal constructor is used for table-valued functions. It should not be used otherwise */
     PostgresRoutineDefinition(Database database, String schema, String name, String specificName) {
         super(database.getSchema(schema), null, name, null, null);
 

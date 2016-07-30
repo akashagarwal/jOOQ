@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -99,12 +99,13 @@ public class MockArray<T> implements Array {
     @SuppressWarnings("unchecked")
     @Override
     public T[] getArray(long index, int count) throws SQLException {
-        if (index - 1 > Integer.MAX_VALUE)
-            throw new SQLException("Cannot access array indexes beyond Integer.MAX_VALUE");
+        if (index - 1 > Integer.MAX_VALUE) {
+			throw new SQLException("Cannot access array indexes beyond Integer.MAX_VALUE");
+		}
 
         return array == null ? null : Arrays
             .asList(array)
-            .subList(((int) index) - 1, ((int) index) - 1 + count)
+            .subList((int) index - 1, (int) index - 1 + count)
             .toArray((T[]) newInstance(array.getClass().getComponentType(), count));
     }
 

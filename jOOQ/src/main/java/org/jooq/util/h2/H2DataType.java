@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -66,9 +66,11 @@ import org.jooq.types.UShort;
  */
 public class H2DataType {
 
-    // -------------------------------------------------------------------------
-    // Default SQL data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Default SQL data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Byte>       TINYINT               = new DefaultDataType<Byte>(SQLDialect.H2, SQLDataType.TINYINT, "tinyint");
     public static final DataType<Short>      SMALLINT              = new DefaultDataType<Short>(SQLDialect.H2, SQLDataType.SMALLINT, "smallint");
@@ -112,16 +114,20 @@ public class H2DataType {
     public static final DataType<String>     NCHAR                 = new DefaultDataType<String>(SQLDialect.H2, SQLDataType.NCHAR, "nchar");
     public static final DataType<String>     NCLOB                 = new DefaultDataType<String>(SQLDialect.H2, SQLDataType.NCLOB, "nclob");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported SQLDialect.H2, SQLDataTypes
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported SQLDialect.H2, SQLDataTypes
+     * -------------------------------------------------------------------------
+     */
 
     protected static final DataType<String>         __LONGNVARCHAR = new DefaultDataType<String>(SQLDialect.H2, SQLDataType.LONGNVARCHAR, "longvarchar");
     protected static final DataType<Result<Record>> __RESULT       = new DefaultDataType<Result<Record>>(SQLDialect.H2, SQLDataType.RESULT, "result_set");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported Java types
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported Java types
+     * -------------------------------------------------------------------------.
+     */
 
     protected static final DataType<BigInteger> __BIGINTEGER       = new DefaultDataType<BigInteger>(SQLDialect.H2, SQLDataType.DECIMAL_INTEGER, "decimal");
     protected static final DataType<UByte>      __TINYINTUNSIGNED  = new DefaultDataType<UByte>(SQLDialect.H2, SQLDataType.TINYINTUNSIGNED, "smallint");
@@ -129,9 +135,11 @@ public class H2DataType {
     protected static final DataType<UInteger>   __INTEGERUNSIGNED  = new DefaultDataType<UInteger>(SQLDialect.H2, SQLDataType.INTEGERUNSIGNED, "bigint");
     protected static final DataType<ULong>      __BIGINTUNSIGNED   = new DefaultDataType<ULong>(SQLDialect.H2, SQLDataType.BIGINTUNSIGNED, "number");
 
-    // -------------------------------------------------------------------------
-    // Dialect-specific data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Dialect-specific data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Short>      YEAR                  = new DefaultDataType<Short>(SQLDialect.H2, SQLDataType.SMALLINT, "year");
     public static final DataType<Long>       IDENTITY              = new DefaultDataType<Long>(SQLDialect.H2, SQLDataType.BIGINT, "identity");

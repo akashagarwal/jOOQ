@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -84,7 +84,7 @@ import org.jooq.tools.StringUtils;
 public final class DayToSecond extends Number implements Interval, Comparable<DayToSecond> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long    serialVersionUID = -3853596481984643811L;
     private static final Pattern PATTERN          = Pattern.compile("(\\+|-)?(?:(\\d+) )?(\\d+):(\\d+):(\\d+)(?:\\.(\\d+))?");
@@ -136,19 +136,19 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
         // Perform normalisation. Specifically, Postgres may return intervals
         // such as 24:00:00, 25:13:15, etc...
         if (nano >= 1000000000) {
-            seconds += (nano / 1000000000);
+            seconds += nano / 1000000000;
             nano %= 1000000000;
         }
         if (seconds >= 60) {
-            minutes += (seconds / 60);
+            minutes += seconds / 60;
             seconds %= 60;
         }
         if (minutes >= 60) {
-            hours += (minutes / 60);
+            hours += minutes / 60;
             minutes %= 60;
         }
         if (hours >= 24) {
-            days += (hours / 24);
+            days += hours / 24;
             hours %= 24;
         }
 
@@ -195,7 +195,7 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
     }
 
     /**
-     * Load a {@link Double} representation of a <code>INTERVAL DAY TO SECOND</code>
+     * Load a {@link Double} representation of a <code>INTERVAL DAY TO SECOND</code>.
      *
      * @param milli The number of milliseconds as a fractional number
      * @return The loaded <code>INTERVAL DAY TO SECOND</code> object
@@ -218,9 +218,11 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
         return result;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX Number API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX Number API
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public final int intValue() {
@@ -242,9 +244,11 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
         return getTotalMilli();
     }
 
-    // -------------------------------------------------------------------------
-    // XXX Interval API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX Interval API
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public final DayToSecond neg() {
@@ -257,56 +261,56 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
     }
 
     /**
-     * Get the day-part of this interval
+     * Get the day-part of this interval.
      */
     public final int getDays() {
         return days;
     }
 
     /**
-     * Get the hour-part of this interval
+     * Get the hour-part of this interval.
      */
     public final int getHours() {
         return hours;
     }
 
     /**
-     * Get the minute-part of this interval
+     * Get the minute-part of this interval.
      */
     public final int getMinutes() {
         return minutes;
     }
 
     /**
-     * Get the second-part of this interval
+     * Get the second-part of this interval.
      */
     public final int getSeconds() {
         return seconds;
     }
 
     /**
-     * Get the (truncated) milli-part of this interval
+     * Get the (truncated) milli-part of this interval.
      */
     public final int getMilli() {
         return nano / 1000000;
     }
 
     /**
-     * Get the (truncated) micro-part of this interval
+     * Get the (truncated) micro-part of this interval.
      */
     public final int getMicro() {
         return nano / 1000;
     }
 
     /**
-     * Get the nano-part of this interval
+     * Get the nano-part of this interval.
      */
     public final int getNano() {
         return nano;
     }
 
     /**
-     * Get the whole interval in days
+     * Get the whole interval in days.
      */
     public final double getTotalDays() {
         return getSign() * (
@@ -318,7 +322,7 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
     }
 
     /**
-     * Get the whole interval in hours
+     * Get the whole interval in hours.
      */
     public final double getTotalHours() {
         return getSign() * (
@@ -330,7 +334,7 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
     }
 
     /**
-     * Get the whole interval in minutes
+     * Get the whole interval in minutes.
      */
     public final double getTotalMinutes() {
         return getSign() * (
@@ -342,7 +346,7 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
     }
 
     /**
-     * Get the whole interval in seconds
+     * Get the whole interval in seconds.
      */
     public final double getTotalSeconds() {
         return getSign() * (
@@ -354,7 +358,7 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
      }
 
     /**
-     * Get the whole interval in milli-seconds
+     * Get the whole interval in milli-seconds.
      */
     public final double getTotalMilli() {
         return getSign() * (
@@ -366,7 +370,7 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
     }
 
     /**
-     * Get the whole interval in micro-seconds
+     * Get the whole interval in micro-seconds.
      */
     public final double getTotalMicro() {
         return getSign() * (
@@ -378,7 +382,7 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
     }
 
     /**
-     * Get the whole interval in nano-seconds
+     * Get the whole interval in nano-seconds.
      */
     public final double getTotalNano() {
         return getSign() * (
@@ -394,9 +398,11 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
         return negative ? -1 : 1;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX Comparable and Object API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX Comparable and Object API
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public final int compareTo(DayToSecond that) {
@@ -446,30 +452,22 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
         result = prime * result + hours;
         result = prime * result + minutes;
         result = prime * result + nano;
-        result = prime * result + seconds;
-        return result;
+        return prime * result + seconds;
     }
 
     @Override
     public final boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) {
+			return true;
+		}
+        if (obj == null) {
+			return false;
+		}
+        if (getClass() != obj.getClass()) {
+			return false;
+		}
         DayToSecond other = (DayToSecond) obj;
-        if (days != other.days)
-            return false;
-        if (hours != other.hours)
-            return false;
-        if (minutes != other.minutes)
-            return false;
-        if (nano != other.nano)
-            return false;
-        if (seconds != other.seconds)
-            return false;
-        return true;
+        return days == other.days && hours == other.hours && minutes == other.minutes && nano == other.nano && seconds == other.seconds;
     }
 
     @Override
@@ -480,18 +478,21 @@ public final class DayToSecond extends Number implements Interval, Comparable<Da
         sb.append(days);
         sb.append(" ");
 
-        if (hours < 10)
-            sb.append("0");
+        if (hours < 10) {
+			sb.append("0");
+		}
         sb.append(hours);
         sb.append(":");
 
-        if (minutes < 10)
-            sb.append("0");
+        if (minutes < 10) {
+			sb.append("0");
+		}
         sb.append(minutes);
         sb.append(":");
 
-        if (seconds < 10)
-            sb.append("0");
+        if (seconds < 10) {
+			sb.append("0");
+		}
         sb.append(seconds);
         sb.append(".");
         sb.append(StringUtils.leftPad("" + nano, 9, "0"));

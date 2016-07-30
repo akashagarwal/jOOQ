@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -82,9 +82,11 @@ public abstract class DAOImpl<R extends UpdatableRecord<R>, P, T> implements DAO
     private RecordMapper<R, P> mapper;
     private Configuration      configuration;
 
-    // -------------------------------------------------------------------------
-    // XXX: Constructors and initialisation
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Constructors and initialisation
+     * -------------------------------------------------------------------------
+     */
 
     protected DAOImpl(Table<R> table, Class<P> type) {
         this(table, type, null);
@@ -138,9 +140,11 @@ public abstract class DAOImpl<R extends UpdatableRecord<R>, P, T> implements DAO
         return mapper;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: DAO API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: DAO API
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public /* non-final */ void insert(P object) {
@@ -241,16 +245,11 @@ public abstract class DAOImpl<R extends UpdatableRecord<R>, P, T> implements DAO
     public /* non-final */ boolean existsById(T id) {
         Field<?>[] pk = pk();
 
-        if (pk != null) {
-            return using(configuration)
-                     .selectCount()
-                     .from(table)
-                     .where(equal(pk, id))
-                     .fetchOne(0, Integer.class) > 0;
-        }
-        else {
-            return false;
-        }
+        return pk != null && using(configuration)
+		         .selectCount()
+		         .from(table)
+		         .where(equal(pk, id))
+		         .fetchOne(0, Integer.class) > 0;
     }
 
     @Override
@@ -321,31 +320,37 @@ public abstract class DAOImpl<R extends UpdatableRecord<R>, P, T> implements DAO
         return type;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: Template methods for generated subclasses
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Template methods for generated subclasses
+     * ------------------------------------------------------------------------
+     */
 
     protected abstract T getId(P object);
 
     @SuppressWarnings("unchecked")
     protected /* non-final */ T compositeKeyRecord(Object... values) {
         UniqueKey<R> key = table.getPrimaryKey();
-        if (key == null)
-            return null;
+        if (key == null) {
+			return null;
+		}
 
         TableField<R, Object>[] fields = (TableField<R, Object>[]) key.getFieldsArray();
         Record result = DSL.using(configuration)
                            .newRecord(fields);
 
-        for (int i = 0; i < values.length; i++)
-            result.set(fields[i], fields[i].getDataType().convert(values[i]));
+        for (int i = 0; i < values.length; i++) {
+			result.set(fields[i], fields[i].getDataType().convert(values[i]));
+		}
 
         return (T) result;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: Private utility methods
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Private utility methods
+     * ------------------------------------------------------------------------
+     */
 
     @SuppressWarnings("unchecked")
     private /* non-final */ Condition equal(Field<?>[] pk, T id) {
@@ -388,9 +393,11 @@ public abstract class DAOImpl<R extends UpdatableRecord<R>, P, T> implements DAO
         for (P object : objects) {
             R record = using(configuration).newRecord(table, object);
 
-            if (forUpdate && pk != null)
-                for (Field<?> field : pk)
-                    record.changed(field, false);
+            if (forUpdate && pk != null) {
+				for (Field<?> field : pk) {
+					record.changed(field, false);
+				}
+			}
 
             Tools.resetChangedOnNotNull(record);
             result.add(record);

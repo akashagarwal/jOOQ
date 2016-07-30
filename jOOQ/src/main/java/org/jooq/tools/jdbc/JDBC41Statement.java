@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -56,33 +56,37 @@ import java.sql.Statement;
  */
 public abstract class JDBC41Statement {
 
-    // ------------------------------------------------------------------------
-    // Methods from JDBC 4.1 java.sql.Statement
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * Methods from JDBC 4.1 java.sql.Statement
+     * ------------------------------------------------------------------------
 
-    // JDBC 4.1 compliance: @Override
+     * JDBC 4.1 compliance: @Override
+     */
     @SuppressWarnings("unused")
     public final void closeOnCompletion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // JDBC 4.1 compliance: @Override
+    /** JDBC 4.1 compliance: @Override */
     @SuppressWarnings("unused")
     public final boolean isCloseOnCompletion() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // ------------------------------------------------------------------------
-    // Methods from JDBC 4.1 java.sql.PreparedCall
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * Methods from JDBC 4.1 java.sql.PreparedCall
+     * ------------------------------------------------------------------------
 
-    // JDBC 4.1 compliance: @Override
+     * JDBC 4.1 compliance: @Override
+     */
     @SuppressWarnings("unused")
     public final <T> T getObject(int parameterIndex, Class<T> type) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // JDBC 4.1 compliance: @Override
+    /** JDBC 4.1 compliance: @Override */
     @SuppressWarnings("unused")
     public final <T> T getObject(String parameterName, Class<T> type) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");

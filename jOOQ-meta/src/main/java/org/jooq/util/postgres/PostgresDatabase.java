@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -503,7 +503,7 @@ public class PostgresDatabase extends AbstractDatabase {
                 DefaultEnumDefinition definition = null;
                 for (String label : enumLabels(nspname, typname)) {
                     SchemaDefinition schema = getSchema(nspname);
-                    String typeName = String.valueOf(typname);
+                    String typeName = typname;
 
                     if (definition == null || !definition.getName().equals(typeName)) {
                         definition = new DefaultEnumDefinition(schema, typeName, null);
@@ -643,8 +643,7 @@ public class PostgresDatabase extends AbstractDatabase {
 
     @Override
     protected List<ArrayDefinition> getArrays0() throws SQLException {
-        List<ArrayDefinition> result = new ArrayList<ArrayDefinition>();
-        return result;
+        return new ArrayList<ArrayDefinition>();
     }
 
     @Override
@@ -699,8 +698,7 @@ public class PostgresDatabase extends AbstractDatabase {
 
     @Override
     protected List<PackageDefinition> getPackages0() throws SQLException {
-        List<PackageDefinition> result = new ArrayList<PackageDefinition>();
-        return result;
+        return new ArrayList<PackageDefinition>();
     }
 
     @Override

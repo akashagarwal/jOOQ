@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -132,49 +132,31 @@ import org.jooq.SQLDialect;
 public interface Interval extends Serializable {
 
     /**
-     * Negate the interval (change its sign)
+     * Negate the interval (change its sign).
      */
     Interval neg();
 
     /**
-     * Get the absolute value of the interval (set its sign to positive)
+     * Get the absolute value of the interval (set its sign to positive).
      */
     Interval abs();
 
     /**
-     * The sign of the interval
+     * The sign of the interval.
      *
      * @return <code>1</code> for positive or zero, <code>-1</code> for negative
      */
     int getSign();
 
-    /**
-     * @see Number#doubleValue()
-     */
     double doubleValue();
 
-    /**
-     * @see Number#floatValue()
-     */
     float floatValue();
 
-    /**
-     * @see Number#longValue()
-     */
     long longValue();
 
-    /**
-     * @see Number#intValue()
-     */
     int intValue();
 
-    /**
-     * @see Number#byteValue()
-     */
     byte byteValue();
 
-    /**
-     * @see Number#shortValue()
-     */
     short shortValue();
 }

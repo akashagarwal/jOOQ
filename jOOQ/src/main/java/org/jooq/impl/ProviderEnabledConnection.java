@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -70,9 +70,11 @@ final class ProviderEnabledConnection extends DefaultConnection {
         this.connectionProvider = connectionProvider;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX Closing the connection
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX Closing the connection
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public final void close() throws SQLException {
@@ -83,9 +85,11 @@ final class ProviderEnabledConnection extends DefaultConnection {
         }
     }
 
-    // ------------------------------------------------------------------------
-    // XXX Creation of Statements
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX Creation of Statements
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public final Statement createStatement() throws SQLException {
@@ -103,9 +107,11 @@ final class ProviderEnabledConnection extends DefaultConnection {
         return new ProviderEnabledStatement(this, getDelegate().createStatement(resultSetType, resultSetConcurrency, resultSetHoldability));
     }
 
-    // ------------------------------------------------------------------------
-    // XXX Creation of PreparedStatements
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX Creation of PreparedStatements
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public final PreparedStatement prepareStatement(String sql) throws SQLException {
@@ -139,9 +145,11 @@ final class ProviderEnabledConnection extends DefaultConnection {
         return new ProviderEnabledPreparedStatement(this, getDelegate().prepareStatement(sql, columnNames));
     }
 
-    // ------------------------------------------------------------------------
-    // XXX Creation of CallableStatements
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX Creation of CallableStatements
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public final CallableStatement prepareCall(String sql) throws SQLException {

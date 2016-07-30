@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -93,13 +93,9 @@ public class MySQLTableDefinition extends AbstractTableDefinition {
 		    String dataType = record.get(Columns.DATA_TYPE);
 
 		    // [#519] Some types have unsigned versions
-		    if (getDatabase().supportsUnsignedTypes()) {
-    		    if (asList("tinyint", "smallint", "mediumint", "int", "bigint").contains(dataType.toLowerCase())) {
-    	            if (record.get(Columns.COLUMN_TYPE).toLowerCase().contains("unsigned")) {
-    	                dataType += "unsigned";
-    	            }
-    		    }
-		    }
+		    if (getDatabase().supportsUnsignedTypes() && asList("tinyint", "smallint", "mediumint", "int", "bigint").contains(dataType.toLowerCase()) && record.get(Columns.COLUMN_TYPE).toLowerCase().contains("unsigned")) {
+			    dataType += "unsigned";
+			}
 
             DataTypeDefinition type = new DefaultDataTypeDefinition(
                 getDatabase(),

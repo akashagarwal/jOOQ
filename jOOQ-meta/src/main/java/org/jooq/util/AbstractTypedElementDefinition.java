@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -100,9 +100,8 @@ abstract class AbstractTypedElementDefinition<T extends Definition>
 
     @Override
     public List<Definition> getDefinitionPath() {
-        List<Definition> result = new ArrayList<Definition>();
+        List<Definition> result = new ArrayList<Definition>(getContainer().getDefinitionPath());
 
-        result.addAll(getContainer().getDefinitionPath());
         result.add(this);
 
         return result;
@@ -131,12 +130,10 @@ abstract class AbstractTypedElementDefinition<T extends Definition>
                 dataType = DefaultDataType.getDataType(db.getDialect(), result.getType(), 0, 0);
             } catch (SQLDialectNotSupportedException ignore) {}
 
-            if (dataType != null) {
-                if (dataType.getSQLType() == Types.DATE) {
-                    DataType<?> forcedDataType = DefaultDataType.getDataType(db.getDialect(), SQLDataType.TIMESTAMP.getTypeName(), 0, 0);
-                    result = new DefaultDataTypeDefinition(db, child.getSchema(), forcedDataType.getTypeName(), 0, 0, 0, result.isNullable(), result.getDefaultValue(), null, null, DateAsTimestampBinding.class.getName());
-                }
-            }
+            if (dataType != null && dataType.getSQLType() == Types.DATE) {
+			    DataType<?> forcedDataType = DefaultDataType.getDataType(db.getDialect(), SQLDataType.TIMESTAMP.getTypeName(), 0, 0);
+			    result = new DefaultDataTypeDefinition(db, child.getSchema(), forcedDataType.getTypeName(), 0, 0, 0, result.isNullable(), result.getDefaultValue(), null, null, DateAsTimestampBinding.class.getName());
+			}
         }
 
         // [#677] Forced types for matching regular expressions
@@ -148,15 +145,17 @@ abstract class AbstractTypedElementDefinition<T extends Definition>
 
             CustomType customType = customType(db, forcedType);
             if (customType != null) {
-                type = (!StringUtils.isBlank(customType.getType()))
+                type = !StringUtils.isBlank(customType.getType())
                     ? customType.getType()
                     : customType.getName();
 
-                if (!StringUtils.isBlank(customType.getConverter()))
-                    converter = customType.getConverter();
+                if (!StringUtils.isBlank(customType.getConverter())) {
+					converter = customType.getConverter();
+				}
 
-                if (!StringUtils.isBlank(customType.getBinding()))
-                    binding = customType.getBinding();
+                if (!StringUtils.isBlank(customType.getBinding())) {
+					binding = customType.getBinding();
+				}
             }
 
             if (type != null) {

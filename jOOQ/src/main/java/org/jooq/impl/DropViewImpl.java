@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -68,7 +68,7 @@ final class DropViewImpl extends AbstractQuery implements
     DropViewFinalStep {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long     serialVersionUID = 8904572826501186329L;
     private static final Clause[] CLAUSES          = { DROP_VIEW };
@@ -87,9 +87,11 @@ final class DropViewImpl extends AbstractQuery implements
         this.ifExists = ifExists;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: QueryPart API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: QueryPart API
+     * ------------------------------------------------------------------------
+     */
 
     private final boolean supportsIfExists(Context<?> ctx) {
         return !asList(DERBY, FIREBIRD).contains(ctx.family());
@@ -111,8 +113,9 @@ final class DropViewImpl extends AbstractQuery implements
         ctx.start(DROP_VIEW_TABLE)
            .keyword("drop view").sql(' ');
 
-        if (ifExists && supportsIfExists(ctx))
-            ctx.keyword("if exists").sql(' ');
+        if (ifExists && supportsIfExists(ctx)) {
+			ctx.keyword("if exists").sql(' ');
+		}
 
         ctx.visit(table);
 

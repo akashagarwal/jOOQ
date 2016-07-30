@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -89,13 +89,13 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
     String                            stringLiteralEscapedApos = "'";
     int                               index;
 
-    // [#2665] VisitListener API
+    /** [#2665] VisitListener API. */
     final VisitListener[]             visitListeners;
     private final Deque<Clause>       visitClauses;
     private final DefaultVisitContext visitContext;
     private final Deque<QueryPart>    visitParts;
 
-    // [#2694] Unified RenderContext and BindContext traversal
+    /** [#2694] Unified RenderContext and BindContext traversal. */
     ParamType                         paramType      = ParamType.INDEXED;
     boolean                           qualifySchema  = true;
     boolean                           qualifyCatalog = true;
@@ -117,8 +117,9 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
 
         this.visitListeners = new VisitListener[providers.length + (userInternalVisitListener ? 1 : 0)];
 
-        for (int i = 0; i < providers.length; i++)
-            this.visitListeners[i] = providers[i].provide();
+        for (int i = 0; i < providers.length; i++) {
+			this.visitListeners[i] = providers[i].provide();
+		}
 
 
 
@@ -137,9 +138,11 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
         }
     }
 
-    // ------------------------------------------------------------------------
-    // VisitListener API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * VisitListener API
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public final C visit(QueryPart part) {
@@ -148,27 +151,32 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
             // Issue start clause events
             // -----------------------------------------------------------------
             Clause[] clauses = visitListeners.length > 0 ? clause(part) : null;
-            if (clauses != null)
-                for (int i = 0; i < clauses.length; i++)
-                    start(clauses[i]);
+            if (clauses != null) {
+				for (int i = 0; i < clauses.length; i++) {
+					start(clauses[i]);
+				}
+			}
 
             // Perform the actual visiting, or recurse into the replacement
             // -----------------------------------------------------------------
             QueryPart original = part;
             QueryPart replacement = start(part);
 
-            if (original == replacement)
-                visit0(original);
-            else
-                visit0(replacement);
+            if (original == replacement) {
+				visit0(original);
+			} else {
+				visit0(replacement);
+			}
 
             end(replacement);
 
             // Issue end clause events
             // -----------------------------------------------------------------
-            if (clauses != null)
-                for (int i = clauses.length - 1; i >= 0; i--)
-                    end(clauses[i]);
+            if (clauses != null) {
+				for (int i = clauses.length - 1; i >= 0; i--) {
+					end(clauses[i]);
+				}
+			}
         }
 
         return (C) this;
@@ -203,8 +211,9 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
         if (clause != null && visitClauses != null) {
             visitClauses.addLast(clause);
 
-            for (VisitListener listener : visitListeners)
-                listener.clauseStart(visitContext);
+            for (VisitListener listener : visitListeners) {
+				listener.clauseStart(visitContext);
+			}
         }
 
         return (C) this;
@@ -213,11 +222,13 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
     @Override
     public final C end(Clause clause) {
         if (clause != null && visitClauses != null) {
-            for (VisitListener listener : visitListeners)
-                listener.clauseEnd(visitContext);
+            for (VisitListener listener : visitListeners) {
+				listener.clauseEnd(visitContext);
+			}
 
-            if (visitClauses.removeLast() != clause)
-                throw new IllegalStateException("Mismatch between visited clauses!");
+            if (visitClauses.removeLast() != clause) {
+				throw new IllegalStateException("Mismatch between visited clauses!");
+			}
         }
 
         return (C) this;
@@ -227,8 +238,9 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
         if (visitParts != null) {
             visitParts.addLast(part);
 
-            for (VisitListener listener : visitListeners)
-                listener.visitStart(visitContext);
+            for (VisitListener listener : visitListeners) {
+				listener.visitStart(visitContext);
+			}
 
             return visitParts.peekLast();
         }
@@ -239,11 +251,13 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
 
     private final void end(QueryPart part) {
         if (visitParts != null) {
-            for (VisitListener listener : visitListeners)
-                listener.visitEnd(visitContext);
+            for (VisitListener listener : visitListeners) {
+				listener.visitEnd(visitContext);
+			}
 
-            if (visitParts.removeLast() != part)
-                throw new RuntimeException("Mismatch between visited query parts");
+            if (visitParts.removeLast() != part) {
+				throw new RuntimeException("Mismatch between visited query parts");
+			}
         }
     }
 
@@ -340,9 +354,11 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
         }
     }
 
-    // ------------------------------------------------------------------------
-    // XXX Context API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX Context API
+     * ------------------------------------------------------------------------.
+     */
 
     private final C visit0(QueryPart part) {
         if (part != null) {
@@ -499,9 +515,11 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
         return index + 1;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX RenderContext API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX RenderContext API
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public final ParamType paramType() {
@@ -510,7 +528,7 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
 
     @Override
     public final C paramType(ParamType p) {
-        paramType = (p == null ? INDEXED : p);
+        paramType = p == null ? INDEXED : p;
         return (C) this;
     }
 
@@ -576,18 +594,22 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
         return (C) this;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX BindContext API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX BindContext API
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public final PreparedStatement statement() {
         return stmt;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX Object API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX Object API
+     * ------------------------------------------------------------------------.
+     */
 
     void toString(StringBuilder sb) {
         sb.append(  "bind index   [");
@@ -598,14 +620,16 @@ abstract class AbstractContext<C extends Context<C>> extends AbstractScope imple
         if (declareFields) {
             sb.append("fields");
 
-            if (declareAliases)
-                sb.append(" and aliases");
+            if (declareAliases) {
+				sb.append(" and aliases");
+			}
         }
         else if (declareTables) {
             sb.append("tables");
 
-            if (declareAliases)
-                sb.append(" and aliases");
+            if (declareAliases) {
+				sb.append(" and aliases");
+			}
         }
         else if (declareWindows) {
             sb.append("windows");

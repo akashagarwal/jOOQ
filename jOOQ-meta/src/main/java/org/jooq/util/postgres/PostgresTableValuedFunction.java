@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -174,8 +174,9 @@ public class PostgresTableValuedFunction extends AbstractTableDefinition {
             SchemaDefinition typeSchema = null;
 
             String schemaName = record.get(p.UDT_SCHEMA);
-            if (schemaName != null)
-                typeSchema = getDatabase().getSchema(schemaName);
+            if (schemaName != null) {
+				typeSchema = getDatabase().getSchema(schemaName);
+			}
 
             DataTypeDefinition type = new DefaultDataTypeDefinition(
                 getDatabase(),

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -41,19 +41,19 @@
 package org.jooq.util;
 
 /**
- * An interface defining an <code>IDENTITY</code> column
+ * An interface defining an <code>IDENTITY</code> column.
  *
  * @author Lukas Eder
  */
 public interface IdentityDefinition extends Definition {
 
     /**
-     * The <code>IDENTITY</code> column's table
+     * The <code>IDENTITY</code> column's table.
      */
     TableDefinition getTable();
 
     /**
-     * The <code>IDENTITY</code> column
+     * The <code>IDENTITY</code> column.
      */
     ColumnDefinition getColumn();
 }

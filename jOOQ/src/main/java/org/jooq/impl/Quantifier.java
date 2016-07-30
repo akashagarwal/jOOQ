@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -42,19 +42,19 @@ package org.jooq.impl;
 
 
 /**
- * A quantifier used for quantified comparison predicates
+ * A quantifier used for quantified comparison predicates.
  *
  * @author Lukas Eder
  */
 enum Quantifier {
 
     /**
-     * The <code>ANY</code> quantifier
+     * The <code>ANY</code> quantifier.
      */
     ANY("any"),
 
     /**
-     * The <code>ALL</code> quantifier
+     * The <code>ALL</code> quantifier.
      */
     ALL("all"),
 

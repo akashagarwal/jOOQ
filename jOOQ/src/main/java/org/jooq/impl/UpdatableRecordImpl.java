@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -86,7 +86,7 @@ import org.jooq.tools.StringUtils;
 public class UpdatableRecordImpl<R extends UpdatableRecord<R>> extends TableRecordImpl<R> implements UpdatableRecord<R> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long       serialVersionUID = -1012420583600561579L;
     private static final JooqLogger log              = JooqLogger.getLogger(UpdatableRecordImpl.class);
@@ -177,7 +177,7 @@ public class UpdatableRecordImpl<R extends UpdatableRecord<R>> extends TableReco
                 if (changed(field) ||
 
                 // [#3237] or if a NOT NULL primary key value is null, then execute an INSERT
-                   (field.getDataType().nullable() == false && get(field) == null)) {
+                   (!field.getDataType().nullable() && get(field) == null)) {
                     executeUpdate = false;
                     break;
                 }
@@ -223,8 +223,9 @@ public class UpdatableRecordImpl<R extends UpdatableRecord<R>> extends TableReco
 
         // Don't store records if no value was set by client code
         if (!update.isExecutable()) {
-            if (log.isDebugEnabled())
-                log.debug("Query is not executable", update);
+            if (log.isDebugEnabled()) {
+				log.debug("Query is not executable", update);
+			}
 
             return 0;
         }
@@ -255,8 +256,9 @@ public class UpdatableRecordImpl<R extends UpdatableRecord<R>> extends TableReco
         checkIfChanged(result, version, timestamp);
 
         if (result > 0) {
-            for (Field<?> storeField : storeFields)
-                changed(storeField, false);
+            for (Field<?> storeField : storeFields) {
+				changed(storeField, false);
+			}
 
             // [#1859] If an update was successful try fetching the generated
             getReturningIfNeeded(update, key);
@@ -406,8 +408,12 @@ public class UpdatableRecordImpl<R extends UpdatableRecord<R>> extends TableReco
         TableField<R, ?> v = getTable().getRecordVersion();
         TableField<R, ?> t = getTable().getRecordTimestamp();
 
-        if (v != null) Tools.addCondition(query, this, v);
-        if (t != null) Tools.addCondition(query, this, t);
+        if (v != null) {
+			Tools.addCondition(query, this, v);
+		}
+        if (t != null) {
+			Tools.addCondition(query, this, t);
+		}
     }
 
     /**

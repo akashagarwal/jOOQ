@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -59,7 +59,7 @@ import org.jooq.conf.ParamType;
 abstract class AbstractDelegatingQuery<Q extends Query> extends AbstractQueryPart implements Query {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = 6710523592699040547L;
     private final Q           delegate;

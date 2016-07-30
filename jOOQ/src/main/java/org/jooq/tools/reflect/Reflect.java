@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2011-2016, Lukas Eder, lukas.eder@gmail.com
  * All rights reserved.
  *
@@ -150,7 +150,7 @@ public class Reflect {
     // ---------------------------------------------------------------------
 
     /**
-     * The wrapped object
+     * The wrapped object.
      */
     private final Object  object;
 
@@ -161,9 +161,11 @@ public class Reflect {
      */
     private final boolean isClass;
 
-    // ---------------------------------------------------------------------
-    // Constructors
-    // ---------------------------------------------------------------------
+    /**
+     * ---------------------------------------------------------------------
+     * Constructors
+     * ---------------------------------------------------------------------.
+     */
 
     private Reflect(Class<?> type) {
         this.object = type;
@@ -180,7 +182,7 @@ public class Reflect {
     // ---------------------------------------------------------------------
 
     /**
-     * Get the wrapped object
+     * Get the wrapped object.
      *
      * @param <T> A convenience generic parameter for automatic unsafe casting
      */
@@ -303,8 +305,9 @@ public class Reflect {
                 if (!isClass ^ Modifier.isStatic(field.getModifiers())) {
                     String name = field.getName();
 
-                    if (!result.containsKey(name))
-                        result.put(name, field(name));
+                    if (!result.containsKey(name)) {
+						result.put(name, field(name));
+					}
                 }
             }
 
@@ -529,14 +532,14 @@ public class Reflect {
 
     /**
      * Create a proxy for the wrapped object allowing to typesafely invoke
-     * methods on it using a custom interface
+     * methods on it using a custom interface.
      *
      * @param proxyType The interface type that is implemented by the proxy
      * @return A proxy for the wrapped object
      */
     @SuppressWarnings("unchecked")
     public <P> P as(Class<P> proxyType) {
-        final boolean isMap = (object instanceof Map);
+        final boolean isMap = object instanceof Map;
         final InvocationHandler handler = new InvocationHandler() {
             @SuppressWarnings("null")
             @Override
@@ -552,7 +555,7 @@ public class Reflect {
                 catch (ReflectException e) {
                     if (isMap) {
                         Map<String, Object> map = (Map<String, Object>) object;
-                        int length = (args == null ? 0 : args.length);
+                        int length = args == null ? 0 : args.length;
 
                         if (length == 0 && name.startsWith("get")) {
                             return map.get(property(name.substring(3)));
@@ -575,7 +578,7 @@ public class Reflect {
     }
 
     /**
-     * Get the POJO property name of an getter/setter
+     * Get the POJO property name of an getter/setter.
      */
     private static String property(String string) {
         int length = string.length();
@@ -602,11 +605,13 @@ public class Reflect {
     private boolean match(Class<?>[] declaredTypes, Class<?>[] actualTypes) {
         if (declaredTypes.length == actualTypes.length) {
             for (int i = 0; i < actualTypes.length; i++) {
-                if (actualTypes[i] == NULL.class)
-                    continue;
+                if (actualTypes[i] == NULL.class) {
+					continue;
+				}
 
-                if (wrapper(declaredTypes[i]).isAssignableFrom(wrapper(actualTypes[i])))
-                    continue;
+                if (wrapper(declaredTypes[i]).isAssignableFrom(wrapper(actualTypes[i]))) {
+					continue;
+				}
 
                 return false;
             }
@@ -618,29 +623,19 @@ public class Reflect {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return object.hashCode();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Reflect) {
-            return object.equals(((Reflect) obj).get());
-        }
-
-        return false;
+        return obj instanceof Reflect && object.equals(((Reflect) obj).get());
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return object.toString();
@@ -651,7 +646,7 @@ public class Reflect {
     // ---------------------------------------------------------------------
 
     /**
-     * Wrap an object created from a constructor
+     * Wrap an object created from a constructor.
      */
     private static Reflect on(Constructor<?> constructor, Object... args) throws ReflectException {
         try {
@@ -663,7 +658,7 @@ public class Reflect {
     }
 
     /**
-     * Wrap an object returned from a method
+     * Wrap an object returned from a method.
      */
     private static Reflect on(Method method, Object object, Object... args) throws ReflectException {
         try {
@@ -683,7 +678,7 @@ public class Reflect {
     }
 
     /**
-     * Unwrap an object
+     * Unwrap an object.
      */
     private static Object unwrap(Object object) {
         if (object instanceof Reflect) {
@@ -694,7 +689,7 @@ public class Reflect {
     }
 
     /**
-     * Get an array of types for an array of objects
+     * Get an array of types for an array of objects.
      *
      * @see Object#getClass()
      */
@@ -714,7 +709,7 @@ public class Reflect {
     }
 
     /**
-     * Load a class
+     * Load a class.
      *
      * @see Class#forName(String)
      */

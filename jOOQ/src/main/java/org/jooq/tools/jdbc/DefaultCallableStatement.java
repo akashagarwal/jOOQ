@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -76,9 +76,11 @@ public class DefaultCallableStatement extends DefaultPreparedStatement implement
         return (CallableStatement) super.getDelegate();
     }
 
-    // ------------------------------------------------------------------------
-    // XXX Other methods
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX Other methods
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public void registerOutParameter(int parameterIndex, int sqlType) throws SQLException {

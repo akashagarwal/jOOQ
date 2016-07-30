@@ -62,10 +62,11 @@ public class JSONObject extends HashMap{
 
         out.write('{');
         while (iter.hasNext()) {
-            if (first)
-                first = false;
-            else
-                out.write(',');
+            if (first) {
+				first = false;
+			} else {
+				out.write(',');
+			}
             Map.Entry<?, ?> entry = (Map.Entry<?, ?>) iter.next();
             out.write('\"');
             out.write(escape(String.valueOf(entry.getKey())));
@@ -83,8 +84,9 @@ public class JSONObject extends HashMap{
      * @return JSON text, or "null" if map is null.
      */
     public static String toJSONString(Map<?, ?> map) {
-        if (map == null)
-            return "null";
+        if (map == null) {
+			return "null";
+		}
 
         StringBuffer sb = new StringBuffer();
         boolean first = true;
@@ -92,10 +94,11 @@ public class JSONObject extends HashMap{
 
         sb.append('{');
         while (iter.hasNext()) {
-            if (first)
-                first = false;
-            else
-                sb.append(',');
+            if (first) {
+				first = false;
+			} else {
+				sb.append(',');
+			}
 
             Map.Entry<?, ?> entry = (Map.Entry<?, ?>) iter.next();
             toJSONString(String.valueOf(entry.getKey()), entry.getValue(), sb);
@@ -106,10 +109,11 @@ public class JSONObject extends HashMap{
 
     private static String toJSONString(String key, Object value, StringBuffer sb) {
         sb.append('\"');
-        if (key == null)
-            sb.append("null");
-        else
-            JSONValue.escape(key, sb);
+        if (key != null) {
+			JSONValue.escape(key, sb);
+		} else {
+			sb.append("null");
+		}
         sb.append('\"').append(':');
 
         sb.append(JSONValue.toJSONString(value));

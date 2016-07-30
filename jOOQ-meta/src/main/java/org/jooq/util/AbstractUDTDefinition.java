@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -44,7 +44,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Abstract base implementation for {@link UDTDefinition}'s
+ * Abstract base implementation for {@link UDTDefinition}'s.
  *
  * @author Lukas Eder
  */

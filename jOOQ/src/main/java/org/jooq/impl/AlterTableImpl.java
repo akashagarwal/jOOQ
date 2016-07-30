@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -94,7 +94,7 @@ final class AlterTableImpl extends AbstractQuery implements
     AlterTableRenameConstraintToStep {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long     serialVersionUID = 8904572826501186329L;
     private static final Clause[] CLAUSES          = { ALTER_TABLE };
@@ -127,9 +127,11 @@ final class AlterTableImpl extends AbstractQuery implements
         this.ifExists = ifExists;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: DSL API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: DSL API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final AlterTableImpl renameTo(Table<?> newName) {
@@ -181,32 +183,35 @@ final class AlterTableImpl extends AbstractQuery implements
 
     @Override
     public final AlterTableImpl to(Field<?> newName) {
-        if (renameColumn != null)
-            renameColumnTo = newName;
-        else
-            throw new IllegalStateException();
+        if (renameColumn != null) {
+			renameColumnTo = newName;
+		} else {
+			throw new IllegalStateException();
+		}
 
         return this;
     }
 
     @Override
     public final AlterTableImpl to(Constraint newName) {
-        if (renameConstraint != null)
-            renameConstraintTo = newName;
-        else
-            throw new IllegalStateException();
+        if (renameConstraint != null) {
+			renameConstraintTo = newName;
+		} else {
+			throw new IllegalStateException();
+		}
 
         return this;
     }
 
     @Override
     public final AlterTableImpl to(Name newName) {
-        if (renameColumn != null)
-            return to(field(newName));
-        else if (renameConstraint != null)
-            return to(constraint(newName));
-        else
-            throw new IllegalStateException();
+        if (renameColumn != null) {
+			return to(field(newName));
+		} else if (renameConstraint != null) {
+			return to(constraint(newName));
+		} else {
+			throw new IllegalStateException();
+		}
     }
 
     @Override
@@ -359,9 +364,11 @@ final class AlterTableImpl extends AbstractQuery implements
         return this;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: QueryPart API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: QueryPart API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final void accept(Context<?> ctx) {
@@ -400,8 +407,9 @@ final class AlterTableImpl extends AbstractQuery implements
             ctx.start(ALTER_TABLE_TABLE)
                .keyword("alter table");
 
-            if (ifExists)
-                ctx.sql(' ').keyword("if exists");
+            if (ifExists) {
+				ctx.sql(' ').keyword("if exists");
+			}
 
             ctx.sql(' ').visit(table)
                .end(ALTER_TABLE_TABLE)
@@ -542,13 +550,13 @@ final class AlterTableImpl extends AbstractQuery implements
                 case MARIADB:
                 case MYSQL: {
 
-                    if (alterColumnDefault == null) {
+                    if (alterColumnDefault != null) {
+                        ctx.keyword("alter column");
+                    }
+                    else {
                         // MySQL's CHANGE COLUMN clause has a mandatory RENAMING syntax...
                         ctx.keyword("change column")
                            .sql(' ').qualify(false).visit(alterColumn).qualify(true);
-                    }
-                    else {
-                        ctx.keyword("alter column");
                     }
 
                     break;
@@ -662,8 +670,9 @@ final class AlterTableImpl extends AbstractQuery implements
             ctx.end(ALTER_TABLE_DROP);
         }
 
-        if (!omitAlterTable)
-            ctx.formatIndentEnd();
+        if (!omitAlterTable) {
+			ctx.formatIndentEnd();
+		}
     }
 
 

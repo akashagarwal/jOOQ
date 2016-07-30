@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -86,10 +86,11 @@ final class InCondition<T> extends AbstractCondition {
         List<Field<?>> list = Arrays.asList(values);
 
         if (list.size() == 0) {
-            if (comparator == IN)
-                ctx.visit(falseCondition());
-            else
-                ctx.visit(trueCondition());
+            if (comparator == IN) {
+				ctx.visit(falseCondition());
+			} else {
+				ctx.visit(trueCondition());
+			}
         }
         else if (list.size() > IN_LIMIT) {
             // [#798] Oracle and some other dialects can only hold 1000 values
@@ -144,7 +145,7 @@ final class InCondition<T> extends AbstractCondition {
     }
 
     /**
-     * Render the SQL for a sub-set of the <code>IN</code> clause's values
+     * Render the SQL for a sub-set of the <code>IN</code> clause's values.
      */
     private void toSQLSubValues(Context<?> ctx, List<Field<?>> subValues) {
         ctx.visit(field)

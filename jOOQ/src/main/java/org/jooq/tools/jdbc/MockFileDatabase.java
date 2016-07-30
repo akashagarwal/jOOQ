@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -206,7 +206,7 @@ public class MockFileDatabase implements MockDataProvider {
 
                         // A terminated line of SQL
                         else if (line.endsWith(";")) {
-                            currentSQL.append(line.substring(0, line.length() - 1));
+                            currentSQL.append(line, 0, line.length() - 1);
 
                             if (!matchExactly.containsKey(previousSQL)) {
                                 matchExactly.put(previousSQL, null);

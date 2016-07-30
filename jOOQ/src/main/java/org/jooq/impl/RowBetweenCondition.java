@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -200,17 +200,19 @@ implements
         this.symmetric = symmetric;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: BetweenAndStep API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: BetweenAndStep API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final Condition and(Field f) {
-        if (maxValue == null) {
-            return and(row(f));
+        if (maxValue != null) {
+            return super.and(f);
         }
         else {
-            return super.and(f);
+            return and(row(f));
         }
     }
 
@@ -693,9 +695,11 @@ implements
         return and(r);
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: QueryPart API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: QueryPart API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final void accept(Context<?> ctx) {
@@ -739,16 +743,20 @@ implements
     private class Native extends AbstractQueryPart {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long serialVersionUID = 2915703568738921575L;
 
         @Override
         public final void accept(Context<?> context) {
                            context.visit(row);
-            if (not)       context.sql(" ").keyword("not");
+            if (not) {
+				context.sql(" ").keyword("not");
+			}
                            context.sql(" ").keyword("between");
-            if (symmetric) context.sql(" ").keyword("symmetric");
+            if (symmetric) {
+				context.sql(" ").keyword("symmetric");
+			}
                            context.sql(" ").visit(minValue);
                            context.sql(" ").keyword("and");
                            context.sql(" ").visit(maxValue);

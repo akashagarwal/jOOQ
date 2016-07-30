@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -111,7 +111,7 @@ public class FirebirdRoutineDefinition extends AbstractRoutineDefinition {
                 type
             );
 
-            addParameter(record.get(p.RDB$PARAMETER_TYPE, int.class).equals(0) ? InOutDefinition.IN : InOutDefinition.OUT, parameter);
+            addParameter(0.equals(record.get(p.RDB$PARAMETER_TYPE, int.class)) ? InOutDefinition.IN : InOutDefinition.OUT, parameter);
         }
 
     }

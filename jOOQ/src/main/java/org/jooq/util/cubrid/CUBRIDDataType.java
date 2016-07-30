@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -58,15 +58,17 @@ import org.jooq.types.ULong;
 import org.jooq.types.UShort;
 
 /**
- * Supported data types for the {@link SQLDialect#CUBRID} dialect
+ * Supported data types for the {@link SQLDialect#CUBRID} dialect.
  *
  * @author Lukas Eder
  */
 public class CUBRIDDataType {
 
-    // -------------------------------------------------------------------------
-    // Default SQL data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Default SQL data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Integer>    INT                      = new DefaultDataType<Integer>(SQLDialect.CUBRID, SQLDataType.INTEGER, "int");
     public static final DataType<Integer>    INTEGER                  = new DefaultDataType<Integer>(SQLDialect.CUBRID, SQLDataType.INTEGER, "integer");
@@ -100,9 +102,11 @@ public class CUBRIDDataType {
     public static final DataType<byte[]>     BIT                      = new DefaultDataType<byte[]>(SQLDialect.CUBRID, SQLDataType.BINARY, "bit");
     public static final DataType<byte[]>     BLOB                     = new DefaultDataType<byte[]>(SQLDialect.CUBRID, SQLDataType.BLOB, "blob");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported SQLDialect.CUBRID, SQLDataTypes
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported SQLDialect.CUBRID, SQLDataTypes
+     * -------------------------------------------------------------------------
+     */
 
     protected static final DataType<Boolean>    __BOOL                = new DefaultDataType<Boolean>(SQLDialect.CUBRID, SQLDataType.BOOLEAN, "bit", "bit(1)");
     protected static final DataType<Boolean>    __BIT                 = new DefaultDataType<Boolean>(SQLDialect.CUBRID, SQLDataType.BIT, "bit", "bit(1)");
@@ -119,21 +123,25 @@ public class CUBRIDDataType {
     protected static final DataType<UInteger>   __INTEGERUNSIGNED     = new DefaultDataType<UInteger>(SQLDialect.CUBRID, SQLDataType.INTEGERUNSIGNED, "bigint");
     protected static final DataType<ULong>      __BIGINTUNSIGNED      = new DefaultDataType<ULong>(SQLDialect.CUBRID, SQLDataType.BIGINTUNSIGNED, "decimal");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported Java types
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported Java types
+     * -------------------------------------------------------------------------.
+     */
 
     protected static final DataType<BigInteger> __BIGINTEGER          = new DefaultDataType<BigInteger>(SQLDialect.CUBRID, SQLDataType.DECIMAL_INTEGER, "decimal", "decimal");
     protected static final DataType<UUID>       __UUID                = new DefaultDataType<UUID>(SQLDialect.CUBRID, SQLDataType.UUID, "varchar");
 
-    // -------------------------------------------------------------------------
-    // Dialect-specific data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Dialect-specific data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Double> MONETARY                     = new DefaultDataType<Double>(SQLDialect.CUBRID, SQLDataType.DOUBLE, "monetary");
     public static final DataType<String> ENUM                         = new DefaultDataType<String>(SQLDialect.CUBRID, SQLDataType.VARCHAR, "enum", "varchar");
 
-    // These types are not yet formally supported
+    /** These types are not yet formally supported. */
     public static final DataType<Object> OBJECT                       = new DefaultDataType<Object>(SQLDialect.CUBRID, SQLDataType.OTHER, "object");
     public static final DataType<Object> OID                          = new DefaultDataType<Object>(SQLDialect.CUBRID, SQLDataType.OTHER, "oid");
     public static final DataType<Object> ELO                          = new DefaultDataType<Object>(SQLDialect.CUBRID, SQLDataType.OTHER, "elo");

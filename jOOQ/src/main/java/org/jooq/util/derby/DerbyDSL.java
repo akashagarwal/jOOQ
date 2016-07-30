@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -51,7 +51,7 @@ import org.jooq.impl.DSL;
 public class DerbyDSL extends DSL {
 
     /**
-     * No instances
+     * No instances.
      */
     protected DerbyDSL() {
     }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -72,7 +72,7 @@ import org.jooq.tools.JooqLogger;
 final class BatchSingle implements BatchBindStep {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long                serialVersionUID = 3793967258181493207L;
     private static final JooqLogger          log              = JooqLogger.getLogger(BatchSingle.class);
@@ -117,8 +117,9 @@ final class BatchSingle implements BatchBindStep {
 
     @Override
     public final BatchSingle bind(Object[]... bindValues) {
-        for (Object[] v : bindValues)
-            bind(v);
+        for (Object[] v : bindValues) {
+			bind(v);
+		}
 
         return this;
     }
@@ -187,10 +188,13 @@ final class BatchSingle implements BatchBindStep {
 
         // [#4071] Help users debug cases where bind value counts don't match the expected number
         // [#5362] Don't do this for plain SQL queries
-        if (expectedBindValues > 0)
-            for (int i = 0; i < allBindValues.size(); i++)
-                if (allBindValues.get(i).length != expectedBindValues)
-                    log.info("Bind value count", "Batch bind value set " + i + " has " + allBindValues.get(i).length + " values when " + expectedBindValues + " values were expected");
+        if (expectedBindValues > 0) {
+			for (int i = 0; i < allBindValues.size(); i++) {
+				if (allBindValues.get(i).length != expectedBindValues) {
+					log.info("Bind value count", "Batch bind value set " + i + " has " + allBindValues.get(i).length + " values when " + expectedBindValues + " values were expected");
+				}
+			}
+		}
     }
 
     private final int[] executePrepared() {
@@ -204,8 +208,9 @@ final class BatchSingle implements BatchBindStep {
         ParamCollector collector = new ParamCollector(configuration, false);
         collector.visit(query);
         List<Param<?>> params = new ArrayList<Param<?>>();
-        for (Entry<String, Param<?>> entry : collector.resultList)
-            params.add(entry.getValue());
+        for (Entry<String, Param<?>> entry : collector.resultList) {
+			params.add(entry.getValue());
+		}
 
         DataType<?>[] paramTypes = dataTypes(params.toArray(EMPTY_FIELD));
 
@@ -239,8 +244,9 @@ final class BatchSingle implements BatchBindStep {
             int[] result = ctx.statement().executeBatch();
 
             int[] batchRows = ctx.batchRows();
-            for (int i = 0; i < batchRows.length && i < result.length; i++)
-                batchRows[i] = result[i];
+            for (int i = 0; i < batchRows.length && i < result.length; i++) {
+				batchRows[i] = result[i];
+			}
 
             listener.executeEnd(ctx);
             return result;

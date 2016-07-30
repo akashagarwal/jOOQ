@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -68,7 +68,7 @@ import org.jooq.Converter;
 public class AbstractXMLasObjectBinding<T> extends AbstractVarcharBinding<T> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long          serialVersionUID = -2153155338260706262L;
 
@@ -88,22 +88,24 @@ public class AbstractXMLasObjectBinding<T> extends AbstractVarcharBinding<T> {
         this.converter = new Converter<Object, T>() {
 
             /**
-             * Generated UID
+             * Generated UID.
              */
             private static final long serialVersionUID = -2153155338260706262L;
 
             @Override
             public T from(Object t) {
-                if (t == null)
-                    return null;
+                if (t != null) {
+					return JAXB.unmarshal(new StringReader("" + t), type);
+				}
 
-                return JAXB.unmarshal(new StringReader("" + t), type);
+                return null;
             }
 
             @Override
             public Object to(T u) {
-                if (u == null)
-                    return null;
+                if (u == null) {
+					return null;
+				}
 
                 try {
                     StringWriter s = new StringWriter();

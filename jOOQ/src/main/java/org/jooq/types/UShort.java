@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2011-2016, Lukas Eder, lukas.eder@gmail.com
  * All rights reserved.
  *
@@ -36,14 +36,14 @@
 package org.jooq.types;
 
 /**
- * The <code>unsigned short</code> type
+ * The <code>unsigned short</code> type.
  *
  * @author Lukas Eder
  */
 public final class UShort extends UNumber implements Comparable<UShort> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = -6821055240959745390L;
 
@@ -60,7 +60,7 @@ public final class UShort extends UNumber implements Comparable<UShort> {
     public static final int   MAX_VALUE        = 0xffff;
 
     /**
-     * The value modelling the content of this <code>unsigned short</code>
+     * The value modelling the content of this <code>unsigned short</code>.
      */
     private final int         value;
 
@@ -84,7 +84,7 @@ public final class UShort extends UNumber implements Comparable<UShort> {
     }
 
     /**
-     * Create an <code>unsigned short</code>
+     * Create an <code>unsigned short</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned short</code>
@@ -94,7 +94,7 @@ public final class UShort extends UNumber implements Comparable<UShort> {
     }
 
     /**
-     * Create an <code>unsigned short</code>
+     * Create an <code>unsigned short</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned short</code>
@@ -157,13 +157,7 @@ public final class UShort extends UNumber implements Comparable<UShort> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj instanceof UShort) {
-            return value == ((UShort) obj).value;
-        }
-
-        return false;
+        return this == obj || (obj instanceof UShort && value == ((UShort) obj).value);
     }
 
     @Override
@@ -173,6 +167,6 @@ public final class UShort extends UNumber implements Comparable<UShort> {
 
     @Override
     public int compareTo(UShort o) {
-        return (value < o.value ? -1 : (value == o.value ? 0 : 1));
+        return value < o.value ? -1 : (value == o.value ? 0 : 1);
     }
 }

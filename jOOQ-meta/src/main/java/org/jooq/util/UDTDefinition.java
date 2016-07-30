@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -54,22 +54,22 @@ import java.util.List;
 public interface UDTDefinition extends PackageDefinition {
 
     /**
-     * All attributes in the UDT
+     * All attributes in the UDT.
      */
     List<AttributeDefinition> getAttributes();
 
     /**
-     * Get an attribute in this UDT by its name
+     * Get an attribute in this UDT by its name.
      */
     AttributeDefinition getAttribute(String attributeName);
 
     /**
-     * Get an attribute in this UDT by its index (starting at 0)
+     * Get an attribute in this UDT by its index (starting at 0).
      */
     AttributeDefinition getAttribute(int attributeIndex);
 
     /**
-     * All routines in the UDT
+     * All routines in the UDT.
      */
     @Override
     List<RoutineDefinition> getRoutines();

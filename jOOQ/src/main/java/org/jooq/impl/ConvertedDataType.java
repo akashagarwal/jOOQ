@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -57,7 +57,7 @@ import org.jooq.Field;
 final class ConvertedDataType<T, U> extends DefaultDataType<U> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long           serialVersionUID = -2321926692580974126L;
 

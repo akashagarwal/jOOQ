@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -66,9 +66,11 @@ import org.jooq.types.UShort;
  */
 public class MariaDBDataType {
 
-    // -------------------------------------------------------------------------
-    // Default SQL data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Default SQL data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Byte>       TINYINT            = new DefaultDataType<Byte>(SQLDialect.MARIADB, SQLDataType.TINYINT, "tinyint", "signed");
     public static final DataType<UByte>      TINYINTUNSIGNED    = new DefaultDataType<UByte>(SQLDialect.MARIADB, SQLDataType.TINYINTUNSIGNED, "tinyint unsigned", "unsigned");
@@ -101,9 +103,11 @@ public class MariaDBDataType {
     public static final DataType<Timestamp>  TIMESTAMP          = new DefaultDataType<Timestamp>(SQLDialect.MARIADB, SQLDataType.TIMESTAMP, "timestamp", "datetime");
     public static final DataType<Timestamp>  DATETIME           = new DefaultDataType<Timestamp>(SQLDialect.MARIADB, SQLDataType.TIMESTAMP, "datetime", "datetime");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported SQLDialect.MARIADB, SQLDataTypes
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported SQLDialect.MARIADB, SQLDataTypes
+     * -------------------------------------------------------------------------
+     */
 
     protected static final DataType<String>     __NCHAR         = new DefaultDataType<String>(SQLDialect.MARIADB, SQLDataType.NCHAR, "char", "char");
     protected static final DataType<String>     __NCLOB         = new DefaultDataType<String>(SQLDialect.MARIADB, SQLDataType.NCLOB, "clob", "char");
@@ -113,16 +117,20 @@ public class MariaDBDataType {
     protected static final DataType<String>     __LONGVARCHAR   = new DefaultDataType<String>(SQLDialect.MARIADB, SQLDataType.LONGVARCHAR, "varchar", "char");
     protected static final DataType<byte[]>     __LONGVARBINARY = new DefaultDataType<byte[]>(SQLDialect.MARIADB, SQLDataType.LONGVARBINARY, "varbinary", "binary");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported Java types
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported Java types
+     * -------------------------------------------------------------------------.
+     */
 
     protected static final DataType<BigInteger> __BIGINTEGER    = new DefaultDataType<BigInteger>(SQLDialect.MARIADB, SQLDataType.DECIMAL_INTEGER, "decimal", "decimal");
     protected static final DataType<UUID>       __UUID          = new DefaultDataType<UUID>(SQLDialect.MARIADB, SQLDataType.UUID, "varchar", "char");
 
-    // -------------------------------------------------------------------------
-    // Dialect-specific data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Dialect-specific data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<String>     TINYTEXT           = new DefaultDataType<String>(SQLDialect.MARIADB, SQLDataType.CLOB, "tinytext", "char");
     public static final DataType<String>     MEDIUMTEXT         = new DefaultDataType<String>(SQLDialect.MARIADB, SQLDataType.CLOB, "mediumtext", "char");

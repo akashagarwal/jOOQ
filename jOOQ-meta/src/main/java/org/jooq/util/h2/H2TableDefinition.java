@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -57,7 +57,7 @@ import org.jooq.util.SchemaDefinition;
 import org.jooq.util.h2.information_schema.tables.Columns;
 
 /**
- * H2 table definition
+ * H2 table definition.
  *
  * @author Espen Stromsnes
  * @author Oliver Flege

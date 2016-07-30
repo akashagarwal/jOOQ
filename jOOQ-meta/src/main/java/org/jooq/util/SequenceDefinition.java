@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -41,7 +41,7 @@
 package org.jooq.util;
 
 /**
- * An interface defining a sequence
+ * An interface defining a sequence.
  *
  * @author Lukas Eder
  */

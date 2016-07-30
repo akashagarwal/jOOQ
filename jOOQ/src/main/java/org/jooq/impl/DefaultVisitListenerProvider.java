@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -73,8 +73,9 @@ public class DefaultVisitListenerProvider implements VisitListenerProvider, Seri
     public static VisitListenerProvider[] providers(VisitListener... listeners) {
         VisitListenerProvider[] result = new VisitListenerProvider[listeners.length];
 
-        for (int i = 0; i < listeners.length; i++)
-            result[i] = new DefaultVisitListenerProvider(listeners[i]);
+        for (int i = 0; i < listeners.length; i++) {
+			result[i] = new DefaultVisitListenerProvider(listeners[i]);
+		}
 
         return result;
     }
@@ -88,17 +89,13 @@ public class DefaultVisitListenerProvider implements VisitListenerProvider, Seri
         this.listener = listener;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public final VisitListener provide() {
         return listener;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return listener.toString();

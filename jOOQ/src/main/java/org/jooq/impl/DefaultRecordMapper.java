@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -410,8 +410,9 @@ public class DefaultRecordMapper<R extends Record, E> implements RecordMapper<R,
         @Override
         public final E map(R record) {
             int size = record.size();
-            if (size != 1)
-                throw new MappingException("Cannot map multi-column record of degree " + size + " to value type " + type);
+            if (size != 1) {
+				throw new MappingException("Cannot map multi-column record of degree " + size + " to value type " + type);
+			}
 
             return record.get(0, type);
         }
@@ -441,21 +442,19 @@ public class DefaultRecordMapper<R extends Record, E> implements RecordMapper<R,
                 public Object invoke(Object proxy, Method method, Object[] args) {
                     String name = method.getName();
 
-                    int length = (args == null ? 0 : args.length);
+                    int length = args == null ? 0 : args.length;
 
-                    if (length == 0 && name.startsWith("get"))
-                        return map.get(name.substring(3));
-                    else if (length == 0 && name.startsWith("is"))
-                        return map.get(name.substring(2));
-                    else if (length == 1 && name.startsWith("set"))
-                        map.put(name.substring(3), args[0]);
-
-
-                    // [#5442] Default methods should be invoked to run client implementation
-                    else if (method.isDefault())
-                        try {
-                            if (constructor == null)
-                                constructor = accessible(Lookup.class.getDeclaredConstructor(Class.class, int.class));
+                    if (length == 0 && name.startsWith("get")) {
+						return map.get(name.substring(3));
+					} else if (length == 0 && name.startsWith("is")) {
+						return map.get(name.substring(2));
+					} else if (length == 1 && name.startsWith("set")) {
+						map.put(name.substring(3), args[0]);
+					} else if (method.isDefault()) {
+						try {
+                            if (constructor == null) {
+								constructor = accessible(Lookup.class.getDeclaredConstructor(Class.class, int.class));
+							}
 
                             Class<?> declaringClass = method.getDeclaringClass();
                             return constructor
@@ -467,6 +466,7 @@ public class DefaultRecordMapper<R extends Record, E> implements RecordMapper<R,
                         catch (Throwable e) {
                             throw new MappingException("Cannot invoke default method", e);
                         }
+					}
 
 
                     return null;
@@ -512,18 +512,22 @@ public class DefaultRecordMapper<R extends Record, E> implements RecordMapper<R,
             this.f = new Field[fields.length];
 
             String dotted = prefix + ".";
-            for (int i = 0; i < fields.length; i++)
-                if (fields[i].getName().startsWith(dotted))
-                    f[i] = field(name(fields[i].getName().substring(dotted.length() + 1)), fields[i].getDataType());
+            for (int i = 0; i < fields.length; i++) {
+				if (fields[i].getName().startsWith(dotted)) {
+					f[i] = field(name(fields[i].getName().substring(dotted.length() + 1)), fields[i].getDataType());
+				}
+			}
         }
 
         @Override
         public Object map(R record) {
             AbstractRecord copy = (AbstractRecord) DSL.using(configuration).newRecord(f);
 
-            for (int i = 0; i < f.length; i++)
-                if (f[i] != null)
-                    copy.set(i, record.get(i));
+            for (int i = 0; i < f.length; i++) {
+				if (f[i] != null) {
+					copy.set(i, record.get(i));
+				}
+			}
 
             return d.map(record);
         }
@@ -533,7 +537,7 @@ public class DefaultRecordMapper<R extends Record, E> implements RecordMapper<R,
      * Convert a record into a mutable POJO type
      * <p>
      * jOOQ's understanding of a mutable POJO is a Java type that has a default
-     * constructor
+     * constructor.
      */
     private class MutablePOJOMapper implements RecordMapper<R, E> {
 
@@ -790,7 +794,7 @@ public class DefaultRecordMapper<R extends Record, E> implements RecordMapper<R,
 
     /**
      * Create an immutable POJO given a constructor and its associated JavaBeans
-     * {@link ConstructorProperties}
+     * {@link ConstructorProperties}.
      */
     private class ImmutablePOJOMapperWithConstructorProperties implements RecordMapper<R, E> {
 

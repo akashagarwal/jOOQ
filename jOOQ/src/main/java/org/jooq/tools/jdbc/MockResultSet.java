@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -78,7 +78,7 @@ import org.jooq.Result;
 public class MockResultSet extends JDBC41ResultSet implements ResultSet, Serializable {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = -2292216936424437750L;
 
@@ -96,9 +96,11 @@ public class MockResultSet extends JDBC41ResultSet implements ResultSet, Seriali
         this.maxRows = maxRows;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Unsupported implementations
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Unsupported implementations
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public <T> T unwrap(Class<T> iface) throws SQLException {
@@ -110,9 +112,11 @@ public class MockResultSet extends JDBC41ResultSet implements ResultSet, Seriali
         return false;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: ResultSet operations
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: ResultSet operations
+     * -------------------------------------------------------------------------
+     */
 
     private int size() {
         if (maxRows == 0) {
@@ -175,17 +179,14 @@ public class MockResultSet extends JDBC41ResultSet implements ResultSet, Seriali
             else if (row == 0) {
                 beforeFirst();
                 return false;
-            }
-            else {
-                if (-row <= size()) {
-                    index = size() + 1 + row;
-                    return true;
-                }
-                else {
-                    beforeFirst();
-                    return false;
-                }
-            }
+            } else if (-row <= size()) {
+			    index = size() + 1 + row;
+			    return true;
+			}
+			else {
+			    beforeFirst();
+			    return false;
+			}
         }
         else {
             return false;
@@ -198,7 +199,7 @@ public class MockResultSet extends JDBC41ResultSet implements ResultSet, Seriali
 
         index += rows;
         try {
-            return (index > 0 && index <= size());
+            return index > 0 && index <= size();
         }
 
         // Be sure we don't go out of bounds
@@ -240,28 +241,28 @@ public class MockResultSet extends JDBC41ResultSet implements ResultSet, Seriali
     public boolean isFirst() throws SQLException {
         checkNotClosed();
 
-        return (size() > 0 && index == 1);
+        return size() > 0 && index == 1;
     }
 
     @Override
     public boolean isBeforeFirst() throws SQLException {
         checkNotClosed();
 
-        return (size() > 0 && index == 0);
+        return size() > 0 && index == 0;
     }
 
     @Override
     public boolean isLast() throws SQLException {
         checkNotClosed();
 
-        return (size() > 0 && index == size());
+        return size() > 0 && index == size();
     }
 
     @Override
     public boolean isAfterLast() throws SQLException {
         checkNotClosed();
 
-        return (size() > 0 && index > size());
+        return size() > 0 && index > size();
     }
 
     @Override
@@ -346,9 +347,11 @@ public class MockResultSet extends JDBC41ResultSet implements ResultSet, Seriali
         return ResultSet.CLOSE_CURSORS_AT_COMMIT;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Getters
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Getters
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public boolean wasNull() throws SQLException {
@@ -372,7 +375,7 @@ public class MockResultSet extends JDBC41ResultSet implements ResultSet, Seriali
         checkField(columnLabel);
 
         T value = result.get(index - 1).get(columnLabel, type);
-        wasNull = (value == null);
+        wasNull = value == null;
         return value;
     }
 
@@ -381,7 +384,7 @@ public class MockResultSet extends JDBC41ResultSet implements ResultSet, Seriali
         checkField(columnIndex);
 
         T value = result.get(index - 1).get(columnIndex - 1, type);
-        wasNull = (value == null);
+        wasNull = value == null;
         return value;
     }
 
@@ -741,9 +744,11 @@ public class MockResultSet extends JDBC41ResultSet implements ResultSet, Seriali
         return get(columnLabel, Object.class);
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Setters and row update methods
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Setters and row update methods
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public boolean rowUpdated() throws SQLException {
@@ -1151,9 +1156,11 @@ public class MockResultSet extends JDBC41ResultSet implements ResultSet, Seriali
         throw new SQLFeatureNotSupportedException("Cannot update ResultSet");
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Object API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Object API
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public String toString() {

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2011-2016, Lukas Eder, lukas.eder@gmail.com
  * All rights reserved.
  *
@@ -39,7 +39,7 @@ import java.io.ObjectStreamException;
 import java.math.BigInteger;
 
 /**
- * The <code>unsigned byte</code> type
+ * The <code>unsigned byte</code> type.
  *
  * @author Lukas Eder
  * @author Ed Schaller
@@ -47,12 +47,12 @@ import java.math.BigInteger;
 public final class UByte extends UNumber implements Comparable<UByte> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long    serialVersionUID = -6821055240959745390L;
 
     /**
-     * Cached values
+     * Cached values.
      */
     private static final UByte[] VALUES           = mkValues();
 
@@ -69,7 +69,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
     public static final short    MAX_VALUE        = 0xff;
 
     /**
-     * The value modelling the content of this <code>unsigned byte</code>
+     * The value modelling the content of this <code>unsigned byte</code>.
      */
     private final short          value;
 
@@ -78,11 +78,12 @@ public final class UByte extends UNumber implements Comparable<UByte> {
      *
      * @return Array of cached values for UByte.
      */
-    private static final UByte[] mkValues() {
+    private static UByte[] mkValues() {
         UByte[] ret = new UByte[256];
 
-        for (int i = Byte.MIN_VALUE; i <= Byte.MAX_VALUE; i++)
-            ret[i & MAX_VALUE] = new UByte((byte) i);
+        for (int i = Byte.MIN_VALUE; i <= Byte.MAX_VALUE; i++) {
+			ret[i & MAX_VALUE] = new UByte((byte) i);
+		}
         return ret;
     }
 
@@ -113,7 +114,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
     }
 
     /**
-     * Get an instance of an <code>unsigned byte</code>
+     * Get an instance of an <code>unsigned byte</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned byte</code>
@@ -123,7 +124,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
     }
 
     /**
-     * Get an instance of an <code>unsigned byte</code>
+     * Get an instance of an <code>unsigned byte</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned byte</code>
@@ -133,7 +134,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
     }
 
     /**
-     * Get an instance of an <code>unsigned byte</code>
+     * Get an instance of an <code>unsigned byte</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned byte</code>
@@ -143,7 +144,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
     }
 
     /**
-     * Create an <code>unsigned byte</code>
+     * Create an <code>unsigned byte</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned byte</code>
@@ -153,7 +154,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
     }
 
     /**
-     * Create an <code>unsigned byte</code>
+     * Create an <code>unsigned byte</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned byte</code>
@@ -163,7 +164,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
     }
 
     /**
-     * Create an <code>unsigned byte</code>
+     * Create an <code>unsigned byte</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned byte</code>
@@ -191,7 +192,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
     }
 
     /**
-     * Throw exception if value out of range (short version)
+     * Throw exception if value out of range (short version).
      *
      * @param value Value to check
      * @return value if it is in range
@@ -205,7 +206,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
     }
 
     /**
-     * Throw exception if value out of range (int version)
+     * Throw exception if value out of range (int version).
      *
      * @param value Value to check
      * @return value if it is in range
@@ -219,7 +220,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
     }
 
     /**
-     * Throw exception if value out of range (long version)
+     * Throw exception if value out of range (long version).
      *
      * @param value Value to check
      * @return value if it is in range
@@ -271,13 +272,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj instanceof UByte) {
-            return value == ((UByte) obj).value;
-        }
-
-        return false;
+        return this == obj || (obj instanceof UByte && value == ((UByte) obj).value);
     }
 
     @Override
@@ -287,7 +282,7 @@ public final class UByte extends UNumber implements Comparable<UByte> {
 
     @Override
     public int compareTo(UByte o) {
-        return (value < o.value ? -1 : (value == o.value ? 0 : 1));
+        return value < o.value ? -1 : (value == o.value ? 0 : 1);
     }
 
     @Override

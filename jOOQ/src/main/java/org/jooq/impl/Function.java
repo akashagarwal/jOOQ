@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -115,11 +115,11 @@ class Function<T> extends AbstractField<T> implements
 
     static final Field<Integer>            ASTERISK         = DSL.field("*", Integer.class);
 
-    // Mutually exclusive attributes: super.getName(), this.name, this.term
+    /** Mutually exclusive attributes: super.getName(), this.name, this.term */
     private final Name                     name;
     private final Term                     term;
 
-    // Other attributes
+    /** Other attributes. */
     private final QueryPartList<QueryPart> arguments;
     private final boolean                  distinct;
     private final SortFieldList            withinGroupOrderBy;
@@ -133,9 +133,11 @@ class Function<T> extends AbstractField<T> implements
     private boolean                        ignoreNulls;
     private boolean                        respectNulls;
 
-    // -------------------------------------------------------------------------
-    // XXX Constructors
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX Constructors
+     * -------------------------------------------------------------------------.
+     */
 
     Function(String name, DataType<T> type, QueryPart... arguments) {
         this(name, false, type, arguments);
@@ -182,7 +184,7 @@ class Function<T> extends AbstractField<T> implements
         this.withinGroupOrderBy = new SortFieldList();
     }
 
-    final static String last(String... strings) {
+    static String last(String... strings) {
         if (strings != null && strings.length > 0) {
             return strings[strings.length - 1];
         }
@@ -190,9 +192,11 @@ class Function<T> extends AbstractField<T> implements
         return null;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX QueryPart API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX QueryPart API
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public /* final */ void accept(Context<?> ctx) {
@@ -216,8 +220,9 @@ class Function<T> extends AbstractField<T> implements
 
         else if (term == MEDIAN && asList(POSTGRES).contains(ctx.family())) {
             Field<?>[] fields = new Field[arguments.size()];
-            for (int i = 0; i < fields.length; i++)
-                fields[i] = DSL.field("{0}", arguments.get(i));
+            for (int i = 0; i < fields.length; i++) {
+				fields[i] = DSL.field("{0}", arguments.get(i));
+			}
 
             ctx.visit(percentileCont(new BigDecimal("0.5")).withinGroupOrderBy(fields));
         }
@@ -276,45 +281,50 @@ class Function<T> extends AbstractField<T> implements
 
 
     /**
-     * [#1275] <code>LIST_AGG</code> emulation for Postgres, Sybase
+     * [#1275] <code>LIST_AGG</code> emulation for Postgres, Sybase.
      */
     final void toSQLStringAgg(Context<?> ctx) {
         toSQLFunctionName(ctx);
         ctx.sql('(');
 
-        if (distinct)
-            ctx.keyword("distinct").sql(' ');
+        if (distinct) {
+			ctx.keyword("distinct").sql(' ');
+		}
 
         // The explicit cast is needed in Postgres
         ctx.visit(((Field<?>) arguments.get(0)).cast(String.class));
 
-        if (arguments.size() > 1)
-            ctx.sql(", ").visit(arguments.get(1));
-        else
-            ctx.sql(", ''");
+        if (arguments.size() > 1) {
+			ctx.sql(", ").visit(arguments.get(1));
+		} else {
+			ctx.sql(", ''");
+		}
 
-        if (!withinGroupOrderBy.isEmpty())
-            ctx.sql(' ').keyword("order by").sql(' ')
+        if (!withinGroupOrderBy.isEmpty()) {
+			ctx.sql(' ').keyword("order by").sql(' ')
                    .visit(withinGroupOrderBy);
+		}
 
         ctx.sql(')');
     }
 
     /**
-     * [#1273] <code>LIST_AGG</code> emulation for MySQL and CUBRID
+     * [#1273] <code>LIST_AGG</code> emulation for MySQL and CUBRID.
      */
     final void toSQLGroupConcat(Context<?> ctx) {
         toSQLFunctionName(ctx);
         ctx.sql('(');
         toSQLArguments0(ctx);
 
-        if (!withinGroupOrderBy.isEmpty())
-            ctx.sql(' ').keyword("order by").sql(' ')
+        if (!withinGroupOrderBy.isEmpty()) {
+			ctx.sql(' ').keyword("order by").sql(' ')
                .visit(withinGroupOrderBy);
+		}
 
-        if (arguments.size() > 1)
-            ctx.sql(' ').keyword("separator").sql(' ')
+        if (arguments.size() > 1) {
+			ctx.sql(' ').keyword("separator").sql(' ')
                .visit(arguments.get(1));
+		}
 
         ctx.sql(')');
     }
@@ -335,12 +345,14 @@ class Function<T> extends AbstractField<T> implements
         QueryPart window = window(ctx);
 
         // Render this clause only if needed
-        if (window == null)
-            return;
+        if (window == null) {
+			return;
+		}
 
         // [#1524] Don't render this clause where it is not supported
-        if (term == ROW_NUMBER && ctx.configuration().dialect() == HSQLDB)
-            return;
+        if (term == ROW_NUMBER && ctx.configuration().dialect() == HSQLDB) {
+			return;
+		}
 
         ctx.sql(' ')
            .keyword("over")
@@ -350,21 +362,25 @@ class Function<T> extends AbstractField<T> implements
 
     @SuppressWarnings("unchecked")
     final QueryPart window(Context<?> ctx) {
-        if (windowSpecification != null)
-            return DSL.sql("({0})", windowSpecification);
+        if (windowSpecification != null) {
+			return DSL.sql("({0})", windowSpecification);
+		}
 
         // [#3727] Referenced WindowDefinitions that contain a frame clause
         // shouldn't be referenced from within parentheses (in PostgreSQL)
-        if (windowDefinition != null)
-            if (POSTGRES == ctx.family())
-                return windowDefinition;
-            else
-                return DSL.sql("({0})", windowDefinition);
+        if (windowDefinition != null) {
+			if (POSTGRES == ctx.family()) {
+				return windowDefinition;
+			} else {
+				return DSL.sql("({0})", windowDefinition);
+			}
+		}
 
         // [#531] Inline window specifications if the WINDOW clause is not supported
         if (windowName != null) {
-            if (asList(POSTGRES).contains(ctx.family()))
-                return windowName;
+            if (asList(POSTGRES).contains(ctx.family())) {
+				return windowName;
+			}
 
             Map<Object, Object> map = (Map<Object, Object>) ctx.data(DATA_LOCALLY_SCOPED_DATA_MAP);
             QueryPartList<WindowDefinition> windows = (QueryPartList<WindowDefinition>) map.get(DATA_WINDOW_DEFINITIONS);
@@ -414,7 +430,7 @@ class Function<T> extends AbstractField<T> implements
     }
 
     /**
-     * Render function arguments and argument modifiers
+     * Render function arguments and argument modifiers.
      */
     final void toSQLArguments(Context<?> ctx) {
         toSQLFunctionName(ctx);
@@ -443,16 +459,17 @@ class Function<T> extends AbstractField<T> implements
             else {
                 QueryPartList<Field<?>> expressions = new QueryPartList<Field<?>>();
 
-                for (QueryPart argument : arguments)
-                    expressions.add(DSL.when(filter, argument == ASTERISK ? one() : argument));
+                for (QueryPart argument : arguments) {
+					expressions.add(DSL.when(filter, argument == ASTERISK ? one() : argument));
+				}
 
                 ctx.visit(expressions);
             }
         }
 
-        if (distinct)
-            if (ctx.family() == POSTGRES && arguments.size() > 1)
-                ctx.sql(')');
+        if (distinct && ctx.family() == POSTGRES && arguments.size() > 1) {
+			ctx.sql(')');
+		}
 
         if (ignoreNulls) {
 
@@ -473,17 +490,20 @@ class Function<T> extends AbstractField<T> implements
     }
 
     final void toSQLFunctionName(Context<?> ctx) {
-        if (name != null)
-            ctx.visit(name);
-        else if (term != null)
-            ctx.sql(term.translate(ctx.configuration().dialect()));
-        else
-            ctx.sql(getName());
+        if (name != null) {
+			ctx.visit(name);
+		} else if (term != null) {
+			ctx.sql(term.translate(ctx.configuration().dialect()));
+		} else {
+			ctx.sql(getName());
+		}
     }
 
-    // -------------------------------------------------------------------------
-    // XXX aggregate and window function fluent API methods
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX aggregate and window function fluent API methods
+     * -------------------------------------------------------------------------.
+     */
 
     final QueryPartList<QueryPart> getArguments() {
         return arguments;
@@ -645,30 +665,33 @@ class Function<T> extends AbstractField<T> implements
 
     @Override
     public final Function<T> orderBy(Field<?>... fields) {
-        if (windowSpecification != null)
-            windowSpecification.orderBy(fields);
-        else
-            withinGroupOrderBy(fields);
+        if (windowSpecification != null) {
+			windowSpecification.orderBy(fields);
+		} else {
+			withinGroupOrderBy(fields);
+		}
 
         return this;
     }
 
     @Override
     public final Function<T> orderBy(SortField<?>... fields) {
-        if (windowSpecification != null)
-            windowSpecification.orderBy(fields);
-        else
-            withinGroupOrderBy(fields);
+        if (windowSpecification != null) {
+			windowSpecification.orderBy(fields);
+		} else {
+			withinGroupOrderBy(fields);
+		}
 
         return this;
     }
 
     @Override
     public final Function<T> orderBy(Collection<? extends SortField<?>> fields) {
-        if (windowSpecification != null)
-            windowSpecification.orderBy(fields);
-        else
-            withinGroupOrderBy(fields);
+        if (windowSpecification != null) {
+			windowSpecification.orderBy(fields);
+		} else {
+			withinGroupOrderBy(fields);
+		}
 
         return this;
     }

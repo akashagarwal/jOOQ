@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -43,7 +43,7 @@ package org.jooq.util;
 import java.util.List;
 
 /**
- * An interface defining a package in a database schema
+ * An interface defining a package in a database schema.
  *
  * @author Lukas Eder
  */

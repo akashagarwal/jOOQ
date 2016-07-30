@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -62,12 +62,14 @@ final class LoaderErrorImpl implements LoaderError {
     }
 
     private static String[] strings(Object[] row) {
-        if (row == null)
-            return null;
+        if (row == null) {
+			return null;
+		}
 
         String[] result = new String[row.length];
-        for (int i = 0; i < result.length; i++)
-            result[i] = row[i] == null ? null : row[i].toString();
+        for (int i = 0; i < result.length; i++) {
+			result[i] = row[i] == null ? null : row[i].toString();
+		}
 
         return result;
     }

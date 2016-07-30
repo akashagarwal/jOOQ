@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -64,9 +64,11 @@ public class DefaultStatement extends JDBC41Statement implements Statement {
         return delegate;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX Executing the statement
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX Executing the statement
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public boolean execute(String sql) throws SQLException {
@@ -118,9 +120,11 @@ public class DefaultStatement extends JDBC41Statement implements Statement {
         return getDelegate().executeUpdate(sql, columnNames);
     }
 
-    // ------------------------------------------------------------------------
-    // XXX Other methods
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX Other methods
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public <T> T unwrap(Class<T> iface) throws SQLException {

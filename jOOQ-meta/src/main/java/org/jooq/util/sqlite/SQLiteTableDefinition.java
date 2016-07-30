@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -55,7 +55,7 @@ import org.jooq.util.SchemaDefinition;
 import org.jooq.util.sqlite.sqlite_master.SQLiteMaster;
 
 /**
- * SQLite table definition
+ * SQLite table definition.
  *
  * @author Lukas Eder
  */

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -62,7 +62,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
 /**
- * The jOOQ Codegen Plugin
+ * The jOOQ Codegen Plugin.
  *
  * @author Sander Plas
  * @author Lukas Eder
@@ -103,7 +103,7 @@ public class Plugin extends AbstractMojo {
     private org.jooq.util.jaxb.Jdbc      jdbc;
 
     /**
-     * The generator settings
+     * The generator settings.
      */
     @Parameter
     private org.jooq.util.jaxb.Generator generator;
@@ -149,7 +149,7 @@ public class Plugin extends AbstractMojo {
             StringWriter writer = new StringWriter();
             JAXB.marshal(configuration, writer);
 
-            getLog().debug("Using this configuration:\n" + writer.toString());
+            getLog().debug("Using this configuration:\n" + writer);
             GenerationTool.generate(configuration);
         }
         catch (Exception ex) {

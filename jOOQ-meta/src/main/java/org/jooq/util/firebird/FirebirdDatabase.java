@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -112,7 +112,7 @@ public class FirebirdDatabase extends AbstractDatabase {
             String fieldName = record.get(RDB$INDEX_SEGMENTS.RDB$FIELD_NAME.trim());
             String key = record.get(RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_NAME.trim());
 
-            TableDefinition td = getTable(this.getSchemata().get(0), tableName);
+            TableDefinition td = getTable(getSchemata().get(0), tableName);
             if (td != null) {
                 ColumnDefinition cd = td.getColumn(fieldName);
                 r.addPrimaryKey(key, cd);
@@ -127,7 +127,7 @@ public class FirebirdDatabase extends AbstractDatabase {
             String fieldName = record.get(RDB$INDEX_SEGMENTS.RDB$FIELD_NAME.trim());
             String key = record.get(RDB$RELATION_CONSTRAINTS.RDB$CONSTRAINT_NAME.trim());
 
-            TableDefinition td = getTable(this.getSchemata().get(0), tableName);
+            TableDefinition td = getTable(getSchemata().get(0), tableName);
             if (td != null) {
                 ColumnDefinition cd = td.getColumn(fieldName);
                 r.addUniqueKey(key, cd);
@@ -289,32 +289,27 @@ public class FirebirdDatabase extends AbstractDatabase {
 
     @Override
     protected List<PackageDefinition> getPackages0() throws SQLException {
-        List<PackageDefinition> result = new ArrayList<PackageDefinition>();
-        return result;
+        return new ArrayList<PackageDefinition>();
     }
 
     @Override
     protected List<EnumDefinition> getEnums0() throws SQLException {
-        List<EnumDefinition> result = new ArrayList<EnumDefinition>();
-        return result;
+        return new ArrayList<EnumDefinition>();
     }
 
     @Override
     protected List<DomainDefinition> getDomains0() throws SQLException {
-        List<DomainDefinition> result = new ArrayList<DomainDefinition>();
-        return result;
+        return new ArrayList<DomainDefinition>();
     }
 
     @Override
     protected List<UDTDefinition> getUDTs0() throws SQLException {
-        List<UDTDefinition> result = new ArrayList<UDTDefinition>();
-        return result;
+        return new ArrayList<UDTDefinition>();
     }
 
     @Override
     protected List<ArrayDefinition> getArrays0() throws SQLException {
-        List<ArrayDefinition> result = new ArrayList<ArrayDefinition>();
-        return result;
+        return new ArrayList<ArrayDefinition>();
     }
 
     @Override

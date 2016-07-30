@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2005 Bytecode Pty Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +34,7 @@ public class CSVParser {
     private final boolean       strictQuotes;
 
     private String              pending;
-    private boolean             inField                           = false;
+    private boolean             inField;
 
     private final boolean       ignoreLeadingWhiteSpace;
 
@@ -58,13 +58,13 @@ public class CSVParser {
 
     /**
      * The default strict quote behavior to use if none is supplied to the
-     * constructor
+     * constructor.
      */
     public static final boolean DEFAULT_STRICT_QUOTES             = false;
 
     /**
      * The default leading whitespace behavior to use if none is supplied to the
-     * constructor
+     * constructor.
      */
     public static final boolean DEFAULT_IGNORE_LEADING_WHITESPACE = true;
 
@@ -226,28 +226,24 @@ public class CSVParser {
 
                     // the tricky case of an embedded quote in the middle:
                     // a,bc"d"ef,g
-                    if (!strictQuotes) {
-                        if (
-                            // not on the beginning of the line
-                            i > 2
-                            // not at the beginning of an escape sequence
-                            && nextLine.charAt(i - 1) != this.separator
-                            // not at the end of an escape sequence
-                            && nextLine.length() > (i + 1) && nextLine.charAt(i + 1) != this.separator
-                        ) {
+                    if (!strictQuotes && // not on the beginning of the line
+					i > 2
+					// not at the beginning of an escape sequence
+					&& nextLine.charAt(i - 1) != this.separator
+					// not at the end of an escape sequence
+					&& nextLine.length() > i + 1 && nextLine.charAt(i + 1) != this.separator) {
 
-                            // discard white space leading up to quote
-                            if (ignoreLeadingWhiteSpace && sb.length() > 0 && isAllWhiteSpace(sb)) {
-                                sb.setLength(0);
-                            }
+					    // discard white space leading up to quote
+					    if (ignoreLeadingWhiteSpace && sb.length() > 0 && isAllWhiteSpace(sb)) {
+					        sb.setLength(0);
+					    }
 
-                            // continue;
-                            else {
-                                sb.append(c);
-                            }
+					    // continue;
+					    else {
+					        sb.append(c);
+					    }
 
-                        }
-                    }
+					}
 
                     inQuotes = !inQuotes;
                 }
@@ -257,13 +253,10 @@ public class CSVParser {
                 tokensOnThisLine.add(sb.toString());
                 sb.setLength(0); // start work on next token
                 inField = false;
-            }
-            else {
-                if (!strictQuotes || inQuotes) {
-                    sb.append(c);
-                    inField = true;
-                }
-            }
+            } else if (!strictQuotes || inQuotes) {
+			    sb.append(c);
+			    inField = true;
+			}
         }
         // line is done - check status
         if (inQuotes) {
@@ -286,7 +279,7 @@ public class CSVParser {
     }
 
     /**
-     * precondition: the current character is a quote or an escape
+     * Precondition: the current character is a quote or an escape
      *
      * @param nextLine the current line
      * @param inQuotes true if the current context is quoted
@@ -296,13 +289,13 @@ public class CSVParser {
     private boolean isNextCharacterEscapedQuote(String nextLine, boolean inQuotes, int i) {
         return inQuotes
             // we are in quotes, therefore there can be escaped quotes in here.
-            && nextLine.length() > (i + 1)
+            && nextLine.length() > i + 1
             // there is indeed another character to check.
             && nextLine.charAt(i + 1) == quotechar;
     }
 
     /**
-     * precondition: the current character is an escape
+     * Precondition: the current character is an escape
      *
      * @param nextLine the current line
      * @param inQuotes true if the current context is quoted
@@ -312,13 +305,13 @@ public class CSVParser {
     protected boolean isNextCharacterEscapable(String nextLine, boolean inQuotes, int i) {
         return inQuotes
             // we are in quotes, therefore there can be escaped quotes in here.
-            && nextLine.length() > (i + 1)
+            && nextLine.length() > i + 1
             // there is indeed another character to check.
             && (nextLine.charAt(i + 1) == quotechar || nextLine.charAt(i + 1) == this.escape);
     }
 
     /**
-     * precondition: sb.length() > 0
+     * Precondition: sb.length() > 0
      *
      * @param sb A sequence of characters to examine
      * @return true if every character in the sequence is whitespace

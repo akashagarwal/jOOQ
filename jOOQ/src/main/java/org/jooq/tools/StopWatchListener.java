@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -52,7 +52,7 @@ import org.jooq.ExecuteListener;
 public class StopWatchListener implements ExecuteListener {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = 7399239846062763212L;
 

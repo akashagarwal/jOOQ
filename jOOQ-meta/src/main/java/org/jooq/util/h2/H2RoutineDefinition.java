@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -57,7 +57,7 @@ import org.jooq.util.SchemaDefinition;
 import org.jooq.util.h2.information_schema.tables.FunctionColumns;
 
 /**
- * H2 implementation of {@link AbstractRoutineDefinition}
+ * H2 implementation of {@link AbstractRoutineDefinition}.
  *
  * @author Espen Stromsnes
  * @author Lukas Eder

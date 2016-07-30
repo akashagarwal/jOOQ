@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -47,14 +47,14 @@ import org.jooq.Field;
 import org.jooq.QueryPart;
 
 /**
- * A base class for all built-in functions that have vendor-specific behaviour
+ * A base class for all built-in functions that have vendor-specific behaviour.
  *
  * @author Lukas Eder
  */
 abstract class AbstractFunction<T> extends AbstractField<T> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long  serialVersionUID = 8771262868110746571L;
 

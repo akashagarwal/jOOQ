@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -95,8 +95,9 @@ final class CaseValueStepImpl<V> implements CaseValueStep<V> {
     public final <T> CaseWhenStep<V, T> mapValues(Map<V, T> values) {
         Map<Field<V>, Field<T>> fields = new LinkedHashMap<Field<V>, Field<T>>();
 
-        for (Entry<V, T> entry : values.entrySet())
-            fields.put(Tools.field(entry.getKey()), Tools.field(entry.getValue()));
+        for (Entry<V, T> entry : values.entrySet()) {
+			fields.put(Tools.field(entry.getKey()), Tools.field(entry.getValue()));
+		}
 
         return mapFields(fields);
     }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -50,7 +50,7 @@ import java.util.List;
 public interface ForeignKeyDefinition extends Definition {
 
     /**
-     * The definition of the referencing table
+     * The definition of the referencing table.
      */
     TableDefinition getKeyTable();
 
@@ -70,7 +70,7 @@ public interface ForeignKeyDefinition extends Definition {
     TableDefinition getReferencedTable();
 
     /**
-     * The list of columns referenced by this foreign key
+     * The list of columns referenced by this foreign key.
      */
     List<ColumnDefinition> getReferencedColumns();
 

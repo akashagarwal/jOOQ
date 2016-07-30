@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -79,7 +79,7 @@ import org.jooq.SQLDialect;
 public final class YearToMonth extends Number implements Interval, Comparable<YearToMonth> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long    serialVersionUID = 1308553645456594273L;
     private static final Pattern PATTERN          = Pattern.compile("(\\+|-)?(\\d+)-(\\d+)");
@@ -107,7 +107,7 @@ public final class YearToMonth extends Number implements Interval, Comparable<Ye
         // Perform normalisation. Specifically, Postgres may return intervals
         // such as 0-13
         if (months >= 12) {
-            years += (months / 12);
+            years += months / 12;
             months %= 12;
         }
 
@@ -140,9 +140,11 @@ public final class YearToMonth extends Number implements Interval, Comparable<Ye
         return null;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX Interval API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX Interval API
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public final YearToMonth neg() {
@@ -167,9 +169,11 @@ public final class YearToMonth extends Number implements Interval, Comparable<Ye
         return negative ? -1 : 1;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX Number API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX Number API
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public final int intValue() {
@@ -191,9 +195,11 @@ public final class YearToMonth extends Number implements Interval, Comparable<Ye
         return intValue();
     }
 
-    // -------------------------------------------------------------------------
-    // XXX Comparable and Object API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX Comparable and Object API
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public final int compareTo(YearToMonth that) {
@@ -219,24 +225,22 @@ public final class YearToMonth extends Number implements Interval, Comparable<Ye
         final int prime = 31;
         int result = 1;
         result = prime * result + months;
-        result = prime * result + years;
-        return result;
+        return prime * result + years;
     }
 
     @Override
     public final boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) {
+			return true;
+		}
+        if (obj == null) {
+			return false;
+		}
+        if (getClass() != obj.getClass()) {
+			return false;
+		}
         YearToMonth other = (YearToMonth) obj;
-        if (months != other.months)
-            return false;
-        if (years != other.years)
-            return false;
-        return true;
+        return months == other.months && years == other.years;
     }
 
     @Override

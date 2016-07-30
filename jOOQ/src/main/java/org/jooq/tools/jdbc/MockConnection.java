@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -99,9 +99,11 @@ public class MockConnection extends JDBC41Connection implements Connection {
         this.data = data;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Utilities
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Utilities
+     * -------------------------------------------------------------------------
+     */
 
     private void checkNotClosed() throws SQLException {
         if (isClosed) {
@@ -109,9 +111,11 @@ public class MockConnection extends JDBC41Connection implements Connection {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Creating statements
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Creating statements
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public Statement createStatement() throws SQLException {
@@ -208,9 +212,11 @@ public class MockConnection extends JDBC41Connection implements Connection {
         return result;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Ignored operations
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Ignored operations
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public void commit() throws SQLException {
@@ -356,9 +362,11 @@ public class MockConnection extends JDBC41Connection implements Connection {
         return null;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Unsupported operations
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Unsupported operations
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public DatabaseMetaData getMetaData() throws SQLException {

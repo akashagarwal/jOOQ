@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -52,7 +52,7 @@ import org.jooq.tools.jdbc.DefaultConnection;
 
 /**
  * A proxy for a JDBC {@link Connection} that handles creation of prepared
- * statements according to the settings' {@link StatementType}
+ * statements according to the settings' {@link StatementType}.
  *
  * @author Lukas Eder
  */
@@ -66,9 +66,11 @@ final class SettingsEnabledConnection extends DefaultConnection {
         this.settings = settings;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX Creation of PreparedStatements
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX Creation of PreparedStatements
+     * ------------------------------------------------------------------------.
+     */
 
     @Override
     public final PreparedStatement prepareStatement(String sql) throws SQLException {

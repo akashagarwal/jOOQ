@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -315,7 +315,7 @@ public class DefaultRelations implements Relations {
     }
 
     /**
-     * A simple local wrapper for a key definition (schema + key name)
+     * A simple local wrapper for a key definition (schema + key name).
      */
     private static class Key {
         final SchemaDefinition schema;
@@ -336,31 +336,37 @@ public class DefaultRelations implements Relations {
             final int prime = 31;
             int result = 1;
             result = prime * result + ((keyName == null) ? 0 : keyName.hashCode());
-            result = prime * result + ((schema == null) ? 0 : schema.hashCode());
-            return result;
+            return prime * result + ((schema == null) ? 0 : schema.hashCode());
         }
 
         @Override
         public boolean equals(Object obj) {
-            if (this == obj)
-                return true;
-            if (obj == null)
-                return false;
-            if (getClass() != obj.getClass())
-                return false;
+            if (this == obj) {
+				return true;
+			}
+            if (obj == null) {
+				return false;
+			}
+            if (getClass() != obj.getClass()) {
+				return false;
+			}
             Key other = (Key) obj;
             if (keyName == null) {
-                if (other.keyName != null)
-                    return false;
+                if (other.keyName != null) {
+					return false;
+				}
             }
-            else if (!keyName.equals(other.keyName))
-                return false;
+            else if (!keyName.equals(other.keyName)) {
+				return false;
+			}
             if (schema == null) {
-                if (other.schema != null)
-                    return false;
+                if (other.schema != null) {
+					return false;
+				}
             }
-            else if (!schema.equals(other.schema))
-                return false;
+            else if (!schema.equals(other.schema)) {
+				return false;
+			}
             return true;
         }
     }

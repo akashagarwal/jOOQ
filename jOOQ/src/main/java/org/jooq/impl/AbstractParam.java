@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -58,14 +58,14 @@ import org.jooq.conf.ParamType;
 import org.jooq.tools.StringUtils;
 
 /**
- * A base implementation for {@link Param}
+ * A base implementation for {@link Param}.
  *
  * @author Lukas Eder
  */
 abstract class AbstractParam<T> extends AbstractField<T> implements Param<T> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long     serialVersionUID = 1311856649676227970L;
     private static final Clause[] CLAUSES          = { FIELD, FIELD_VALUE };
@@ -108,9 +108,11 @@ abstract class AbstractParam<T> extends AbstractField<T> implements Param<T> {
              : String.valueOf(value);
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: QueryPart API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: QueryPart API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final Clause[] clauses(Context<?> ctx) {
@@ -122,9 +124,11 @@ abstract class AbstractParam<T> extends AbstractField<T> implements Param<T> {
         return true;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: Param API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Param API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final void setValue(T value) {
@@ -158,7 +162,7 @@ abstract class AbstractParam<T> extends AbstractField<T> implements Param<T> {
 
     final boolean isInline(Context<?> context) {
         return isInline()
-            || (context.paramType() == INLINED)
+            || context.paramType() == INLINED
             || (context.paramType() == NAMED_OR_INLINED && StringUtils.isBlank(paramName));
     }
 

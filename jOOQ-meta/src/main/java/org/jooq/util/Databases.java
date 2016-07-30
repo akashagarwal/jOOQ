@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -74,7 +74,7 @@ public class Databases {
      * Get a reference to a {@link Database} class for a given {@link SQLDialect}.
      */
     @SuppressWarnings("deprecation")
-    public static final Class<? extends Database> databaseClass(SQLDialect dialect) {
+    public static Class<? extends Database> databaseClass(SQLDialect dialect) {
         Class<? extends Database> result = JDBCDatabase.class;
 
         switch (dialect) {
@@ -126,7 +126,7 @@ public class Databases {
     /**
      * Get a {@link Database} instance for a given {@link SQLDialect}.
      */
-    public static final Database database(SQLDialect dialect) {
+    public static Database database(SQLDialect dialect) {
         try {
             return databaseClass(dialect).newInstance();
         }

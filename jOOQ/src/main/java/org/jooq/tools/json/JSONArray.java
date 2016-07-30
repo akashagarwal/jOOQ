@@ -68,10 +68,11 @@ public class JSONArray extends ArrayList {
 
         out.write('[');
         while (iter.hasNext()) {
-            if (first)
-                first = false;
-            else
-                out.write(',');
+            if (first) {
+				first = false;
+			} else {
+				out.write(',');
+			}
 
             Object value = iter.next();
             if (value == null) {
@@ -91,8 +92,9 @@ public class JSONArray extends ArrayList {
      * @return JSON text, or "null" if list is null.
      */
     public static String toJSONString(List<?> list) {
-        if (list == null)
-            return "null";
+        if (list == null) {
+			return "null";
+		}
 
         boolean first = true;
         StringBuffer sb = new StringBuffer();
@@ -100,10 +102,11 @@ public class JSONArray extends ArrayList {
 
         sb.append('[');
         while (iter.hasNext()) {
-            if (first)
-                first = false;
-            else
-                sb.append(',');
+            if (first) {
+				first = false;
+			} else {
+				sb.append(',');
+			}
 
             Object value = iter.next();
             if (value == null) {

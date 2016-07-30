@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -74,7 +74,7 @@ import org.jooq.Row2;
 final class RowOverlapsCondition<T1, T2> extends AbstractCondition {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long     serialVersionUID = 85887551884667824L;
     private static final Clause[] CLAUSES          = { CONDITION, CONDITION_OVERLAPS };
@@ -146,7 +146,7 @@ final class RowOverlapsCondition<T1, T2> extends AbstractCondition {
     private class Native extends AbstractCondition {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long serialVersionUID = -1552476981094856727L;
 

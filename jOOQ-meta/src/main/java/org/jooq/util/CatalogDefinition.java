@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -67,9 +67,11 @@ public class CatalogDefinition extends AbstractDefinition {
 	}
 
 	public final SchemaDefinition getSchema(String name) {
-	    for (SchemaDefinition schema : getSchemata())
-	        if (schema.getInputName().equals(name))
-	            return schema;
+	    for (SchemaDefinition schema : getSchemata()) {
+			if (schema.getInputName().equals(name)) {
+				return schema;
+			}
+		}
 
 	    return null;
 	}

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2005 Bytecode Pty Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -169,8 +169,9 @@ public class CSVReader implements Closeable, Iterator<String[]> {
         List<String[]> allElements = new ArrayList<String[]>();
         while (hasNext) {
             String[] nextLineAsTokens = readNext();
-            if (nextLineAsTokens != null)
-                allElements.add(nextLineAsTokens);
+            if (nextLineAsTokens != null) {
+				allElements.add(nextLineAsTokens);
+			}
         }
         return allElements;
 
@@ -237,9 +238,11 @@ public class CSVReader implements Closeable, Iterator<String[]> {
         br.close();
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: Iterator implementation added by Johannes Buehler
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Iterator implementation added by Johannes Buehler
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public boolean hasNext() {

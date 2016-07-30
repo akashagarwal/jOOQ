@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -78,7 +78,7 @@ import org.jooq.impl.DefaultVisitListenerProvider;
 public class LoggerListener extends DefaultExecuteListener {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = 7399239846062763212L;
 
@@ -91,8 +91,9 @@ public class LoggerListener extends DefaultExecuteListener {
             String newline = TRUE.equals(configuration.settings().isRenderFormatted()) ? "\n" : "";
 
             // [#2939] Prevent excessive logging of bind variables only in DEBUG mode, not in TRACE mode.
-            if (!log.isTraceEnabled())
-                configuration = abbreviateBindVariables(configuration);
+            if (!log.isTraceEnabled()) {
+				configuration = abbreviateBindVariables(configuration);
+			}
 
             String[] batchSQL = ctx.batchSQL();
             if (ctx.query() != null) {
@@ -103,8 +104,9 @@ public class LoggerListener extends DefaultExecuteListener {
                 // [#1278] DEBUG log also SQL with inlined bind values, if
                 // that is not the same as the actual SQL passed to JDBC
                 String inlined = DSL.using(configuration).renderInlined(ctx.query());
-                if (!ctx.sql().equals(inlined))
-                    log.debug("-> with bind values", newline + inlined);
+                if (!ctx.sql().equals(inlined)) {
+					log.debug("-> with bind values", newline + inlined);
+				}
             }
 
             // [#2987] Log routines
@@ -114,61 +116,67 @@ public class LoggerListener extends DefaultExecuteListener {
                 String inlined = DSL.using(configuration)
                                     .renderInlined(ctx.routine());
 
-                if (!ctx.sql().equals(inlined))
-                    log.debug("-> with bind values", newline + inlined);
+                if (!ctx.sql().equals(inlined)) {
+					log.debug("-> with bind values", newline + inlined);
+				}
             }
 
             else if (!StringUtils.isBlank(ctx.sql())) {
 
                 // [#1529] Batch queries should be logged specially
-                if (ctx.type() == ExecuteType.BATCH)
-                    log.debug("Executing batch query", newline + ctx.sql());
-                else
-                    log.debug("Executing query", newline + ctx.sql());
+                if (ctx.type() == ExecuteType.BATCH) {
+					log.debug("Executing batch query", newline + ctx.sql());
+				} else {
+					log.debug("Executing query", newline + ctx.sql());
+				}
             }
 
             // [#2532] Log a complete BatchMultiple query
-            else if (batchSQL.length > 0) {
-                if (batchSQL[batchSQL.length - 1] != null)
-                    for (String sql : batchSQL)
-                        log.debug("Executing batch query", newline + sql);
-            }
+            else if (batchSQL.length > 0 && batchSQL[batchSQL.length - 1] != null) {
+				for (String sql : batchSQL) {
+					log.debug("Executing batch query", newline + sql);
+				}
+			}
         }
     }
 
     @Override
     public void recordEnd(ExecuteContext ctx) {
-        if (log.isTraceEnabled() && ctx.record() != null)
-            logMultiline("Record fetched", ctx.record().toString(), Level.FINER);
+        if (log.isTraceEnabled() && ctx.record() != null) {
+			logMultiline("Record fetched", ctx.record().toString(), Level.FINER);
+		}
     }
 
     @Override
     public void resultEnd(ExecuteContext ctx) {
-        if (ctx.result() != null)
-            if (log.isTraceEnabled())
-                logMultiline("Fetched result", ctx.result().format(500), Level.FINE);
-            else if (log.isDebugEnabled())
-                logMultiline("Fetched result", ctx.result().format(5), Level.FINE);
+        if (ctx.result() != null) {
+			if (log.isTraceEnabled()) {
+				logMultiline("Fetched result", ctx.result().format(500), Level.FINE);
+			} else if (log.isDebugEnabled()) {
+				logMultiline("Fetched result", ctx.result().format(5), Level.FINE);
+			}
+		}
     }
 
     @Override
     public void executeEnd(ExecuteContext ctx) {
-        if (ctx.rows() >= 0)
-            if (log.isDebugEnabled())
-                log.debug("Affected row(s)", ctx.rows());
+        if (ctx.rows() >= 0 && log.isDebugEnabled()) {
+			log.debug("Affected row(s)", ctx.rows());
+		}
     }
 
     @Override
     public void outEnd(ExecuteContext ctx) {
-        if (ctx.routine() != null)
-            if (log.isDebugEnabled())
-                logMultiline("Fetched OUT parameters", "" + record(ctx.configuration(), ctx.routine()), Level.FINE);
+        if (ctx.routine() != null && log.isDebugEnabled()) {
+			logMultiline("Fetched OUT parameters", "" + record(ctx.configuration(), ctx.routine()), Level.FINE);
+		}
     }
 
     @Override
     public void exception(ExecuteContext ctx) {
-        if (log.isDebugEnabled())
-            log.debug("Exception", ctx.exception());
+        if (log.isDebugEnabled()) {
+			log.debug("Exception", ctx.exception());
+		}
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -177,20 +185,24 @@ public class LoggerListener extends DefaultExecuteListener {
 
         List<Field<?>> fields = new ArrayList<Field<?>>();
         Parameter<?> returnParam = routine.getReturnParameter();
-        if (returnParam != null)
-            fields.add(field(name(returnParam.getName()), returnParam.getDataType()));
+        if (returnParam != null) {
+			fields.add(field(name(returnParam.getName()), returnParam.getDataType()));
+		}
 
-        for (Parameter<?> param : routine.getOutParameters())
-            fields.add(field(name(param.getName()), param.getDataType()));
+        for (Parameter<?> param : routine.getOutParameters()) {
+			fields.add(field(name(param.getName()), param.getDataType()));
+		}
 
         result = DSL.using(configuration).newRecord(fields.toArray(new Field[0]));
 
         int i = 0;
-        if (returnParam != null)
-            result.setValue((Field) fields.get(i++), routine.getValue(returnParam));
+        if (returnParam != null) {
+			result.setValue((Field) fields.get(i++), routine.getValue(returnParam));
+		}
 
-        for (Parameter<?> param : routine.getOutParameters())
-            result.setValue((Field) fields.get(i++), routine.getValue(param));
+        for (Parameter<?> param : routine.getOutParameters()) {
+			result.setValue((Field) fields.get(i++), routine.getValue(param));
+		}
 
         result.changed(false);
         return result;
@@ -225,7 +237,7 @@ public class LoggerListener extends DefaultExecuteListener {
 
     private static class BindValueAbbreviator extends DefaultVisitListener {
 
-        private boolean anyAbbreviations = false;
+        private boolean anyAbbreviations;
 
         @Override
         public void visitStart(VisitContext context) {
@@ -250,11 +262,9 @@ public class LoggerListener extends DefaultExecuteListener {
 
         @Override
         public void visitEnd(VisitContext context) {
-            if (anyAbbreviations) {
-                if (context.queryPartsLength() == 1) {
-                    context.renderContext().sql(" -- Bind values may have been abbreviated for DEBUG logging. Use TRACE logging for very large bind variables.");
-                }
-            }
+            if (anyAbbreviations && context.queryPartsLength() == 1) {
+			    context.renderContext().sql(" -- Bind values may have been abbreviated for DEBUG logging. Use TRACE logging for very large bind variables.");
+			}
         }
     }
 }

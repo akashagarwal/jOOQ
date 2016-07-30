@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Lukas Eder, lukas.eder@gmail.com
  * All rights reserved.
  *
@@ -55,7 +55,7 @@ import org.jooq.Select;
 final class FetchCount extends AbstractResultQuery<Record1<Integer>> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = -1093806354311260458L;
 

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2011-2016, Lukas Eder, lukas.eder@gmail.com
  * All rights reserved.
  *
@@ -38,14 +38,14 @@ package org.jooq.types;
 import java.math.BigInteger;
 
 /**
- * The <code>unsigned long</code> type
+ * The <code>unsigned long</code> type.
  *
  * @author Lukas Eder
  */
 public final class ULong extends UNumber implements Comparable<ULong> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long      serialVersionUID = -6821055240959745390L;
 
@@ -68,7 +68,7 @@ public final class ULong extends UNumber implements Comparable<ULong> {
     public static final BigInteger MAX_VALUE_LONG   = new BigInteger("9223372036854775808");
 
     /**
-     * The value modelling the content of this <code>unsigned long</code>
+     * The value modelling the content of this <code>unsigned long</code>.
      */
     private final BigInteger       value;
 
@@ -92,7 +92,7 @@ public final class ULong extends UNumber implements Comparable<ULong> {
     }
 
     /**
-     * Create an <code>unsigned long</code>
+     * Create an <code>unsigned long</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned long</code>
@@ -102,7 +102,7 @@ public final class ULong extends UNumber implements Comparable<ULong> {
     }
 
     /**
-     * Create an <code>unsigned long</code>
+     * Create an <code>unsigned long</code>.
      *
      * @throws NumberFormatException If <code>value</code> is not in the range
      *             of an <code>unsigned long</code>
@@ -170,13 +170,7 @@ public final class ULong extends UNumber implements Comparable<ULong> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj instanceof ULong) {
-            return value.equals(((ULong) obj).value);
-        }
-
-        return false;
+        return this == obj || (obj instanceof ULong && value.equals(((ULong) obj).value));
     }
 
     @Override

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -112,7 +112,7 @@ final class CompareCondition extends AbstractCondition {
 
             lhs = lhs.lower();
             rhs = rhs.lower();
-            op = (op == LIKE_IGNORE_CASE ? LIKE : NOT_LIKE);
+            op = op == LIKE_IGNORE_CASE ? LIKE : NOT_LIKE;
         }
 
         ctx.visit(lhs)
@@ -136,11 +136,15 @@ final class CompareCondition extends AbstractCondition {
 
 
                      ctx.keyword(op.toSQL()).sql(' ');
-        if (castRhs) ctx.keyword("cast").sql('(');
+        if (castRhs) {
+			ctx.keyword("cast").sql('(');
+		}
                      ctx.paramType(forcedParamType)
                         .visit(rhs)
                         .paramType(previousParamType);
-        if (castRhs) ctx.sql(' ').keyword("as").sql(' ').keyword("varchar").sql("(4000))");
+        if (castRhs) {
+			ctx.sql(' ').keyword("as").sql(' ').keyword("varchar").sql("(4000))");
+		}
 
         if (escape != null) {
             ctx.sql(' ').keyword("escape").sql(' ')

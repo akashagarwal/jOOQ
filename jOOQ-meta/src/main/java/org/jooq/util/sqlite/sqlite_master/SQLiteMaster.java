@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -58,7 +58,7 @@ public class SQLiteMaster extends TableImpl<Record> {
     private static final long serialVersionUID = -823335201;
 
     /**
-     * The singleton instance of tables
+     * The singleton instance of tables.
      */
     public static final SQLiteMaster                SQLITE_MASTER = new SQLiteMaster();
 
@@ -69,7 +69,7 @@ public class SQLiteMaster extends TableImpl<Record> {
     public static final TableField<Record, String>  SQL           = createField("sql",      SQLiteDataType.VARCHAR, SQLITE_MASTER);
 
     /**
-     * No further instances allowed
+     * No further instances allowed.
      */
     private SQLiteMaster() {
         super("sqlite_master");

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -373,8 +373,9 @@ final class InsertQueryImpl<R extends Record> extends AbstractStoreQuery<R> impl
            .declareTables(declareTables);
 
         // [#1506] with DEFAULT VALUES, we might not have any columns to render
-        if (insertMaps.isExecutable())
-            insertMaps.insertMaps.get(0).toSQLReferenceKeys(ctx);
+        if (insertMaps.isExecutable()) {
+			insertMaps.insertMaps.get(0).toSQLReferenceKeys(ctx);
+		}
 
         ctx.end(INSERT_INSERT_INTO);
 
@@ -383,8 +384,9 @@ final class InsertQueryImpl<R extends Record> extends AbstractStoreQuery<R> impl
             // [#2995] Prevent the generation of wrapping parentheses around the
             //         INSERT .. SELECT statement's SELECT because they would be
             //         interpreted as the (missing) INSERT column list's parens.
-            if (insertMaps.insertMaps.get(0).size() == 0)
-                ctx.data(DATA_INSERT_SELECT_WITHOUT_INSERT_COLUMN_LIST, true);
+            if (insertMaps.insertMaps.get(0).size() == 0) {
+				ctx.data(DATA_INSERT_SELECT_WITHOUT_INSERT_COLUMN_LIST, true);
+			}
 
             ctx.formatSeparator()
                .start(INSERT_SELECT)
@@ -451,10 +453,11 @@ final class InsertQueryImpl<R extends Record> extends AbstractStoreQuery<R> impl
                         .where(matchByPrimaryKey(map))
                     );
 
-                if (rows == null)
-                    rows = row;
-                else
-                    rows = rows.unionAll(row);
+                if (rows != null) {
+					rows = rows.unionAll(row);
+				} else {
+					rows = row;
+				}
             }
 
             return create(configuration)

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -64,9 +64,11 @@ import org.jooq.types.UShort;
  */
 public class SQLiteDataType {
 
-    // -------------------------------------------------------------------------
-    // Default SQL data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Default SQL data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Byte>       TINYINT          = new DefaultDataType<Byte>(SQLDialect.SQLITE, SQLDataType.TINYINT, "tinyint");
     public static final DataType<Short>      SMALLINT         = new DefaultDataType<Short>(SQLDialect.SQLITE, SQLDataType.SMALLINT, "smallint");
@@ -99,9 +101,11 @@ public class SQLiteDataType {
     public static final DataType<byte[]>     LONGVARBINARY    = new DefaultDataType<byte[]>(SQLDialect.SQLITE, SQLDataType.LONGVARBINARY, "longvarbinary");
     public static final DataType<byte[]>     BLOB             = new DefaultDataType<byte[]>(SQLDialect.SQLITE, SQLDataType.BLOB, "blob");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported SQLDialect.SQLITE, SQLDataTypes
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported SQLDialect.SQLITE, SQLDataTypes
+     * -------------------------------------------------------------------------
+     */
 
     protected static final DataType<byte[]>   __BINARY           = new DefaultDataType<byte[]>(SQLDialect.SQLITE, SQLDataType.BINARY, "longvarbinary");
     protected static final DataType<Boolean>  __BIT              = new DefaultDataType<Boolean>(SQLDialect.SQLITE, SQLDataType.BIT, "boolean");
@@ -115,15 +119,19 @@ public class SQLiteDataType {
     protected static final DataType<UInteger> __INTEGERUNSIGNED  = new DefaultDataType<UInteger>(SQLDialect.SQLITE, SQLDataType.INTEGERUNSIGNED, "bigint");
     protected static final DataType<ULong>    __BIGINTUNSIGNED   = new DefaultDataType<ULong>(SQLDialect.SQLITE, SQLDataType.BIGINTUNSIGNED, "numeric");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported Java types
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported Java types
+     * -------------------------------------------------------------------------.
+     */
 
     protected static final DataType<UUID>     __UUID             = new DefaultDataType<UUID>(SQLDialect.SQLITE, SQLDataType.UUID, "varchar");
 
-    // -------------------------------------------------------------------------
-    // Dialect-specific data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Dialect-specific data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Object>     NULL                = new DefaultDataType<Object>(SQLDialect.SQLITE, SQLDataType.OTHER, "null");
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -53,7 +53,7 @@ import java.util.List;
 public interface UniqueKeyDefinition extends Definition {
 
     /**
-     * Whether this unique key is the primary key
+     * Whether this unique key is the primary key.
      */
     boolean isPrimaryKey();
 
@@ -63,12 +63,12 @@ public interface UniqueKeyDefinition extends Definition {
     List<ColumnDefinition> getKeyColumns();
 
     /**
-     * The foreign keys referencing this primary key
+     * The foreign keys referencing this primary key.
      */
     List<ForeignKeyDefinition> getForeignKeys();
 
     /**
-     * The table holding this key
+     * The table holding this key.
      */
     TableDefinition getTable();
 }

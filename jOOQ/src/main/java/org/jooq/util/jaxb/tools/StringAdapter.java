@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -64,22 +64,25 @@ public class StringAdapter extends XmlAdapter<String, String> {
 
     @Override
     public final String unmarshal(String v) throws Exception {
-        if (v == null)
-            return null;
+        if (v == null) {
+			return null;
+		}
 
         String result = v.trim();
 
         Matcher matcher = PROPERTY_PATTERN.matcher(result);
-        while (matcher.find())
-            result = result.replace(matcher.group(0), System.getProperty(matcher.group(1), matcher.group(0)));
+        while (matcher.find()) {
+			result = result.replace(matcher.group(0), System.getProperty(matcher.group(1), matcher.group(0)));
+		}
 
         return result;
     }
 
     @Override
     public final String marshal(String v) throws Exception {
-        if (v == null)
-            return null;
-        return v.trim();
+        if (v != null) {
+			return v.trim();
+		}
+        return null;
     }
 }

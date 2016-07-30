@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -70,9 +70,11 @@ import org.jooq.types.YearToMonth;
  */
 public class HSQLDBDataType {
 
-    // -------------------------------------------------------------------------
-    // Default SQL data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Default SQL data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Byte>        TINYINT               = new DefaultDataType<Byte>(SQLDialect.HSQLDB, SQLDataType.TINYINT, "tinyint");
     public static final DataType<Short>       SMALLINT              = new DefaultDataType<Short>(SQLDialect.HSQLDB, SQLDataType.SMALLINT, "smallint");
@@ -108,9 +110,11 @@ public class HSQLDBDataType {
     public static final DataType<YearToMonth> INTERVALYEARTOMONTH   = new DefaultDataType<YearToMonth>(SQLDialect.HSQLDB, SQLDataType.INTERVALYEARTOMONTH, "interval year to month");
     public static final DataType<DayToSecond> INTERVALDAYTOSECOND   = new DefaultDataType<DayToSecond>(SQLDialect.HSQLDB, SQLDataType.INTERVALDAYTOSECOND, "interval day to second");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported SQLDialect.HSQLDB, SQLDataTypes
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported SQLDialect.HSQLDB, SQLDataTypes
+     * -------------------------------------------------------------------------
+     */
 
     protected static final DataType<String>   __NCHAR               = new DefaultDataType<String>(SQLDialect.HSQLDB, SQLDataType.NCHAR, "char");
     protected static final DataType<String>   __NCLOB               = new DefaultDataType<String>(SQLDialect.HSQLDB, SQLDataType.NCLOB, "clob");
@@ -121,16 +125,20 @@ public class HSQLDBDataType {
     protected static final DataType<UInteger> __INTEGERUNSIGNED     = new DefaultDataType<UInteger>(SQLDialect.HSQLDB, SQLDataType.INTEGERUNSIGNED, "bigint");
     protected static final DataType<ULong>    __BIGINTUNSIGNED      = new DefaultDataType<ULong>(SQLDialect.HSQLDB, SQLDataType.BIGINTUNSIGNED, "decimal");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported Java types
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported Java types
+     * -------------------------------------------------------------------------.
+     */
 
     protected static final DataType<BigInteger> __BIGINTEGER       = new DefaultDataType<BigInteger>(SQLDialect.HSQLDB, SQLDataType.DECIMAL_INTEGER, "decimal");
     protected static final DataType<UUID>       __UUID             = new DefaultDataType<UUID>(SQLDialect.HSQLDB, SQLDataType.UUID, "varchar", "varchar(36)");
 
-    // -------------------------------------------------------------------------
-    // Dialect-specific data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Dialect-specific data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<String>         VARCHARIGNORECASE = new DefaultDataType<String>(SQLDialect.HSQLDB, SQLDataType.VARCHAR, "varchar_ignorecase", "varchar_ignorecase(32672)");
     public static final DataType<Object>         OBJECT            = new DefaultDataType<Object>(SQLDialect.HSQLDB, SQLDataType.OTHER, "object");

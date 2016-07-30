@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -70,10 +70,11 @@ public class MockConnectionProvider implements ConnectionProvider {
 
     @Override
     public final void release(Connection connection) {
-        if (connection instanceof MockConnectionWrapper)
-            delegate.release(((MockConnectionWrapper) connection).connection);
-        else
-            throw new IllegalArgumentException("Argument connection must be a MockConnectionWrapper");
+        if (connection instanceof MockConnectionWrapper) {
+			delegate.release(((MockConnectionWrapper) connection).connection);
+		} else {
+			throw new IllegalArgumentException("Argument connection must be a MockConnectionWrapper");
+		}
     }
 
     private class MockConnectionWrapper extends MockConnection {

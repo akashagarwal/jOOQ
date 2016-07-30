@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -61,14 +61,15 @@ import org.jooq.util.ParameterDefinition;
 import org.jooq.util.SchemaDefinition;
 
 /**
- * HSQLDB implementation of {@link AbstractRoutineDefinition}
+ * HSQLDB implementation of {@link AbstractRoutineDefinition}.
  *
  * @author Espen Stromsnes
  * @author Lukas Eder
  */
 public class HSQLDBRoutineDefinition extends AbstractRoutineDefinition {
 
-    private final String specificName; // internal name for the function used by HSQLDB
+    /** Internal name for the function used by HSQLDB. */
+    private final String specificName;
 
     public HSQLDBRoutineDefinition(SchemaDefinition schema, String name, String specificName, String dataType, Number precision, Number scale) {
         this(schema, name, specificName, dataType, precision, scale, false);

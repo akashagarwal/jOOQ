@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -64,7 +64,7 @@ import org.springframework.context.annotation.ClassPathScanningCandidateComponen
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
 /**
- * The JPA database
+ * The JPA database.
  *
  * @author Lukas Eder
  */
@@ -98,9 +98,11 @@ public class JPADatabase extends H2Database {
                     new ClassPathScanningCandidateComponentProvider(true);
 
                 scanner.addIncludeFilter(new AnnotationTypeFilter(Entity.class));
-                for (String pkg : packages.split(","))
-                    for (BeanDefinition def : scanner.findCandidateComponents(defaultIfBlank(pkg, "").trim()))
-                        metadata.addAnnotatedClass(Class.forName(def.getBeanClassName()));
+                for (String pkg : packages.split(",")) {
+					for (BeanDefinition def : scanner.findCandidateComponents(defaultIfBlank(pkg, "").trim())) {
+						metadata.addAnnotatedClass(Class.forName(def.getBeanClassName()));
+					}
+				}
 
                 // This seems to be the way to do this in idiomatic Hibernate 5.0 API
                 // See also: http://stackoverflow.com/q/32178041/521799

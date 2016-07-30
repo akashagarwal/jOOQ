@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -107,9 +107,7 @@ public class DerbyDatabase extends AbstractDatabase {
 	    }
 	}
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     protected void loadUniqueKeys(DefaultRelations relations) throws SQLException {
         for (Record record : fetchKeys("U")) {
@@ -197,7 +195,7 @@ public class DerbyDatabase extends AbstractDatabase {
 	    }
 	}
 
-    /*
+    /**
      * Unfortunately the descriptor interface is not exposed publicly Hence, the
      * toString() method is used and its results are parsed The results are
      * something like UNIQUE BTREE (index1, index2, ... indexN)
@@ -312,38 +310,32 @@ public class DerbyDatabase extends AbstractDatabase {
 
     @Override
     protected List<EnumDefinition> getEnums0() throws SQLException {
-        List<EnumDefinition> result = new ArrayList<EnumDefinition>();
-        return result;
+        return new ArrayList<EnumDefinition>();
     }
 
     @Override
     protected List<DomainDefinition> getDomains0() throws SQLException {
-        List<DomainDefinition> result = new ArrayList<DomainDefinition>();
-        return result;
+        return new ArrayList<DomainDefinition>();
     }
 
     @Override
     protected List<UDTDefinition> getUDTs0() throws SQLException {
-        List<UDTDefinition> result = new ArrayList<UDTDefinition>();
-        return result;
+        return new ArrayList<UDTDefinition>();
     }
 
     @Override
     protected List<ArrayDefinition> getArrays0() throws SQLException {
-        List<ArrayDefinition> result = new ArrayList<ArrayDefinition>();
-        return result;
+        return new ArrayList<ArrayDefinition>();
     }
 
     @Override
     protected List<RoutineDefinition> getRoutines0() throws SQLException {
-        List<RoutineDefinition> result = new ArrayList<RoutineDefinition>();
-        return result;
+        return new ArrayList<RoutineDefinition>();
     }
 
     @Override
     protected List<PackageDefinition> getPackages0() throws SQLException {
-        List<PackageDefinition> result = new ArrayList<PackageDefinition>();
-        return result;
+        return new ArrayList<PackageDefinition>();
     }
 
     @Override

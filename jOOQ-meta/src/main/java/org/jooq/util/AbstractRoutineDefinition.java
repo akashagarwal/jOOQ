@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -83,11 +83,10 @@ public abstract class AbstractRoutineDefinition extends AbstractDefinition imple
 
     @Override
     public List<Definition> getDefinitionPath() {
-        List<Definition> result = new ArrayList<Definition>();
-        result.addAll(getSchema().getDefinitionPath());
-
-        if (pkg != null)
-            result.add(pkg);
+        List<Definition> result = new ArrayList<Definition>(getSchema().getDefinitionPath());
+        if (pkg != null) {
+			result.add(pkg);
+		}
 
         result.add(this);
         return result;

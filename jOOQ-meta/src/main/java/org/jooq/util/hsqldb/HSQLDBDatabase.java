@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -87,7 +87,7 @@ import org.jooq.util.hsqldb.information_schema.tables.CheckConstraints;
 import org.jooq.util.hsqldb.information_schema.tables.TableConstraints;
 
 /**
- * The HSQLDB database
+ * The HSQLDB database.
  *
  * @author Lukas Eder
  */
@@ -304,26 +304,22 @@ public class HSQLDBDatabase extends AbstractDatabase {
 
     @Override
     protected List<EnumDefinition> getEnums0() throws SQLException {
-        List<EnumDefinition> result = new ArrayList<EnumDefinition>();
-        return result;
+        return new ArrayList<EnumDefinition>();
     }
 
     @Override
     protected List<DomainDefinition> getDomains0() throws SQLException {
-        List<DomainDefinition> result = new ArrayList<DomainDefinition>();
-        return result;
+        return new ArrayList<DomainDefinition>();
     }
 
     @Override
     protected List<UDTDefinition> getUDTs0() throws SQLException {
-        List<UDTDefinition> result = new ArrayList<UDTDefinition>();
-        return result;
+        return new ArrayList<UDTDefinition>();
     }
 
     @Override
     protected List<ArrayDefinition> getArrays0() throws SQLException {
-        List<ArrayDefinition> result = new ArrayList<ArrayDefinition>();
-        return result;
+        return new ArrayList<ArrayDefinition>();
     }
 
     @Override
@@ -373,7 +369,6 @@ public class HSQLDBDatabase extends AbstractDatabase {
 
     @Override
     protected List<PackageDefinition> getPackages0() throws SQLException {
-        List<PackageDefinition> result = new ArrayList<PackageDefinition>();
-        return result;
+        return new ArrayList<PackageDefinition>();
     }
 }

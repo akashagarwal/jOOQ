@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -41,19 +41,19 @@
 package org.jooq.util;
 
 /**
- * An element that has a data type
+ * An element that has a data type.
  *
  * @author Lukas Eder
  */
 public interface TypedElementDefinition<T extends Definition> extends Definition {
 
     /**
-     * The column / parameter type
+     * The column / parameter type.
      */
     DataTypeDefinition getType();
 
     /**
-     * The container that contains this typed element
+     * The container that contains this typed element.
      */
     T getContainer();
 }

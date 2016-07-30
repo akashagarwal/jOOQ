@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -86,7 +86,7 @@ final class TableAlias<R extends Record> extends AbstractTable<R> {
     }
 
     /**
-     * Register fields for this table alias
+     * Register fields for this table alias.
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private final Fields<R> init(String[] fieldAliases) {
@@ -109,7 +109,7 @@ final class TableAlias<R extends Record> extends AbstractTable<R> {
     }
 
     /**
-     * Get the aliased table wrapped by this table
+     * Get the aliased table wrapped by this table.
      */
     Table<R> getAliasedTable() {
         if (alias != null) {

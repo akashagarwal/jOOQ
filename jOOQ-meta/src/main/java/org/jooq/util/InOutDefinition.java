@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -42,7 +42,7 @@
 package org.jooq.util;
 
 /**
- * The parameter type of a stored procedure
+ * The parameter type of a stored procedure.
  *
  * @author Lukas Eder
  */
@@ -54,17 +54,17 @@ public enum InOutDefinition {
 	IN,
 
 	/**
-	 * An out parameter
+	 * An out parameter.
 	 */
 	OUT,
 
 	/**
-	 * An in/out parameter
+	 * An in/out parameter.
 	 */
 	INOUT,
 
 	/**
-	 * A return value for a function
+	 * A return value for a function.
 	 */
 	RETURN;
 
@@ -74,7 +74,7 @@ public enum InOutDefinition {
 	 * @param string IN, OUT, INOUT or <code>null</code>
 	 * @return The in/out value
 	 */
-	public static final InOutDefinition getFromString(String string) {
+	public static InOutDefinition getFromString(String string) {
 		if (string == null) {
 			return IN;
 		}

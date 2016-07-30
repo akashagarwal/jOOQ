@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -148,20 +148,23 @@ public class DefaultTransactionProvider implements TransactionProvider {
         Deque<Savepoint> savepoints = savepoints(ctx.configuration());
 
         // This is the top-level transaction
-        if (savepoints.isEmpty())
-            brace(ctx.configuration(), true);
+        if (savepoints.isEmpty()) {
+			brace(ctx.configuration(), true);
+		}
 
         Savepoint savepoint = setSavepoint(ctx.configuration());
 
-        if (savepoint == UNSUPPORTED_SAVEPOINT && !savepoints.isEmpty())
-            throw new DataAccessException("Cannot nest transactions because Savepoints are not supported");
+        if (savepoint == UNSUPPORTED_SAVEPOINT && !savepoints.isEmpty()) {
+			throw new DataAccessException("Cannot nest transactions because Savepoints are not supported");
+		}
 
         savepoints.push(savepoint);
     }
 
     private final Savepoint setSavepoint(Configuration configuration) {
-        if (!nested())
-            return IGNORED_SAVEPOINT;
+        if (!nested()) {
+			return IGNORED_SAVEPOINT;
+		}
 
         switch (configuration.family()) {
 
@@ -180,23 +183,20 @@ public class DefaultTransactionProvider implements TransactionProvider {
         Savepoint savepoint = savepoints.pop();
 
         // [#3489] Explicitly release savepoints prior to commit
-        if (savepoint != null && savepoint != UNSUPPORTED_SAVEPOINT && savepoint != IGNORED_SAVEPOINT)
-            try {
+        if (savepoint != null && savepoint != UNSUPPORTED_SAVEPOINT && savepoint != IGNORED_SAVEPOINT) {
+			try {
                 connection(ctx.configuration()).releaseSavepoint(savepoint);
             }
 
             // [#3537] Ignore those cases where the JDBC driver incompletely implements the API
             // See also http://stackoverflow.com/q/10667292/521799
             catch (DataAccessException ignore) {}
+		}
 
         // This is the top-level transaction
         if (savepoints.isEmpty()) {
             connection(ctx.configuration()).commit();
             brace(ctx.configuration(), false);
-        }
-
-        // Nested commits have no effect
-        else {
         }
     }
 
@@ -206,8 +206,9 @@ public class DefaultTransactionProvider implements TransactionProvider {
         Savepoint savepoint = null;
 
         // [#3537] If something went wrong with the savepoints per se
-        if (!savepoints.isEmpty())
-            savepoint = savepoints.pop();
+        if (!savepoints.isEmpty()) {
+			savepoint = savepoints.pop();
+		}
 
         try {
             if (savepoint == null || savepoint == UNSUPPORTED_SAVEPOINT) {
@@ -217,8 +218,9 @@ public class DefaultTransactionProvider implements TransactionProvider {
             // [#3955] ROLLBACK is only effective if an exception reaches the
             //         top-level transaction.
             else if (savepoint == IGNORED_SAVEPOINT) {
-                if (savepoints.isEmpty())
-                    connection(ctx.configuration()).rollback();
+                if (savepoints.isEmpty()) {
+					connection(ctx.configuration()).rollback();
+				}
             }
             else {
                 connection(ctx.configuration()).rollback(savepoint);
@@ -226,8 +228,9 @@ public class DefaultTransactionProvider implements TransactionProvider {
         }
 
         finally {
-            if (savepoints.isEmpty())
-                brace(ctx.configuration(), false);
+            if (savepoints.isEmpty()) {
+				brace(ctx.configuration(), false);
+			}
         }
     }
 
@@ -243,8 +246,9 @@ public class DefaultTransactionProvider implements TransactionProvider {
 
             // Transactions cannot run with autoCommit = true. Change the value for
             // the duration of a transaction
-            if (autoCommit == true)
-                connection.setAutoCommit(!start);
+            if (autoCommit) {
+				connection.setAutoCommit(!start);
+			}
         }
 
         // [#3718] Chances are that the above JDBC interactions throw additional exceptions

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -47,7 +47,7 @@ import java.util.List;
 import org.jooq.tools.StringUtils;
 
 /**
- * The definition of a database schema
+ * The definition of a database schema.
  *
  * @author Lukas Eder
  */
@@ -82,10 +82,11 @@ public class SchemaDefinition extends AbstractDefinition {
 
     @Override
     public final List<Definition> getDefinitionPath() {
-        if (StringUtils.isEmpty(catalog.getName()))
-            return Arrays.<Definition>asList(this);
-        else
-            return Arrays.<Definition>asList(catalog, this);
+        if (StringUtils.isEmpty(catalog.getName())) {
+			return Arrays.<Definition>asList(this);
+		} else {
+			return Arrays.<Definition>asList(catalog, this);
+		}
     }
 
     public boolean isDefaultSchema() {

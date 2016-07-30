@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -49,7 +49,7 @@ import org.jooq.UDTField;
 import org.jooq.UDTRecord;
 
 /**
- * A common base type for UDT attributes / fields
+ * A common base type for UDT attributes / fields.
  *
  * @author Lukas Eder
  */

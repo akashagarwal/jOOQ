@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -121,13 +121,9 @@ public class MySQLRoutineDefinition extends AbstractRoutineDefinition {
             String dataType = record.get(Parameters.DATA_TYPE);
 
             // [#519] Some types have unsigned versions
-            if (getDatabase().supportsUnsignedTypes()) {
-                if (asList("tinyint", "smallint", "mediumint", "int", "bigint").contains(dataType.toLowerCase())) {
-                    if (record.get(Parameters.DTD_IDENTIFIER).toLowerCase().contains("unsigned")) {
-                        dataType += "unsigned";
-                    }
-                }
-            }
+            if (getDatabase().supportsUnsignedTypes() && asList("tinyint", "smallint", "mediumint", "int", "bigint").contains(dataType.toLowerCase()) && record.get(Parameters.DTD_IDENTIFIER).toLowerCase().contains("unsigned")) {
+			    dataType += "unsigned";
+			}
 
             DataTypeDefinition type = new DefaultDataTypeDefinition(
                 getDatabase(),

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -48,7 +48,7 @@ import org.jooq.Converter;
 public abstract class AbstractConverter<T, U> implements Converter<T, U> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = 3739249904977790727L;
 

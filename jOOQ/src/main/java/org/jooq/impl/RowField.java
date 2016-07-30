@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -55,7 +55,7 @@ import org.jooq.Row;
 final class RowField<ROW extends Row, REC extends Record> extends AbstractField<REC> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = -2065258332642911588L;
 
@@ -94,8 +94,9 @@ final class RowField<ROW extends Row, REC extends Record> extends AbstractField<
         this.row = row;
         this.emulatedFields = new Field[row.fields().length];
 
-        for (int i = 0; i < emulatedFields.length; i++)
-            emulatedFields[i] = row.field(i).as(as + "." + row.field(i).getName());
+        for (int i = 0; i < emulatedFields.length; i++) {
+			emulatedFields[i] = row.field(i).as(as + "." + row.field(i).getName());
+		}
     }
 
     Field<?>[] emulatedFields() {

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -60,15 +60,17 @@ import org.jooq.types.UShort;
 import org.jooq.types.YearToMonth;
 
 /**
- * Supported data types for the {@link SQLDialect#FIREBIRD} dialect
+ * Supported data types for the {@link SQLDialect#FIREBIRD} dialect.
  *
  * @author Lukas Eder
  */
 public class FirebirdDataType {
 
-    // -------------------------------------------------------------------------
-    // Default SQL data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Default SQL data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Short>       SMALLINT              = new DefaultDataType<Short>(SQLDialect.FIREBIRD, SQLDataType.SMALLINT, "smallint");
     public static final DataType<Integer>     INTEGER               = new DefaultDataType<Integer>(SQLDialect.FIREBIRD, SQLDataType.INTEGER, "integer");
@@ -92,16 +94,18 @@ public class FirebirdDataType {
     public static final DataType<Timestamp>   TIMESTAMP             = new DefaultDataType<Timestamp>(SQLDialect.FIREBIRD, SQLDataType.TIMESTAMP, "timestamp");
     public static final DataType<byte[]>      BLOB                  = new DefaultDataType<byte[]>(SQLDialect.FIREBIRD, SQLDataType.BLOB, "blob");
 
-    // TODO Below are HSQLDB data types. Fix this
+    /** TODO Below are HSQLDB data types. Fix this */
 
     public static final DataType<Boolean>     BIT                   = new DefaultDataType<Boolean>(SQLDialect.FIREBIRD, SQLDataType.BIT, "bit");
     public static final DataType<Object>      OTHER                 = new DefaultDataType<Object>(SQLDialect.FIREBIRD, SQLDataType.OTHER, "other");
     public static final DataType<YearToMonth> INTERVALYEARTOMONTH   = new DefaultDataType<YearToMonth>(SQLDialect.FIREBIRD, SQLDataType.INTERVALYEARTOMONTH, "interval year to month");
     public static final DataType<DayToSecond> INTERVALDAYTOSECOND   = new DefaultDataType<DayToSecond>(SQLDialect.FIREBIRD, SQLDataType.INTERVALDAYTOSECOND, "interval day to second");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported SQLDialect.FIREBIRD, SQLDataTypes
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported SQLDialect.FIREBIRD, SQLDataTypes
+     * -------------------------------------------------------------------------
+     */
 
     protected static final DataType<byte[]>   __BINARY              = new DefaultDataType<byte[]>(SQLDialect.FIREBIRD, SQLDataType.BINARY, "blob");
     protected static final DataType<Double>   __FLOAT               = new DefaultDataType<Double>(SQLDialect.FIREBIRD, SQLDataType.FLOAT, "double precision");
@@ -116,11 +120,14 @@ public class FirebirdDataType {
     protected static final DataType<UByte>    __TINYINTUNSIGNED     = new DefaultDataType<UByte>(SQLDialect.FIREBIRD, SQLDataType.TINYINTUNSIGNED, "smallint");
     protected static final DataType<UShort>   __SMALLINTUNSIGNED    = new DefaultDataType<UShort>(SQLDialect.FIREBIRD, SQLDataType.SMALLINTUNSIGNED, "int");
     protected static final DataType<UInteger> __INTEGERUNSIGNED     = new DefaultDataType<UInteger>(SQLDialect.FIREBIRD, SQLDataType.INTEGERUNSIGNED, "bigint");
-    protected static final DataType<ULong>    __BIGINTUNSIGNED      = new DefaultDataType<ULong>(SQLDialect.FIREBIRD, SQLDataType.BIGINTUNSIGNED, "decimal", "varchar(20)"); // There are no large numbers in firebird...?
+    /** There are no large numbers in firebird...? */
+    protected static final DataType<ULong>    __BIGINTUNSIGNED      = new DefaultDataType<ULong>(SQLDialect.FIREBIRD, SQLDataType.BIGINTUNSIGNED, "decimal", "varchar(20)");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported Java types
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported Java types
+     * -------------------------------------------------------------------------.
+     */
 
     protected static final DataType<BigInteger> __BIGINTEGER        = new DefaultDataType<BigInteger>(SQLDialect.FIREBIRD, SQLDataType.DECIMAL_INTEGER, "decimal");
     protected static final DataType<UUID>       __UUID              = new DefaultDataType<UUID>(SQLDialect.FIREBIRD, SQLDataType.UUID, "varchar", "varchar(36)");

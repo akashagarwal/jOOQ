@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -56,14 +56,15 @@ import org.jooq.util.xml.jaxb.InformationSchema;
  */
 final class InformationSchemaExport {
 
-    static final InformationSchema export(Configuration configuration, List<Schema> schemas) {
+    static InformationSchema export(Configuration configuration, List<Schema> schemas) {
         InformationSchema result = new InformationSchema();
 
         for (Schema s : schemas) {
             org.jooq.util.xml.jaxb.Schema is = new org.jooq.util.xml.jaxb.Schema();
 
-            if (!StringUtils.isBlank(s.getCatalog().getName()))
-                is.setCatalogName(s.getCatalog().getName());
+            if (!StringUtils.isBlank(s.getCatalog().getName())) {
+				is.setCatalogName(s.getCatalog().getName());
+			}
 
             if (!StringUtils.isBlank(s.getName())) {
                 is.setSchemaName(s.getName());
@@ -73,11 +74,13 @@ final class InformationSchemaExport {
             for (Table<?> t : s.getTables()) {
                 org.jooq.util.xml.jaxb.Table it = new org.jooq.util.xml.jaxb.Table();
 
-                if (!StringUtils.isBlank(t.getCatalog().getName()))
-                    it.setTableCatalog(t.getCatalog().getName());
+                if (!StringUtils.isBlank(t.getCatalog().getName())) {
+					it.setTableCatalog(t.getCatalog().getName());
+				}
 
-                if (!StringUtils.isBlank(t.getSchema().getName()))
-                    it.setTableSchema(t.getSchema().getName());
+                if (!StringUtils.isBlank(t.getSchema().getName())) {
+					it.setTableSchema(t.getSchema().getName());
+				}
 
                 it.setTableName(t.getName());
                 result.getTables().add(it);
@@ -87,24 +90,29 @@ final class InformationSchemaExport {
                     Field<?> f = fields[i];
                     Column ic = new Column();
 
-                    if (!StringUtils.isBlank(t.getCatalog().getName()))
-                        ic.setTableCatalog(t.getCatalog().getName());
+                    if (!StringUtils.isBlank(t.getCatalog().getName())) {
+						ic.setTableCatalog(t.getCatalog().getName());
+					}
 
-                    if (!StringUtils.isBlank(t.getSchema().getName()))
-                        ic.setTableSchema(t.getSchema().getName());
+                    if (!StringUtils.isBlank(t.getSchema().getName())) {
+						ic.setTableSchema(t.getSchema().getName());
+					}
 
                     ic.setTableName(t.getName());
                     ic.setColumnName(t.getName());
                     ic.setDataType(f.getDataType().getTypeName(configuration));
 
-                    if (f.getDataType().hasLength())
-                        ic.setCharacterMaximumLength(f.getDataType().length());
+                    if (f.getDataType().hasLength()) {
+						ic.setCharacterMaximumLength(f.getDataType().length());
+					}
 
-                    if (f.getDataType().hasPrecision())
-                        ic.setNumericPrecision(f.getDataType().precision());
+                    if (f.getDataType().hasPrecision()) {
+						ic.setNumericPrecision(f.getDataType().precision());
+					}
 
-                    if (f.getDataType().hasScale())
-                        ic.setNumericScale(f.getDataType().scale());
+                    if (f.getDataType().hasScale()) {
+						ic.setNumericScale(f.getDataType().scale());
+					}
 
                     ic.setColumnDefault(DSL.using(configuration).render(f.getDataType().defaultValue()));
                     ic.setIsNullable(f.getDataType().nullable());
@@ -117,23 +125,28 @@ final class InformationSchemaExport {
             for (Sequence<?> q : s.getSequences()) {
                 org.jooq.util.xml.jaxb.Sequence iq = new org.jooq.util.xml.jaxb.Sequence();
 
-                if (!StringUtils.isBlank(q.getCatalog().getName()))
-                    iq.setSequenceCatalog(q.getCatalog().getName());
+                if (!StringUtils.isBlank(q.getCatalog().getName())) {
+					iq.setSequenceCatalog(q.getCatalog().getName());
+				}
 
-                if (!StringUtils.isBlank(q.getSchema().getName()))
-                    iq.setSequenceSchema(q.getSchema().getName());
+                if (!StringUtils.isBlank(q.getSchema().getName())) {
+					iq.setSequenceSchema(q.getSchema().getName());
+				}
 
                 iq.setSequenceName(q.getName());
                 iq.setDataType(q.getDataType().getTypeName(configuration));
 
-                if (q.getDataType().hasLength())
-                    iq.setCharacterMaximumLength(q.getDataType().length());
+                if (q.getDataType().hasLength()) {
+					iq.setCharacterMaximumLength(q.getDataType().length());
+				}
 
-                if (q.getDataType().hasPrecision())
-                    iq.setNumericPrecision(q.getDataType().precision());
+                if (q.getDataType().hasPrecision()) {
+					iq.setNumericPrecision(q.getDataType().precision());
+				}
 
-                if (q.getDataType().hasScale())
-                    iq.setNumericScale(q.getDataType().scale());
+                if (q.getDataType().hasScale()) {
+					iq.setNumericScale(q.getDataType().scale());
+				}
 
                 result.getSequences().add(iq);
             }

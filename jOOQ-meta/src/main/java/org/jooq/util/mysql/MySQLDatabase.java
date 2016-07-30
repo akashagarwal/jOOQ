@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -230,8 +230,7 @@ public class MySQLDatabase extends AbstractDatabase {
 
     @Override
     protected List<SequenceDefinition> getSequences0() throws SQLException {
-        List<SequenceDefinition> result = new ArrayList<SequenceDefinition>();
-        return result;
+        return new ArrayList<SequenceDefinition>();
     }
 
     @Override
@@ -296,27 +295,22 @@ public class MySQLDatabase extends AbstractDatabase {
             if (tableDefinition != null) {
                 ColumnDefinition columnDefinition = tableDefinition.getColumn(column);
 
-                if (columnDefinition != null) {
+                if (columnDefinition != null && getConfiguredForcedType(columnDefinition, columnDefinition.getType()) == null) {
+				    DefaultEnumDefinition definition = new DefaultEnumDefinition(schema, name, comment);
 
-                    // [#1137] Avoid generating enum classes for enum types that
-                    // are explicitly forced to another type
-                    if (getConfiguredForcedType(columnDefinition, columnDefinition.getType()) == null) {
-                        DefaultEnumDefinition definition = new DefaultEnumDefinition(schema, name, comment);
+				    CSVReader reader = new CSVReader(
+				        new StringReader(columnType.replaceAll("(^enum\\()|(\\)$)", ""))
+				       ,','  // Separator
+				       ,'\'' // Quote character
+				       ,true // Strict quotes
+				    );
 
-                        CSVReader reader = new CSVReader(
-                            new StringReader(columnType.replaceAll("(^enum\\()|(\\)$)", ""))
-                           ,','  // Separator
-                           ,'\'' // Quote character
-                           ,true // Strict quotes
-                        );
+				    for (String string : reader.next()) {
+				        definition.addLiteral(string);
+				    }
 
-                        for (String string : reader.next()) {
-                            definition.addLiteral(string);
-                        }
-
-                        result.add(definition);
-                    }
-                }
+				    result.add(definition);
+				}
             }
         }
 
@@ -325,20 +319,17 @@ public class MySQLDatabase extends AbstractDatabase {
 
     @Override
     protected List<DomainDefinition> getDomains0() throws SQLException {
-        List<DomainDefinition> result = new ArrayList<DomainDefinition>();
-        return result;
+        return new ArrayList<DomainDefinition>();
     }
 
     @Override
     protected List<UDTDefinition> getUDTs0() throws SQLException {
-        List<UDTDefinition> result = new ArrayList<UDTDefinition>();
-        return result;
+        return new ArrayList<UDTDefinition>();
     }
 
     @Override
     protected List<ArrayDefinition> getArrays0() throws SQLException {
-        List<ArrayDefinition> result = new ArrayList<ArrayDefinition>();
-        return result;
+        return new ArrayList<ArrayDefinition>();
     }
 
     @Override
@@ -400,8 +391,7 @@ public class MySQLDatabase extends AbstractDatabase {
 
     @Override
     protected List<PackageDefinition> getPackages0() throws SQLException {
-        List<PackageDefinition> result = new ArrayList<PackageDefinition>();
-        return result;
+        return new ArrayList<PackageDefinition>();
     }
 
     @Override

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -61,7 +61,7 @@ import org.jooq.tools.StringUtils;
 public class PackageImpl extends AbstractQueryPart implements Package {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long     serialVersionUID = 7466890004995197675L;
 
@@ -98,9 +98,11 @@ public class PackageImpl extends AbstractQueryPart implements Package {
         return null;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: Object API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Object API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public int hashCode() {

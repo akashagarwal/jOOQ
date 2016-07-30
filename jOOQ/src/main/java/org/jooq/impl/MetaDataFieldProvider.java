@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -72,7 +72,7 @@ import org.jooq.tools.JooqLogger;
 final class MetaDataFieldProvider implements Serializable {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long       serialVersionUID = -8482521025536063609L;
     private static final JooqLogger log              = JooqLogger.getLogger(MetaDataFieldProvider.class);
@@ -165,9 +165,11 @@ final class MetaDataFieldProvider implements Serializable {
         return fields.fields();
     }
 
-    // -------------------------------------------------------------------------
-    // The Object API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * The Object API
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public String toString() {

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2011-2016, Lukas Eder, lukas.eder@gmail.com
  * All rights reserved.
  *
@@ -57,7 +57,7 @@ import java.lang.reflect.InvocationTargetException;
 public class ReflectException extends RuntimeException {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = -6213149635297151442L;
 

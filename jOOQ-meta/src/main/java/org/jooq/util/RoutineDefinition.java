@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -57,17 +57,17 @@ public interface RoutineDefinition extends Definition {
     PackageDefinition getPackage();
 
     /**
-     * A list of IN or INOUT parameter column definitions
+     * A list of IN or INOUT parameter column definitions.
      */
     List<ParameterDefinition> getInParameters();
 
     /**
-     * A list of OUT or INOUT parameter column definitions
+     * A list of OUT or INOUT parameter column definitions.
      */
     List<ParameterDefinition> getOutParameters();
 
     /**
-     * A list of all IN, OUT, and INOUT parameter column definitions
+     * A list of all IN, OUT, and INOUT parameter column definitions.
      */
     List<ParameterDefinition> getAllParameters();
 

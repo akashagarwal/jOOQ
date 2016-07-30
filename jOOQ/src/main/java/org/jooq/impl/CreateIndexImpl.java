@@ -1,4 +1,4 @@
-/**
+/*
  * All rights reserved.
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  *
@@ -79,7 +79,7 @@ final class CreateIndexImpl extends AbstractQuery implements
     CreateIndexWhereStep {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long     serialVersionUID = 8904572826501186329L;
     private static final Clause[] CLAUSES          = { CREATE_INDEX };
@@ -102,9 +102,11 @@ final class CreateIndexImpl extends AbstractQuery implements
         this.ifNotExists = ifNotExists;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: DSL API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: DSL API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final CreateIndexImpl on(Table<?> t, SortField<?>... f) {
@@ -126,8 +128,9 @@ final class CreateIndexImpl extends AbstractQuery implements
     public final CreateIndexImpl on(String tableName, String... fieldNames) {
         Field<?>[] f = new Field[fieldNames.length];
 
-        for (int i = 0; i < f.length; i++)
-            f[i] = field(name(fieldNames[i]));
+        for (int i = 0; i < f.length; i++) {
+			f[i] = field(name(fieldNames[i]));
+		}
 
         return on(table(name(tableName)), f);
     }
@@ -171,9 +174,11 @@ final class CreateIndexImpl extends AbstractQuery implements
 
 
 
-    // ------------------------------------------------------------------------
-    // XXX: QueryPart API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: QueryPart API
+     * ------------------------------------------------------------------------
+     */
 
     private final boolean supportsIfNotExists(Context<?> ctx) {
         return !asList(DERBY, FIREBIRD).contains(ctx.family());
@@ -194,17 +199,19 @@ final class CreateIndexImpl extends AbstractQuery implements
     private final void accept0(Context<?> ctx) {
         ctx.keyword("create");
 
-        if (unique)
-            ctx.sql(' ')
+        if (unique) {
+			ctx.sql(' ')
                .keyword("unique");
+		}
 
         ctx.sql(' ')
            .keyword("index")
            .sql(' ');
 
-        if (ifNotExists && supportsIfNotExists(ctx))
-            ctx.keyword("if not exists")
+        if (ifNotExists && supportsIfNotExists(ctx)) {
+			ctx.keyword("if not exists")
                .sql(' ');
+		}
 
         ctx.visit(index)
            .sql(' ')

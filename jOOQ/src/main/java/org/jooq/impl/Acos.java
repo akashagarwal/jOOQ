@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -56,7 +56,7 @@ import org.jooq.QueryPart;
 final class Acos extends AbstractFunction<BigDecimal> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long             serialVersionUID = 3117002829857089691L;
     private final Field<? extends Number> arg;

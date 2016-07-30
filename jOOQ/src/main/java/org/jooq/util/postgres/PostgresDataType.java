@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -69,9 +69,11 @@ import org.jooq.types.YearToMonth;
  */
 public class PostgresDataType {
 
-    // -------------------------------------------------------------------------
-    // Default SQL data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Default SQL data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Short>        SMALLINT                 = new DefaultDataType<Short>(SQLDialect.POSTGRES, SQLDataType.SMALLINT, "smallint");
     public static final DataType<Short>        INT2                     = new DefaultDataType<Short>(SQLDialect.POSTGRES, SQLDataType.SMALLINT, "int2");
@@ -100,9 +102,11 @@ public class PostgresDataType {
     public static final DataType<YearToMonth>  INTERVALYEARTOMONTH      = new DefaultDataType<YearToMonth>(SQLDialect.POSTGRES, SQLDataType.INTERVALYEARTOMONTH, "interval year to month");
     public static final DataType<DayToSecond>  INTERVALDAYTOSECOND      = new DefaultDataType<DayToSecond>(SQLDialect.POSTGRES, SQLDataType.INTERVALDAYTOSECOND, "interval day to second");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported SQLDialect.POSTGRES, SQLDataTypes
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported SQLDialect.POSTGRES, SQLDataTypes
+     * -------------------------------------------------------------------------
+     */
 
     protected static final DataType<byte[]>     __BINARY                = new DefaultDataType<byte[]>(SQLDialect.POSTGRES, SQLDataType.BINARY, "bytea");
     protected static final DataType<Boolean>    __BIT                   = new DefaultDataType<Boolean>(SQLDialect.POSTGRES, SQLDataType.BIT, "boolean");
@@ -119,15 +123,19 @@ public class PostgresDataType {
     protected static final DataType<UInteger>   __INTEGERUNSIGNED       = new DefaultDataType<UInteger>(SQLDialect.POSTGRES, SQLDataType.INTEGERUNSIGNED, "bigint");
     protected static final DataType<ULong>      __BIGINTUNSIGNED        = new DefaultDataType<ULong>(SQLDialect.POSTGRES, SQLDataType.BIGINTUNSIGNED, "decimal");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported Java types
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported Java types
+     * -------------------------------------------------------------------------.
+     */
 
     protected static final DataType<BigInteger> __BIGINTEGER            = new DefaultDataType<BigInteger>(SQLDialect.POSTGRES, SQLDataType.DECIMAL_INTEGER, "decimal");
 
-    // -------------------------------------------------------------------------
-    // Dialect-specific data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Dialect-specific data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Integer>    SERIAL                     = new DefaultDataType<Integer>(SQLDialect.POSTGRES, SQLDataType.INTEGER, "serial");
     public static final DataType<Integer>    SERIAL4                    = new DefaultDataType<Integer>(SQLDialect.POSTGRES, SQLDataType.INTEGER, "serial4");
@@ -149,7 +157,7 @@ public class PostgresDataType {
     public static final DataType<UUID>       UUID                       = new DefaultDataType<UUID>(SQLDialect.POSTGRES, SQLDataType.UUID, "uuid");
     public static final DataType<Object>     JSON                       = new DefaultDataType<Object>(SQLDialect.POSTGRES, SQLDataType.OTHER, "json");
 
-    // Meta-table types
+    /** Meta-table types. */
     public static final DataType<Long>       OID                        = new DefaultDataType<Long>(SQLDialect.POSTGRES, SQLDataType.BIGINT, "oid");
     public static final DataType<Long>       OIDVECTOR                  = new DefaultDataType<Long>(SQLDialect.POSTGRES, SQLDataType.BIGINT, "oidvector");
     public static final DataType<Long>       XID                        = new DefaultDataType<Long>(SQLDialect.POSTGRES, SQLDataType.BIGINT, "xid");

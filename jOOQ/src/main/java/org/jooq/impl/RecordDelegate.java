@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -75,11 +75,11 @@ final class RecordDelegate<R extends Record> {
         this.type = type;
     }
 
-    static final <R extends Record> RecordDelegate<R> delegate(Configuration configuration, R record) {
+    static <R extends Record> RecordDelegate<R> delegate(Configuration configuration, R record) {
         return new RecordDelegate<R>(configuration, record);
     }
 
-    static final <R extends Record> RecordDelegate<R> delegate(Configuration configuration, R record, RecordLifecycleType type) {
+    static <R extends Record> RecordDelegate<R> delegate(Configuration configuration, R record, RecordLifecycleType type) {
         return new RecordDelegate<R>(configuration, record, type);
     }
 
@@ -134,12 +134,15 @@ final class RecordDelegate<R extends Record> {
 
                 // Do not propagate these exception types to client code as they're not really "exceptions"
                 if (!(e instanceof ControlFlowSignal)) {
-                    if (ctx != null)
-                        ctx.exception = e;
+                    if (ctx != null) {
+						ctx.exception = e;
+					}
 
-                    if (listeners != null)
-                        for (RecordListener listener : listeners)
-                            listener.exception(ctx);
+                    if (listeners != null) {
+						for (RecordListener listener : listeners) {
+							listener.exception(ctx);
+						}
+					}
                 }
             }
         }

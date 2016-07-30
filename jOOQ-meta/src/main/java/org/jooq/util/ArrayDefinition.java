@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -42,7 +42,7 @@ package org.jooq.util;
 
 
 /**
- * A definition for an ARRAY type
+ * A definition for an ARRAY type.
  *
  * @author Lukas Eder
  */

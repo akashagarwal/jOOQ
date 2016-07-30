@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -111,7 +111,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#VARCHAR} type.
      */
-    public static final DataType<String> VARCHAR(int length) {
+    public static DataType<String> VARCHAR(int length) {
         return VARCHAR.length(length);
     }
 
@@ -123,7 +123,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#CHAR} type.
      */
-    public static final DataType<String> CHAR(int length) {
+    public static DataType<String> CHAR(int length) {
         return CHAR.length(length);
     }
 
@@ -135,7 +135,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#LONGVARCHAR} type.
      */
-    public static final DataType<String> LONGVARCHAR(int length) {
+    public static DataType<String> LONGVARCHAR(int length) {
         return LONGVARCHAR.length(length);
     }
 
@@ -147,7 +147,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#CLOB} type.
      */
-    public static final DataType<String> CLOB(int length) {
+    public static DataType<String> CLOB(int length) {
         return CLOB.length(length);
     }
 
@@ -159,7 +159,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#NVARCHAR} type.
      */
-    public static final DataType<String> NVARCHAR(int length) {
+    public static DataType<String> NVARCHAR(int length) {
         return NVARCHAR.length(length);
     }
 
@@ -171,7 +171,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#NCHAR} type.
      */
-    public static final DataType<String> NCHAR(int length) {
+    public static DataType<String> NCHAR(int length) {
         return NCHAR.length(length);
     }
 
@@ -183,7 +183,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#LONGNVARCHAR} type.
      */
-    public static final DataType<String> LONGNVARCHAR(int length) {
+    public static DataType<String> LONGNVARCHAR(int length) {
         return LONGNVARCHAR.length(length);
     }
 
@@ -195,7 +195,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#NCLOB} type.
      */
-    public static final DataType<String> NCLOB(int length) {
+    public static DataType<String> NCLOB(int length) {
         return NCLOB.length(length);
     }
 
@@ -297,14 +297,14 @@ public final class SQLDataType {
     /**
      * The {@link Types#NUMERIC} type.
      */
-    public static final DataType<BigDecimal> NUMERIC(int precision) {
+    public static DataType<BigDecimal> NUMERIC(int precision) {
         return NUMERIC.precision(precision);
     }
 
     /**
      * The {@link Types#NUMERIC} type.
      */
-    public static final DataType<BigDecimal> NUMERIC(int precision, int scale) {
+    public static DataType<BigDecimal> NUMERIC(int precision, int scale) {
         return NUMERIC.precision(precision, scale);
     }
 
@@ -316,14 +316,14 @@ public final class SQLDataType {
     /**
      * The {@link Types#DECIMAL} type.
      */
-    public static final DataType<BigDecimal> DECIMAL(int precision) {
+    public static DataType<BigDecimal> DECIMAL(int precision) {
         return DECIMAL.precision(precision);
     }
 
     /**
      * The {@link Types#DECIMAL} type.
      */
-    public static final DataType<BigDecimal> DECIMAL(int precision, int scale) {
+    public static DataType<BigDecimal> DECIMAL(int precision, int scale) {
         return DECIMAL.precision(precision, scale);
     }
 
@@ -413,7 +413,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#BINARY} type.
      */
-    public static final DataType<byte[]> BINARY(int length) {
+    public static DataType<byte[]> BINARY(int length) {
         return BINARY.length(length);
     }
 
@@ -425,7 +425,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#VARBINARY} type.
      */
-    public static final DataType<byte[]> VARBINARY(int length) {
+    public static DataType<byte[]> VARBINARY(int length) {
         return VARBINARY.length(length);
     }
 
@@ -437,7 +437,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#LONGVARBINARY} type.
      */
-    public static final DataType<byte[]> LONGVARBINARY(int length) {
+    public static DataType<byte[]> LONGVARBINARY(int length) {
         return LONGVARBINARY.length(length);
     }
 
@@ -449,7 +449,7 @@ public final class SQLDataType {
     /**
      * The {@link Types#BLOB} type.
      */
-    public static final DataType<byte[]> BLOB(int length) {
+    public static DataType<byte[]> BLOB(int length) {
         return BLOB.length(length);
     }
 
@@ -484,9 +484,11 @@ public final class SQLDataType {
      */
     public static final DataType<UUID> UUID = new DefaultDataType<UUID>(null, UUID.class, "uuid");
 
-    // -------------------------------------------------------------------------
-    // Static initialisation of dialect-specific data types
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Static initialisation of dialect-specific data types
+     * -------------------------------------------------------------------------.
+     */
 
     static {
         // Load all dialect-specific data types
@@ -519,7 +521,7 @@ public final class SQLDataType {
     }
 
     /**
-     * No instances
+     * No instances.
      */
     private SQLDataType() {}
 }

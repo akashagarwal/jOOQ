@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -125,7 +125,7 @@ implements
 {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long     serialVersionUID = 1018023703769802616L;
     private static final Clause[] CLAUSES          = { CONSTRAINT };
@@ -156,20 +156,22 @@ implements
     @Override
     public final void accept(Context<?> ctx) {
         if (ctx.data(DATA_CONSTRAINT_REFERENCE) != null) {
-            if (name == null)
-                throw new DataAccessException("Cannot ALTER or DROP CONSTRAINT without name");
+            if (name == null) {
+				throw new DataAccessException("Cannot ALTER or DROP CONSTRAINT without name");
+			}
 
             ctx.visit(name);
         }
         else {
             boolean qualify = ctx.qualify();
 
-            if (name != null)
-                ctx.keyword("constraint")
+            if (name != null) {
+				ctx.keyword("constraint")
                    .sql(' ')
                    .visit(name)
                    .formatIndentStart()
                    .formatSeparator();
+			}
 
             if (unique != null) {
                 ctx.keyword("unique")
@@ -204,13 +206,15 @@ implements
                    .qualify(qualify)
                    .sql(')');
 
-                if (onDelete != null)
-                    ctx.sql(' ').keyword("on delete")
+                if (onDelete != null) {
+					ctx.sql(' ').keyword("on delete")
                        .sql(' ').keyword(onDelete.sql);
+				}
 
-                if (onUpdate != null)
-                    ctx.sql(' ').keyword("on update")
+                if (onUpdate != null) {
+					ctx.sql(' ').keyword("on update")
                        .sql(' ').keyword(onUpdate.sql);
+				}
             }
             else if (check != null) {
                 ctx.keyword("check")
@@ -336,7 +340,7 @@ implements
         return this;
     }
 
-    // [jooq-tools] START [foreignKey]
+    /** [jooq-tools] START [foreignKey]. */
 
     @Generated("This method was generated using jOOQ-tools")
     @Override
@@ -866,7 +870,7 @@ implements
     	return references(table, new String[] { field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12, field13, field14, field15, field16, field17, field18, field19, field20, field21, field22 });
     }
 
-// [jooq-tools] END [foreignKey]
+/** [jooq-tools] END [foreignKey]. */
 
     enum Action {
         NO_ACTION("no action"),

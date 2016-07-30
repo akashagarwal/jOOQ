@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -116,7 +116,7 @@ public final class Convert {
     public static final Set<String> FALSE_VALUES;
 
     /**
-     * A UUID pattern for UUIDs with or without hyphens
+     * A UUID pattern for UUIDs with or without hyphens.
      */
     private static final Pattern UUID_PATTERN = Pattern.compile("(\\p{XDigit}{8})-?(\\p{XDigit}{4})-?(\\p{XDigit}{4})-?(\\p{XDigit}{4})-?(\\p{XDigit}{12})");
 
@@ -163,7 +163,7 @@ public final class Convert {
      * <p>
      * This converts <code>values[i]</code> to <code>fields[i].getType()</code>
      */
-    public static final Object[] convert(Object[] values, Field<?>[] fields) {
+    public static Object[] convert(Object[] values, Field<?>[] fields) {
 
         // [#1005] Convert values from the <code>VALUES</code> clause to appropriate
         // values as specified by the <code>INTO</code> clause's column list.
@@ -192,9 +192,9 @@ public final class Convert {
     /**
      * Convert an array of values to a matching data type
      * <p>
-     * This converts <code>values[i]</code> to <code>types[i]</code>
+     * This converts <code>values[i]</code> to <code>types[i]</code>.
      */
-    public static final Object[] convert(Object[] values, Class<?>[] types) {
+    public static Object[] convert(Object[] values, Class<?>[] types) {
 
         // [#1005] Convert values from the <code>VALUES</code> clause to appropriate
         // values as specified by the <code>INTO</code> clause's column list.
@@ -224,7 +224,7 @@ public final class Convert {
      * <p>
      * This uses {@link #convertArray(Object[], Class)} to convert the array to
      * an array of {@link Converter#fromType()} first, before converting that
-     * array again to {@link Converter#toType()}
+     * array again to {@link Converter#toType()}.
      *
      * @param from The array to convert
      * @param converter The data type converter
@@ -232,7 +232,7 @@ public final class Convert {
      * @throws DataTypeException - When the conversion is not possible
      */
     @SuppressWarnings("unchecked")
-    public static final <U> U[] convertArray(Object[] from, Converter<?, ? extends U> converter) throws DataTypeException {
+    public static <U> U[] convertArray(Object[] from, Converter<?, ? extends U> converter) throws DataTypeException {
         if (from == null) {
             return null;
         }
@@ -257,7 +257,7 @@ public final class Convert {
      * <li>If <code>toClass</code> is an array class, then create an instance
      * from it, and convert all elements in the <code>from</code> array one by
      * one, using {@link #convert(Object, Class)}</li>
-     * </ul>
+     * </ul>.
      *
      * @param from The array to convert
      * @param toClass The target array type
@@ -265,7 +265,7 @@ public final class Convert {
      * @throws DataTypeException - When the conversion is not possible
      */
     @SuppressWarnings("unchecked")
-    public static final Object[] convertArray(Object[] from, Class<?> toClass) throws DataTypeException {
+    public static Object[] convertArray(Object[] from, Class<?> toClass) throws DataTypeException {
         if (from == null) {
             return null;
         }
@@ -304,14 +304,14 @@ public final class Convert {
      * @return The target type object
      * @throws DataTypeException - When the conversion is not possible
      */
-    public static final <U> U convert(Object from, Converter<?, ? extends U> converter) throws DataTypeException {
+    public static <U> U convert(Object from, Converter<?, ? extends U> converter) throws DataTypeException {
         return convert0(from, converter);
     }
 
     /**
-     * Conversion type-safety
+     * Conversion type-safety.
      */
-    private static final <T, U> U convert0(Object from, Converter<T, ? extends U> converter) throws DataTypeException {
+    private static <T, U> U convert0(Object from, Converter<T, ? extends U> converter) throws DataTypeException {
         ConvertAll<T> all = new ConvertAll<T>(converter.fromType());
         return converter.from(all.from(from));
     }
@@ -376,13 +376,13 @@ public final class Convert {
      * @return The converted object
      * @throws DataTypeException - When the conversion is not possible
      */
-    public static final <T> T convert(Object from, Class<? extends T> toClass) throws DataTypeException {
+    public static <T> T convert(Object from, Class<? extends T> toClass) throws DataTypeException {
         return convert(from, new ConvertAll<T>(toClass));
     }
 
     /**
      * Convert a collection of objects to a list of <code>T</code>, using
-     * {@link #convert(Object, Class)}
+     * {@link #convert(Object, Class)}.
      *
      * @param collection The list of objects
      * @param type The target type
@@ -390,13 +390,13 @@ public final class Convert {
      * @throws DataTypeException - When the conversion is not possible
      * @see #convert(Object, Class)
      */
-    public static final <T> List<T> convert(Collection<?> collection, Class<? extends T> type) throws DataTypeException {
+    public static <T> List<T> convert(Collection<?> collection, Class<? extends T> type) throws DataTypeException {
         return convert(collection, new ConvertAll<T>(type));
     }
 
     /**
      * Convert a collection of objects to a list of <code>T</code>, using
-     * {@link #convert(Object, Converter)}
+     * {@link #convert(Object, Converter)}.
      *
      * @param collection The collection of objects
      * @param converter The data type converter
@@ -404,14 +404,14 @@ public final class Convert {
      * @throws DataTypeException - When the conversion is not possible
      * @see #convert(Object, Converter)
      */
-    public static final <U> List<U> convert(Collection<?> collection, Converter<?, ? extends U> converter) throws DataTypeException {
+    public static <U> List<U> convert(Collection<?> collection, Converter<?, ? extends U> converter) throws DataTypeException {
         return convert0(collection, converter);
     }
 
     /**
-     * Type safe conversion
+     * Type safe conversion.
      */
-    private static final <T, U> List<U> convert0(Collection<?> collection, Converter<T, ? extends U> converter) throws DataTypeException {
+    private static <T, U> List<U> convert0(Collection<?> collection, Converter<T, ? extends U> converter) throws DataTypeException {
         ConvertAll<T> all = new ConvertAll<T>(converter.fromType());
         List<U> result = new ArrayList<U>(collection.size());
 
@@ -423,7 +423,7 @@ public final class Convert {
     }
 
     /**
-     * No instances
+     * No instances.
      */
     private Convert() {}
 
@@ -433,7 +433,7 @@ public final class Convert {
     private static class ConvertAll<U> implements Converter<Object, U> {
 
         /**
-         * Generated UID
+         * Generated UID.
          */
         private static final long        serialVersionUID = 2508560107067092501L;
 
@@ -526,7 +526,7 @@ public final class Convert {
                     }
 
                     if (fromClass == Boolean.class || fromClass == boolean.class) {
-                        return (U) (((Boolean) from) ? Byte.valueOf((byte) 1) : Byte.valueOf((byte) 0));
+                        return (U) ((Boolean) from ? Byte.valueOf((byte) 1) : Byte.valueOf((byte) 0));
                     }
 
                     try {
@@ -542,7 +542,7 @@ public final class Convert {
                     }
 
                     if (fromClass == Boolean.class || fromClass == boolean.class) {
-                        return (U) (((Boolean) from) ? Short.valueOf((short) 1) : Short.valueOf((short) 0));
+                        return (U) ((Boolean) from ? Short.valueOf((short) 1) : Short.valueOf((short) 0));
                     }
 
                     try {
@@ -558,7 +558,7 @@ public final class Convert {
                     }
 
                     if (fromClass == Boolean.class || fromClass == boolean.class) {
-                        return (U) (((Boolean) from) ? Integer.valueOf(1) : Integer.valueOf(0));
+                        return (U) ((Boolean) from ? Integer.valueOf(1) : Integer.valueOf(0));
                     }
 
                     try {
@@ -574,7 +574,7 @@ public final class Convert {
                     }
 
                     if (fromClass == Boolean.class || fromClass == boolean.class) {
-                        return (U) (((Boolean) from) ? Long.valueOf(1L) : Long.valueOf(0L));
+                        return (U) ((Boolean) from ? Long.valueOf(1L) : Long.valueOf(0L));
                     }
 
                     if (java.util.Date.class.isAssignableFrom(fromClass)) {
@@ -603,7 +603,7 @@ public final class Convert {
                         }
 
                         if (fromClass == Boolean.class || fromClass == boolean.class) {
-                            return (U) (((Boolean) from) ? ubyte(1) : ubyte(0));
+                            return (U) ((Boolean) from ? ubyte(1) : ubyte(0));
                         }
 
                         return (U) ubyte(new BigDecimal(from.toString().trim()).shortValue());
@@ -619,7 +619,7 @@ public final class Convert {
                         }
 
                         if (fromClass == Boolean.class || fromClass == boolean.class) {
-                            return (U) (((Boolean) from) ? ushort(1) : ushort(0));
+                            return (U) ((Boolean) from ? ushort(1) : ushort(0));
                         }
 
                         return (U) ushort(new BigDecimal(from.toString().trim()).intValue());
@@ -635,7 +635,7 @@ public final class Convert {
                         }
 
                         if (fromClass == Boolean.class || fromClass == boolean.class) {
-                            return (U) (((Boolean) from) ? uint(1) : uint(0));
+                            return (U) ((Boolean) from ? uint(1) : uint(0));
                         }
 
                         return (U) uint(new BigDecimal(from.toString().trim()).longValue());
@@ -646,7 +646,7 @@ public final class Convert {
                 }
                 else if (toClass == ULong.class) {
                     if (fromClass == Boolean.class || fromClass == boolean.class) {
-                        return (U) (((Boolean) from) ? ulong(1) : ulong(0));
+                        return (U) ((Boolean) from ? ulong(1) : ulong(0));
                     }
 
                     if (java.util.Date.class.isAssignableFrom(fromClass)) {
@@ -674,7 +674,7 @@ public final class Convert {
                     }
 
                     if (fromClass == Boolean.class || fromClass == boolean.class) {
-                        return (U) (((Boolean) from) ? Float.valueOf(1.0f) : Float.valueOf(0.0f));
+                        return (U) ((Boolean) from ? Float.valueOf(1.0f) : Float.valueOf(0.0f));
                     }
 
                     try {
@@ -690,7 +690,7 @@ public final class Convert {
                     }
 
                     if (fromClass == Boolean.class || fromClass == boolean.class) {
-                        return (U) (((Boolean) from) ? Double.valueOf(1.0) : Double.valueOf(0.0));
+                        return (U) ((Boolean) from ? Double.valueOf(1.0) : Double.valueOf(0.0));
                     }
 
                     try {
@@ -702,7 +702,7 @@ public final class Convert {
                 }
                 else if (toClass == BigDecimal.class) {
                     if (fromClass == Boolean.class || fromClass == boolean.class) {
-                        return (U) (((Boolean) from) ? BigDecimal.ONE : BigDecimal.ZERO);
+                        return (U) ((Boolean) from ? BigDecimal.ONE : BigDecimal.ZERO);
                     }
 
                     try {
@@ -714,7 +714,7 @@ public final class Convert {
                 }
                 else if (toClass == BigInteger.class) {
                     if (fromClass == Boolean.class || fromClass == boolean.class) {
-                        return (U) (((Boolean) from) ? BigInteger.ONE : BigInteger.ZERO);
+                        return (U) ((Boolean) from ? BigInteger.ONE : BigInteger.ZERO);
                     }
 
                     try {
@@ -739,7 +739,7 @@ public final class Convert {
                 }
                 else if (toClass == Character.class || toClass == char.class) {
                     if (fromClass == Boolean.class || fromClass == boolean.class) {
-                        return (U) (((Boolean) from) ? Character.valueOf('1') : Character.valueOf('0'));
+                        return (U) ((Boolean) from ? Character.valueOf('1') : Character.valueOf('0'));
                     }
 
                     if (from.toString().length() < 1) {
@@ -750,7 +750,7 @@ public final class Convert {
                 }
 
                 // URI types can be converted from strings
-                else if ((fromClass == String.class) && toClass == URI.class) {
+                else if (fromClass == String.class && toClass == URI.class) {
                     try {
                         return (U) new URI(from.toString());
                     }
@@ -760,7 +760,7 @@ public final class Convert {
                 }
 
                 // URI types can be converted from strings
-                else if ((fromClass == String.class) && toClass == URL.class) {
+                else if (fromClass == String.class && toClass == URL.class) {
                     try {
                         return (U) new URI(from.toString()).toURL();
                     }
@@ -770,7 +770,7 @@ public final class Convert {
                 }
 
                 // File types can be converted from strings
-                else if ((fromClass == String.class) && toClass == File.class) {
+                else if (fromClass == String.class && toClass == File.class) {
                     try {
                         return (U) new File(from.toString());
                     }
@@ -802,7 +802,7 @@ public final class Convert {
 
 
                 // [#1501] Strings can be converted to java.sql.Date
-                else if ((fromClass == String.class) && toClass == java.sql.Date.class) {
+                else if (fromClass == String.class && toClass == java.sql.Date.class) {
                     try {
                         return (U) java.sql.Date.valueOf((String) from);
                     }
@@ -812,7 +812,7 @@ public final class Convert {
                 }
 
                 // [#1501] Strings can be converted to java.sql.Date
-                else if ((fromClass == String.class) && toClass == java.sql.Time.class) {
+                else if (fromClass == String.class && toClass == java.sql.Time.class) {
                     try {
                         return (U) java.sql.Time.valueOf((String) from);
                     }
@@ -822,7 +822,7 @@ public final class Convert {
                 }
 
                 // [#1501] Strings can be converted to java.sql.Date
-                else if ((fromClass == String.class) && toClass == java.sql.Timestamp.class) {
+                else if (fromClass == String.class && toClass == java.sql.Timestamp.class) {
                     try {
                         return (U) java.sql.Timestamp.valueOf((String) from);
                     }
@@ -832,7 +832,7 @@ public final class Convert {
                 }
 
 
-                else if ((fromClass == String.class) && toClass == LocalDate.class) {
+                else if (fromClass == String.class && toClass == LocalDate.class) {
 
                     // Try "lenient" ISO date formats first
                     try {
@@ -848,7 +848,7 @@ public final class Convert {
                     }
                 }
 
-                else if ((fromClass == String.class) && toClass == LocalTime.class) {
+                else if (fromClass == String.class && toClass == LocalTime.class) {
 
                     // Try "lenient" ISO date formats first
                     try {
@@ -864,7 +864,7 @@ public final class Convert {
                     }
                 }
 
-                else if ((fromClass == String.class) && toClass == OffsetTime.class) {
+                else if (fromClass == String.class && toClass == OffsetTime.class) {
 
                     // Try "local" ISO date formats first
                     try {
@@ -880,7 +880,7 @@ public final class Convert {
                     }
                 }
 
-                else if ((fromClass == String.class) && toClass == LocalDateTime.class) {
+                else if (fromClass == String.class && toClass == LocalDateTime.class) {
 
                     // Try "lenient" ISO date formats first
                     try {
@@ -896,7 +896,7 @@ public final class Convert {
                     }
                 }
 
-                else if ((fromClass == String.class) && toClass == OffsetDateTime.class) {
+                else if (fromClass == String.class && toClass == OffsetDateTime.class) {
 
                     // Try "local" ISO date formats first
                     try {
@@ -912,7 +912,7 @@ public final class Convert {
                     }
                 }
 
-                else if ((fromClass == String.class) && toClass == Instant.class) {
+                else if (fromClass == String.class && toClass == Instant.class) {
 
                     // Try "local" ISO date formats first
                     try {
@@ -931,7 +931,7 @@ public final class Convert {
 
                 // [#1448] Some users may find it useful to convert string
                 // literals to Enum values without a Converter
-                else if ((fromClass == String.class) && java.lang.Enum.class.isAssignableFrom(toClass)) {
+                else if (fromClass == String.class && java.lang.Enum.class.isAssignableFrom(toClass)) {
                     try {
                         return (U) java.lang.Enum.valueOf((Class) toClass, (String) from);
                     }
@@ -941,7 +941,7 @@ public final class Convert {
                 }
 
                 // [#1624] UUID data types can be read from Strings
-                else if ((fromClass == String.class) && toClass == UUID.class) {
+                else if (fromClass == String.class && toClass == UUID.class) {
                     try {
                         return (U) parseUUID((String) from);
                     }
@@ -1019,7 +1019,7 @@ public final class Convert {
         }
 
         /**
-         * Convert a long timestamp to any date type
+         * Convert a long timestamp to any date type.
          */
         @SuppressWarnings("unchecked")
         private static <X> X toDate(long time, Class<X> toClass) {
@@ -1066,7 +1066,7 @@ public final class Convert {
         }
 
 
-        private static final long millis(Temporal temporal) {
+        private static long millis(Temporal temporal) {
 
             // java.sql.* temporal types:
             if (temporal instanceof LocalDate) {
@@ -1097,7 +1097,7 @@ public final class Convert {
          * Some databases do not implement the standard very well. Specifically,
          * {@link SQLDialect#SYBASE} seems to omit hyphens
          */
-        private static final UUID parseUUID(String string) {
+        private static UUID parseUUID(String string) {
             if (string == null) {
                 return null;
             }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -55,7 +55,7 @@ import org.jooq.Table;
 final class RowsFrom extends AbstractTable<Record> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = 693765524746506586L;
 
@@ -86,9 +86,11 @@ final class RowsFrom extends AbstractTable<Record> {
     final Fields<Record> fields0() {
         List<Field<?>> fields = new ArrayList<Field<?>>();
 
-        for (Table<?> table : tables)
-            for (Field<?> field : table.fields())
-                fields.add(DSL.field(DSL.name(field.getName()), field.getDataType()));
+        for (Table<?> table : tables) {
+			for (Field<?> field : table.fields()) {
+				fields.add(DSL.field(DSL.name(field.getName()), field.getDataType()));
+			}
+		}
 
         return new Fields<Record>(fields);
     }

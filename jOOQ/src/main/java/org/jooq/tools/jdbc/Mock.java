@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -59,7 +59,7 @@ public final class Mock {
      * Create a new {@link MockDataProvider} that always returns a single record
      * for all queries.
      */
-    public static final MockDataProvider of(int rows) {
+    public static MockDataProvider of(int rows) {
         return of(new MockResult(rows, null));
     }
 
@@ -67,7 +67,7 @@ public final class Mock {
      * Create a new {@link MockDataProvider} that always returns a single record
      * for all queries.
      */
-    public static final MockDataProvider of(Record record) {
+    public static MockDataProvider of(Record record) {
         return of(result(record));
     }
 
@@ -75,7 +75,7 @@ public final class Mock {
      * Create a new {@link MockDataProvider} that always returns the same result
      * for all queries.
      */
-    public static final MockDataProvider of(Result<?> result) {
+    public static MockDataProvider of(Result<?> result) {
         return of(new MockResult(result.size(), result));
     }
 
@@ -83,7 +83,7 @@ public final class Mock {
      * Create a new {@link MockDataProvider} that always returns the same mock
      * results for all queries.
      */
-    public static final MockDataProvider of(final MockResult... result) {
+    public static MockDataProvider of(final MockResult... result) {
         return new MockDataProvider() {
             @Override
             public MockResult[] execute(MockExecuteContext ctx) {
@@ -95,7 +95,7 @@ public final class Mock {
     /**
      * Wrap a record in a result.
      */
-    static final Result<?> result(Record data) {
+    static Result<?> result(Record data) {
         Configuration configuration = data instanceof AttachableInternal
             ? ((AttachableInternal) data).configuration()
             : new DefaultConfiguration();
@@ -107,7 +107,7 @@ public final class Mock {
     }
 
     /**
-     * No instances
+     * No instances.
      */
     private Mock() {}
 }

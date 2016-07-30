@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -66,9 +66,11 @@ import org.jooq.types.UShort;
  */
 public class MySQLDataType {
 
-    // -------------------------------------------------------------------------
-    // Default SQL data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Default SQL data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<Byte>       TINYINT            = new DefaultDataType<Byte>(SQLDialect.MYSQL, SQLDataType.TINYINT, "tinyint", "signed");
     public static final DataType<UByte>      TINYINTUNSIGNED    = new DefaultDataType<UByte>(SQLDialect.MYSQL, SQLDataType.TINYINTUNSIGNED, "tinyint unsigned", "unsigned");
@@ -100,9 +102,11 @@ public class MySQLDataType {
     public static final DataType<Timestamp>  TIMESTAMP          = new DefaultDataType<Timestamp>(SQLDialect.MYSQL, SQLDataType.TIMESTAMP, "timestamp", "datetime");
     public static final DataType<Timestamp>  DATETIME           = new DefaultDataType<Timestamp>(SQLDialect.MYSQL, SQLDataType.TIMESTAMP, "datetime", "datetime");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported SQLDialect.MYSQL, SQLDataTypes
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported SQLDialect.MYSQL, SQLDataTypes
+     * -------------------------------------------------------------------------
+     */
 
     protected static final DataType<String>     __NCHAR         = new DefaultDataType<String>(SQLDialect.MYSQL, SQLDataType.NCHAR, "char", "char");
     protected static final DataType<String>     __NCLOB         = new DefaultDataType<String>(SQLDialect.MYSQL, SQLDataType.NCLOB, "clob", "char");
@@ -112,16 +116,20 @@ public class MySQLDataType {
     protected static final DataType<String>     __LONGVARCHAR   = new DefaultDataType<String>(SQLDialect.MYSQL, SQLDataType.LONGVARCHAR, "varchar", "char");
     protected static final DataType<byte[]>     __LONGVARBINARY = new DefaultDataType<byte[]>(SQLDialect.MYSQL, SQLDataType.LONGVARBINARY, "varbinary", "binary");
 
-    // -------------------------------------------------------------------------
-    // Compatibility types for supported Java types
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Compatibility types for supported Java types
+     * -------------------------------------------------------------------------.
+     */
 
     protected static final DataType<BigInteger> __BIGINTEGER    = new DefaultDataType<BigInteger>(SQLDialect.MYSQL, SQLDataType.DECIMAL_INTEGER, "decimal", "decimal");
     protected static final DataType<UUID>       __UUID          = new DefaultDataType<UUID>(SQLDialect.MYSQL, SQLDataType.UUID, "varchar", "char");
 
-    // -------------------------------------------------------------------------
-    // Dialect-specific data types and synonyms thereof
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * Dialect-specific data types and synonyms thereof
+     * -------------------------------------------------------------------------.
+     */
 
     public static final DataType<String>     TINYTEXT           = new DefaultDataType<String>(SQLDialect.MYSQL, SQLDataType.CLOB, "tinytext", "char");
     public static final DataType<String>     MEDIUMTEXT         = new DefaultDataType<String>(SQLDialect.MYSQL, SQLDataType.CLOB, "mediumtext", "char");

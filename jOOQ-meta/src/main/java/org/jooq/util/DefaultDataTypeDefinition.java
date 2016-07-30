@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -65,7 +65,7 @@ public class DefaultDataTypeDefinition implements DataTypeDefinition {
     private final int              precision;
     private final int              scale;
 
-    private static final String defaultValue(Boolean defaultable) {
+    private static String defaultValue(Boolean defaultable) {
         return defaultable != null && defaultable ? "NULL" : null;
     }
 
@@ -260,14 +260,14 @@ public class DefaultDataTypeDefinition implements DataTypeDefinition {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((type == null) ? 0 : type.hashCode());
-        result = prime * result + ((userType == null) ? 0 : userType.hashCode());
-        return result;
+        return prime * result + ((userType == null) ? 0 : userType.hashCode());
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
+        if (this == obj) {
+			return true;
+		}
 
         if (obj instanceof DefaultDataTypeDefinition) {
             DefaultDataTypeDefinition other = (DefaultDataTypeDefinition) obj;

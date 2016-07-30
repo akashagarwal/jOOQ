@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -146,7 +146,7 @@ final class UpdateQueryImpl<R extends Record> extends AbstractStoreQuery<R> impl
         return updateMap;
     }
 
-// [jooq-tools] START [addValues]
+/** [jooq-tools] START [addValues]. */
 
     @Generated("This method was generated using jOOQ-tools")
     @Override
@@ -424,7 +424,7 @@ final class UpdateQueryImpl<R extends Record> extends AbstractStoreQuery<R> impl
         addValues0(row, select);
     }
 
-// [jooq-tools] END [addValues]
+/** [jooq-tools] END [addValues]. */
 
     private final void addValues0(Row row, Row value) {
         multiRow = row;

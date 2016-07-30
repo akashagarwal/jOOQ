@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -68,7 +68,7 @@ import org.jooq.TableRecord;
 public abstract class CustomRecord<R extends TableRecord<R>> extends TableRecordImpl<R> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = 5287021930962460241L;
 

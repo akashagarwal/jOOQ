@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -54,7 +54,7 @@ import org.jooq.Field;
 final class Ln extends AbstractFunction<BigDecimal> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long             serialVersionUID = -7273879239726265322L;
 
@@ -74,24 +74,7 @@ final class Ln extends AbstractFunction<BigDecimal> {
 
     @Override
     final Field<BigDecimal> getFunction0(Configuration configuration) {
-        if (base == null) {
-            switch (configuration.dialect().family()) {
-
-
-
-
-
-
-
-
-                case H2:
-                    return function("log", SQLDataType.NUMERIC, argument);
-
-                default:
-                    return function("ln", SQLDataType.NUMERIC, argument);
-            }
-        }
-        else {
+        if (base != null) {
             switch (configuration.dialect().family()) {
 
 
@@ -109,6 +92,23 @@ final class Ln extends AbstractFunction<BigDecimal> {
 
                 default:
                     return function("log", SQLDataType.NUMERIC, inline(base), argument);
+            }
+        }
+        else {
+            switch (configuration.dialect().family()) {
+
+
+
+
+
+
+
+
+                case H2:
+                    return function("log", SQLDataType.NUMERIC, argument);
+
+                default:
+                    return function("ln", SQLDataType.NUMERIC, argument);
             }
         }
     }

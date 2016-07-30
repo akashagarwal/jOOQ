@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -58,7 +58,7 @@ import org.jooq.QueryPart;
 final class DateAdd<T extends java.util.Date> extends AbstractFunction<T> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long             serialVersionUID = -19593015886723235L;
 
@@ -158,10 +158,11 @@ final class DateAdd<T extends java.util.Date> extends AbstractFunction<T> {
 
                 // [#3824] Ensure that the output for DATE arithmetic will also
                 // be of type DATE, not TIMESTAMP
-                if (getDataType().getType() == Date.class)
-                    return field("({0} + ({1} || {2})::interval)::date", getDataType(), date, interval, inline(keyword));
-                else
-                    return field("({0} + ({1} || {2})::interval)", getDataType(), date, interval, inline(keyword));
+                if (getDataType().getType() == Date.class) {
+					return field("({0} + ({1} || {2})::interval)::date", getDataType(), date, interval, inline(keyword));
+				} else {
+					return field("({0} + ({1} || {2})::interval)", getDataType(), date, interval, inline(keyword));
+				}
             }
 
             case SQLITE: {

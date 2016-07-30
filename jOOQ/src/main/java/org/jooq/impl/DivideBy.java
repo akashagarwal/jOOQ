@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -135,7 +135,7 @@ implements
     }
 
     /**
-     * Extracted method for type-safety
+     * Extracted method for type-safety.
      */
     @SuppressWarnings("deprecation")
     private final <T> void selfJoin(org.jooq.ConditionProvider selfJoin, Table<?> outer, Table<?> inner, Field<T> field) {
@@ -150,9 +150,11 @@ implements
         }
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: DivideBy API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: DivideBy API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final DivideByOnConditionStep on(Condition... conditions) {

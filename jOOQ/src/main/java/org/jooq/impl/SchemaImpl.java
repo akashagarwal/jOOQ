@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -153,7 +153,7 @@ public class SchemaImpl extends AbstractQueryPart implements Schema {
     /**
      * {@inheritDoc}
      * <p>
-     * Subclasses should override this method
+     * Subclasses should override this method.
      */
     @Override
     public List<Table<?>> getTables() {
@@ -163,7 +163,7 @@ public class SchemaImpl extends AbstractQueryPart implements Schema {
     /**
      * {@inheritDoc}
      * <p>
-     * Subclasses should override this method
+     * Subclasses should override this method.
      */
     @Override
     public List<UDT<?>> getUDTs() {
@@ -173,16 +173,18 @@ public class SchemaImpl extends AbstractQueryPart implements Schema {
     /**
      * {@inheritDoc}
      * <p>
-     * Subclasses should override this method
+     * Subclasses should override this method.
      */
     @Override
     public List<Sequence<?>> getSequences() {
         return Collections.emptyList();
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: Object API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Object API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public int hashCode() {

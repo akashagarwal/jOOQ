@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -104,17 +104,17 @@ public class XMLDatabase extends AbstractDatabase {
     private static final JooqLogger log        = JooqLogger.getLogger(XMLDatabase.class);
 
     /**
-     * The property name for the XML file
+     * The property name for the XML file.
      */
     public static final String      P_XML_FILE = "xml-file";
 
     /**
-     * The property name for the XSL file that pre-processes the XML file
+     * The property name for the XSL file that pre-processes the XML file.
      */
     public static final String      P_XSL_FILE = "xsl-file";
 
     /**
-     * The property name for the dialect name
+     * The property name for the dialect name.
      */
     public static final String      P_DIALECT  = "dialect";
 
@@ -132,8 +132,9 @@ public class XMLDatabase extends AbstractDatabase {
 
             try {
                 xmlIs = XMLDatabase.class.getResourceAsStream(xml);
-                if (xmlIs == null)
-                    xmlIs = new FileInputStream(xml);
+                if (xmlIs == null) {
+					xmlIs = new FileInputStream(xml);
+				}
 
                 if (StringUtils.isBlank(xsl)) {
                     info = JAXB.unmarshal(new File(xml), InformationSchema.class);
@@ -142,8 +143,9 @@ public class XMLDatabase extends AbstractDatabase {
                     log.info("Using XSL file", xsl);
 
                     xslIs = XMLDatabase.class.getResourceAsStream(xsl);
-                    if (xslIs == null)
-                        xslIs = new FileInputStream(xsl);
+                    if (xslIs == null) {
+						xslIs = new FileInputStream(xsl);
+					}
 
                     try {
                         StringWriter writer = new StringWriter();
@@ -246,16 +248,19 @@ public class XMLDatabase extends AbstractDatabase {
                 int r = 0;
 
                 r = defaultIfNull(o1.getConstraintCatalog(), "").compareTo(defaultIfNull(o2.getConstraintCatalog(), ""));
-                if (r != 0)
-                    return r;
+                if (r != 0) {
+					return r;
+				}
 
                 r = defaultIfNull(o1.getConstraintSchema(), "").compareTo(defaultIfNull(o2.getConstraintSchema(), ""));
-                if (r != 0)
-                    return r;
+                if (r != 0) {
+					return r;
+				}
 
                 r = defaultIfNull(o1.getConstraintName(), "").compareTo(defaultIfNull(o2.getConstraintName(), ""));
-                if (r != 0)
-                    return r;
+                if (r != 0) {
+					return r;
+				}
 
                 return Integer.valueOf(o1.getOrdinalPosition()).compareTo(o2.getOrdinalPosition());
             }
@@ -359,38 +364,32 @@ public class XMLDatabase extends AbstractDatabase {
 
     @Override
     protected List<EnumDefinition> getEnums0() {
-        List<EnumDefinition> result = new ArrayList<EnumDefinition>();
-        return result;
+        return new ArrayList<EnumDefinition>();
     }
 
     @Override
     protected List<DomainDefinition> getDomains0() throws SQLException {
-        List<DomainDefinition> result = new ArrayList<DomainDefinition>();
-        return result;
+        return new ArrayList<DomainDefinition>();
     }
 
     @Override
     protected List<UDTDefinition> getUDTs0() {
-        List<UDTDefinition> result = new ArrayList<UDTDefinition>();
-        return result;
+        return new ArrayList<UDTDefinition>();
     }
 
     @Override
     protected List<ArrayDefinition> getArrays0() {
-        List<ArrayDefinition> result = new ArrayList<ArrayDefinition>();
-        return result;
+        return new ArrayList<ArrayDefinition>();
     }
 
     @Override
     protected List<RoutineDefinition> getRoutines0() {
-        List<RoutineDefinition> result = new ArrayList<RoutineDefinition>();
-        return result;
+        return new ArrayList<RoutineDefinition>();
     }
 
     @Override
     protected List<PackageDefinition> getPackages0() {
-        List<PackageDefinition> result = new ArrayList<PackageDefinition>();
-        return result;
+        return new ArrayList<PackageDefinition>();
     }
 
     static int unbox(Integer i) {

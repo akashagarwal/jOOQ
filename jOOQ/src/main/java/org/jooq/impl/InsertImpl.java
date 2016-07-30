@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -128,7 +128,7 @@ class InsertImpl<R extends Record, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11,
     InsertResultStep<R> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = 4222898879771679107L;
 
@@ -147,9 +147,11 @@ class InsertImpl<R extends Record, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11,
         columns(fields);
     }
 
-    // -------------------------------------------------------------------------
-    // The DSL API
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * The DSL API
+     * -------------------------------------------------------------------------.
+     */
 
     @Override
     public final InsertImpl select(Select select) {

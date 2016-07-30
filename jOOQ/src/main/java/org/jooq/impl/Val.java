@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -67,17 +67,20 @@ final class Val<T> extends AbstractParam<T> {
         super(value, type, paramName);
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: Field API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Field API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public void accept(Context<?> ctx) {
         if (ctx instanceof RenderContext) {
             ParamType paramType = ctx.paramType();
 
-            if (isInline(ctx))
-                ctx.paramType(ParamType.INLINED);
+            if (isInline(ctx)) {
+				ctx.paramType(ParamType.INLINED);
+			}
 
             try {
                 getBinding().sql(new DefaultBindingSQLContext<T>(ctx.configuration(), ctx.data(), (RenderContext) ctx, value, getBindVariable(ctx)));
@@ -87,20 +90,15 @@ final class Val<T> extends AbstractParam<T> {
             }
 
             ctx.paramType(paramType);
-        }
-
-        else {
-
-            // [#1302] Bind value only if it was not explicitly forced to be inlined
-            if (!isInline(ctx)) {
-                ctx.bindValue(value, this);
-            }
-        }
+        } else // [#1302] Bind value only if it was not explicitly forced to be inlined
+		if (!isInline(ctx)) {
+		    ctx.bindValue(value, this);
+		}
     }
 
     /**
      * Get a bind variable, depending on value of
-     * {@link RenderContext#namedParams()}
+     * {@link RenderContext#namedParams()}.
      */
     final String getBindVariable(Context<?> ctx) {
         if (ctx.paramType() == NAMED || ctx.paramType() == NAMED_OR_INLINED) {

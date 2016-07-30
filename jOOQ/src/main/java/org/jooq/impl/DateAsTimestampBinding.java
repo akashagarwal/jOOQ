@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -70,7 +70,7 @@ import org.jooq.SQLDialect;
 public class DateAsTimestampBinding implements Binding<Timestamp, Timestamp> {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = -7730882831126647188L;
 

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -67,7 +67,7 @@ final class DropTableImpl extends AbstractQuery implements
     DropTableStep {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long     serialVersionUID = 8904572826501186329L;
     private static final Clause[] CLAUSES          = { DROP_TABLE };
@@ -87,9 +87,11 @@ final class DropTableImpl extends AbstractQuery implements
         this.ifExists = ifExists;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: DSL API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: DSL API
+     * ------------------------------------------------------------------------
+     */
 
     @Override
     public final DropTableImpl cascade() {
@@ -103,9 +105,11 @@ final class DropTableImpl extends AbstractQuery implements
         return this;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: QueryPart API
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: QueryPart API
+     * ------------------------------------------------------------------------
+     */
 
     private final boolean supportsIfExists(Context<?> ctx) {
         return !asList(DERBY, FIREBIRD).contains(ctx.family());
@@ -127,8 +131,9 @@ final class DropTableImpl extends AbstractQuery implements
         ctx.start(DROP_TABLE_TABLE)
            .keyword("drop table").sql(' ');
 
-        if (ifExists && supportsIfExists(ctx))
-            ctx.keyword("if exists").sql(' ');
+        if (ifExists && supportsIfExists(ctx)) {
+			ctx.keyword("if exists").sql(' ');
+		}
 
         ctx.visit(table);
 

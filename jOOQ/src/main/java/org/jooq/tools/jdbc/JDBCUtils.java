@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -97,7 +97,7 @@ public class JDBCUtils {
      *
      * @see #dialect(String)
      */
-    public static final SQLDialect dialect(Connection connection) {
+    public static SQLDialect dialect(Connection connection) {
         SQLDialect result = SQLDialect.DEFAULT;
 
         if (connection != null) {
@@ -128,7 +128,7 @@ public class JDBCUtils {
     /**
      * "Guess" the {@link SQLDialect} from a connection URL.
      */
-    public static final SQLDialect dialect(String url) {
+    public static SQLDialect dialect(String url) {
         if (url == null) {
             return DEFAULT;
         }
@@ -217,7 +217,7 @@ public class JDBCUtils {
     /**
      * "Guess" the JDBC driver from a connection URL.
      */
-    public static final String driver(String url) {
+    public static String driver(String url) {
         switch (dialect(url).family()) {
             case CUBRID:
                 return "cubrid.jdbc.driver.CUBRIDDriver";
@@ -273,7 +273,7 @@ public class JDBCUtils {
      * This method will silently ignore if <code>connection</code> is
      * <code>null</code>, or if {@link Connection#close()} throws an exception.
      */
-    public static final void safeClose(Connection connection) {
+    public static void safeClose(Connection connection) {
         if (connection != null) {
             try {
                 connection.close();
@@ -288,7 +288,7 @@ public class JDBCUtils {
      * This method will silently ignore if <code>statement</code> is
      * <code>null</code>, or if {@link Statement#close()} throws an exception.
      */
-    public static final void safeClose(Statement statement) {
+    public static void safeClose(Statement statement) {
         if (statement != null) {
             try {
                 statement.close();
@@ -303,7 +303,7 @@ public class JDBCUtils {
      * This method will silently ignore if <code>resultSet</code> is
      * <code>null</code>, or if {@link ResultSet#close()} throws an exception.
      */
-    public static final void safeClose(ResultSet resultSet) {
+    public static void safeClose(ResultSet resultSet) {
         if (resultSet != null) {
             try {
                 resultSet.close();
@@ -320,7 +320,7 @@ public class JDBCUtils {
      * {@link ResultSet#close()} or {@link Statement#close()} throws an
      * exception.
      */
-    public static final void safeClose(ResultSet resultSet, PreparedStatement statement) {
+    public static void safeClose(ResultSet resultSet, PreparedStatement statement) {
         safeClose(resultSet);
         safeClose(statement);
     }
@@ -331,7 +331,7 @@ public class JDBCUtils {
      * This method will silently ignore if <code>blob</code> is
      * <code>null</code>, or if {@link Blob#free()} throws an exception.
      */
-    public static final void safeFree(Blob blob) {
+    public static void safeFree(Blob blob) {
         if (blob != null) {
             try {
                 blob.free();
@@ -351,7 +351,7 @@ public class JDBCUtils {
      * This method will silently ignore if <code>clob</code> is
      * <code>null</code>, or if {@link Clob#free()} throws an exception.
      */
-    public static final void safeFree(Clob clob) {
+    public static void safeFree(Clob clob) {
         if (clob != null) {
             try {
                 clob.free();
@@ -371,7 +371,7 @@ public class JDBCUtils {
      * This method will silently ignore if <code>xml</code> is
      * <code>null</code>, or if {@link SQLXML#free()} throws an exception.
      */
-    public static final void safeFree(SQLXML xml) {
+    public static void safeFree(SQLXML xml) {
         if (xml != null) {
             try {
                 xml.free();
@@ -391,7 +391,7 @@ public class JDBCUtils {
      * This method will silently ignore if <code>array</code> is
      * <code>null</code>, or if {@link Array#free()} throws an exception.
      */
-    public static final void safeFree(Array array) {
+    public static void safeFree(Array array) {
         if (array != null) {
             try {
                 array.free();
@@ -416,7 +416,7 @@ public class JDBCUtils {
      * @return The <code>value</code> or <code>null</code> if the
      *         {@link SQLInput#wasNull()} is <code>true</code>
      */
-    public static final <T> T wasNull(SQLInput stream, T value) throws SQLException {
+    public static <T> T wasNull(SQLInput stream, T value) throws SQLException {
         return (value == null || stream.wasNull()) ? null : value;
     }
 
@@ -431,7 +431,7 @@ public class JDBCUtils {
      * @return The <code>value</code> or <code>null</code> if the
      *         {@link SQLInput#wasNull()} is <code>true</code>
      */
-    public static final <T extends Number> T wasNull(SQLInput stream, T value) throws SQLException {
+    public static <T extends Number> T wasNull(SQLInput stream, T value) throws SQLException {
         return (value == null || (value.intValue() == 0 && stream.wasNull())) ? null : value;
     }
 
@@ -446,8 +446,8 @@ public class JDBCUtils {
      * @return The <code>value</code> or <code>null</code> if the
      *         {@link SQLInput#wasNull()} is <code>true</code>
      */
-    public static final Boolean wasNull(SQLInput stream, Boolean value) throws SQLException {
-        return (value == null || (value.booleanValue() == false && stream.wasNull())) ? null : value;
+    public static Boolean wasNull(SQLInput stream, Boolean value) throws SQLException {
+        return (value == null || (!value.booleanValue() && stream.wasNull())) ? null : value;
     }
 
     /**
@@ -461,7 +461,7 @@ public class JDBCUtils {
      * @return The <code>value</code> or <code>null</code> if the
      *         {@link ResultSet#wasNull()} is <code>true</code>
      */
-    public static final <T> T wasNull(ResultSet rs, T value) throws SQLException {
+    public static <T> T wasNull(ResultSet rs, T value) throws SQLException {
         return (value == null || rs.wasNull()) ? null : value;
     }
 
@@ -476,7 +476,7 @@ public class JDBCUtils {
      * @return The <code>value</code> or <code>null</code> if the
      *         {@link ResultSet#wasNull()} is <code>true</code>
      */
-    public static final <T extends Number> T wasNull(ResultSet rs, T value) throws SQLException {
+    public static <T extends Number> T wasNull(ResultSet rs, T value) throws SQLException {
         return (value == null || (value.intValue() == 0 && rs.wasNull())) ? null : value;
     }
 
@@ -491,8 +491,8 @@ public class JDBCUtils {
      * @return The <code>value</code> or <code>null</code> if the
      *         {@link ResultSet#wasNull()} is <code>true</code>
      */
-    public static final Boolean wasNull(ResultSet rs, Boolean value) throws SQLException {
-        return (value == null || (value.booleanValue() == false && rs.wasNull())) ? null : value;
+    public static Boolean wasNull(ResultSet rs, Boolean value) throws SQLException {
+        return (value == null || (!value.booleanValue() && rs.wasNull())) ? null : value;
     }
 
     /**
@@ -506,7 +506,7 @@ public class JDBCUtils {
      * @return The <code>value</code> or <code>null</code> if the
      *         {@link CallableStatement#wasNull()} is <code>true</code>
      */
-    public static final <T> T wasNull(CallableStatement statement, T value) throws SQLException {
+    public static <T> T wasNull(CallableStatement statement, T value) throws SQLException {
         return (value == null || statement.wasNull()) ? null : value;
     }
 
@@ -521,7 +521,7 @@ public class JDBCUtils {
      * @return The <code>value</code> or <code>null</code> if the
      *         {@link CallableStatement#wasNull()} is <code>true</code>
      */
-    public static final <T extends Number> T wasNull(CallableStatement statement, T value) throws SQLException {
+    public static <T extends Number> T wasNull(CallableStatement statement, T value) throws SQLException {
         return (value == null || (value.intValue() == 0 && statement.wasNull())) ? null : value;
     }
 
@@ -536,8 +536,8 @@ public class JDBCUtils {
      * @return The <code>value</code> or <code>null</code> if the
      *         {@link CallableStatement#wasNull()} is <code>true</code>
      */
-    public static final Boolean wasNull(CallableStatement statement, Boolean value) throws SQLException {
-        return (value == null || (value.booleanValue() == false && statement.wasNull())) ? null : value;
+    public static Boolean wasNull(CallableStatement statement, Boolean value) throws SQLException {
+        return (value == null || (!value.booleanValue() && statement.wasNull())) ? null : value;
     }
 
     /**

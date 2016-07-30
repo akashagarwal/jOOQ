@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -99,7 +99,7 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
     private boolean                     resultWasNull;
     private boolean                     isClosed;
 
-    // Execution parameters
+    /** Execution parameters. */
     int                                 resultSetType        = ResultSet.TYPE_FORWARD_ONLY;
     int                                 resultSetConcurrency = ResultSet.CONCUR_READ_ONLY;
     int                                 resultSetHoldability = ResultSet.CLOSE_CURSORS_AT_COMMIT;
@@ -107,7 +107,7 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
     int[]                               columnIndexes;
     String[]                            columnNames;
 
-    // Statement properties
+    /** Statement properties. */
     private int                         queryTimeout;
     private int                         maxRows;
 
@@ -129,9 +129,11 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
         this.bindings.add(new ArrayList<Object>());
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Utilities
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Utilities
+     * -------------------------------------------------------------------------
+     */
 
     private List<Object> bindings() {
         return bindings.get(bindings.size() - 1);
@@ -162,9 +164,11 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
         return connection;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Executing queries
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Executing queries
+     * -------------------------------------------------------------------------
+     */
 
     @SuppressWarnings("unused")
     private boolean execute0(
@@ -191,7 +195,7 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
         return result != null && result.length > 0 && result[resultIndex].data != null;
     }
 
-    private static final int[] unbox(List<Integer> list) {
+    private static int[] unbox(List<Integer> list) {
         int[] array = new int[list.size()];
 
         for (int i = 0; i < array.length; i++) {
@@ -214,7 +218,7 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
 
     @Override
     public boolean getMoreResults(int current) throws SQLException {
-        return (result != null && ++resultIndex < result.length);
+        return result != null && ++resultIndex < result.length;
     }
 
     @SuppressWarnings("resource")
@@ -229,7 +233,7 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
     @Override
     public int getUpdateCount() throws SQLException {
         checkNotClosed();
-        return (result != null && resultIndex < result.length) && result[resultIndex].data == null ? result[resultIndex].rows : -1;
+        return result != null && resultIndex < result.length && result[resultIndex].data == null ? result[resultIndex].rows : -1;
     }
 
     @Override
@@ -297,9 +301,11 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
         return getUpdateCount();
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Batch processing
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Batch processing
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public void addBatch() throws SQLException {
@@ -326,29 +332,34 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
         checkNotClosed();
 
         Object[][] matrix = new Object[bindings.size() - 1][];
-        for (int i = 0; i < bindings.size() - 1; i++)
-            matrix[i] = bindings.get(i).toArray();
+        for (int i = 0; i < bindings.size() - 1; i++) {
+			matrix[i] = bindings.get(i).toArray();
+		}
 
         result = data.execute(new MockExecuteContext(sql.toArray(new String[0]), matrix));
 
         int[] rows = new int[result.length];
-        for (int i = 0; i < result.length; i++)
-            rows[i] = result[i].rows;
+        for (int i = 0; i < result.length; i++) {
+			rows[i] = result[i].rows;
+		}
 
         return rows;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Bind variables
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Bind variables
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public void clearParameters() throws SQLException {
         checkNotClosed();
         List<Object> b = bindings();
 
-        for (int i = 0; i < b.size(); i++)
-            b.set(i, null);
+        for (int i = 0; i < b.size(); i++) {
+			b.set(i, null);
+		}
     }
 
     @Override
@@ -497,26 +508,32 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
         bindings().set(parameterIndex - 1, x.getArray());
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Bind variables from CallableStatement
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Bind variables from CallableStatement
+     * -------------------------------------------------------------------------
+     */
 
     private Record outParameters() throws SQLException {
-        if (result == null || result.length == 0 || result[0].data == null || result[0].data.size() == 0)
-            throw new SQLException("No OUT Parameters available");
+        if (result == null || result.length == 0 || result[0].data == null || result[0].data.size() == 0) {
+			throw new SQLException("No OUT Parameters available");
+		}
 
         return result[0].data.get(0);
     }
 
     private int translate(int parameterIndex) throws SQLException {
-        if (parameterIndex > outParameterTypes.size())
-            throw new SQLException("OUT parameter index too high: " + parameterIndex);
+        if (parameterIndex > outParameterTypes.size()) {
+			throw new SQLException("OUT parameter index too high: " + parameterIndex);
+		}
 
         int index = -1;
 
-        for (int i = 0; i < parameterIndex; i++)
-            if (outParameterTypes.get(i) != null)
-                index++;
+        for (int i = 0; i < parameterIndex; i++) {
+			if (outParameterTypes.get(i) != null) {
+				index++;
+			}
+		}
 
         return index;
     }
@@ -697,9 +714,11 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
         return value;
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Ignored operations
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Ignored operations
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public boolean isClosed() throws SQLException {
@@ -829,9 +848,11 @@ public class MockStatement extends JDBC41Statement implements CallableStatement 
         throw new SQLException("Can this be ignored?");
     }
 
-    // -------------------------------------------------------------------------
-    // XXX: Unsupported operations
-    // -------------------------------------------------------------------------
+    /**
+     * -------------------------------------------------------------------------
+     * XXX: Unsupported operations
+     * -------------------------------------------------------------------------
+     */
 
     @Override
     public <T> T unwrap(Class<T> iface) throws SQLException {

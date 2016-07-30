@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2011-2016, Lukas Eder, lukas.eder@gmail.com
  * All rights reserved.
  *
@@ -45,7 +45,7 @@ import java.math.BigInteger;
 public abstract class UNumber extends Number {
 
     /**
-     * Generated UID
+     * Generated UID.
      */
     private static final long serialVersionUID = -7666221938815339843L;
 

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2009-2016, Data Geekery GmbH (http://www.datageekery.com)
  * All rights reserved.
  *
@@ -84,7 +84,7 @@ class DefaultExecuteContext implements ExecuteContext {
 
     private static final JooqLogger                log     = JooqLogger.getLogger(DefaultExecuteContext.class);
 
-    // Persistent attributes (repeatable)
+    /** Persistent attributes (repeatable). */
     private final Configuration                    configuration;
     private final Map<Object, Object>              data;
     private final Query                            query;
@@ -95,7 +95,7 @@ class DefaultExecuteContext implements ExecuteContext {
     private final String[]                         batchSQL;
     private final int[]                            batchRows;
 
-    // Transient attributes (created afresh per execution)
+    /** Transient attributes (created afresh per execution). */
     private transient ConnectionProvider           connectionProvider;
     private transient Connection                   connection;
     private transient PreparedStatement            statement;
@@ -107,9 +107,11 @@ class DefaultExecuteContext implements ExecuteContext {
     private transient SQLException                 sqlException;
     private transient SQLWarning                   sqlWarning;
 
-    // ------------------------------------------------------------------------
-    // XXX: Static utility methods for handling blob / clob lifecycle
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Static utility methods for handling blob / clob lifecycle
+     * ------------------------------------------------------------------------
+     */
 
     private static final ThreadLocal<List<Blob>>   BLOBS   = new ThreadLocal<List<Blob>>();
     private static final ThreadLocal<List<Clob>>   CLOBS   = new ThreadLocal<List<Clob>>();
@@ -149,7 +151,7 @@ class DefaultExecuteContext implements ExecuteContext {
      * @see <a
      *      href="http://stackoverflow.com/q/11439543/521799">http://stackoverflow.com/q/11439543/521799</a>
      */
-    static final void clean() {
+    static void clean() {
         List<Blob> blobs = BLOBS.get();
         List<Clob> clobs = CLOBS.get();
         List<SQLXML> xmls = SQLXMLS.get();
@@ -193,36 +195,38 @@ class DefaultExecuteContext implements ExecuteContext {
     }
 
     /**
-     * Register a blob for later cleanup with {@link #clean()}
+     * Register a blob for later cleanup with {@link #clean()}.
      */
-    static final void register(Blob blob) {
+    static void register(Blob blob) {
         BLOBS.get().add(blob);
     }
 
     /**
-     * Register a clob for later cleanup with {@link #clean()}
+     * Register a clob for later cleanup with {@link #clean()}.
      */
-    static final void register(Clob clob) {
+    static void register(Clob clob) {
         CLOBS.get().add(clob);
     }
 
     /**
-     * Register an xml for later cleanup with {@link #clean()}
+     * Register an xml for later cleanup with {@link #clean()}.
      */
-    static final void register(SQLXML xml) {
+    static void register(SQLXML xml) {
         SQLXMLS.get().add(xml);
     }
 
     /**
-     * Register an array for later cleanup with {@link #clean()}
+     * Register an array for later cleanup with {@link #clean()}.
      */
-    static final void register(Array array) {
+    static void register(Array array) {
         ARRAYS.get().add(array);
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: Static utility methods for handling Configuration lifecycle
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Static utility methods for handling Configuration lifecycle
+     * ------------------------------------------------------------------------
+     */
 
     private static final ThreadLocal<Configuration>       LOCAL_CONFIGURATION = new ThreadLocal<Configuration>();
     private static final ThreadLocal<Map<Object, Object>> LOCAL_DATA          = new ThreadLocal<Map<Object, Object>>();
@@ -234,7 +238,7 @@ class DefaultExecuteContext implements ExecuteContext {
      * {@link ExecuteContext} has been established, until the statement is
      * closed.
      */
-    static final Configuration localConfiguration() {
+    static Configuration localConfiguration() {
         return LOCAL_CONFIGURATION.get();
     }
 
@@ -245,13 +249,15 @@ class DefaultExecuteContext implements ExecuteContext {
      * {@link ExecuteContext} has been established, until the statement is
      * closed.
      */
-    static final Map<Object, Object> localData() {
+    static Map<Object, Object> localData() {
         return LOCAL_DATA.get();
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: Static utility methods for handling Configuration lifecycle
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Static utility methods for handling Configuration lifecycle
+     * ------------------------------------------------------------------------
+     */
 
     private static final ThreadLocal<Connection> LOCAL_CONNECTION = new ThreadLocal<Connection>();
 
@@ -262,7 +268,7 @@ class DefaultExecuteContext implements ExecuteContext {
      * {@link ExecuteContext} has been established, until the statement is
      * closed.
      */
-    static final Connection localConnection() {
+    static Connection localConnection() {
         return LOCAL_CONNECTION.get();
     }
 
@@ -286,7 +292,7 @@ class DefaultExecuteContext implements ExecuteContext {
      * {@link ExecuteContext} has been established, until the statement is
      * closed.
      */
-    static final Connection localTargetConnection() {
+    static Connection localTargetConnection() {
         Connection result = localConnection();
 
         unwrappingLoop:
@@ -347,9 +353,11 @@ class DefaultExecuteContext implements ExecuteContext {
         return result;
     }
 
-    // ------------------------------------------------------------------------
-    // XXX: Constructors
-    // ------------------------------------------------------------------------
+    /**
+     * ------------------------------------------------------------------------
+     * XXX: Constructors
+     * ------------------------------------------------------------------------
+     */
 
     DefaultExecuteContext(Configuration configuration) {
         this(configuration, null, null, null);
@@ -371,15 +379,16 @@ class DefaultExecuteContext implements ExecuteContext {
         this.configuration = configuration;
         this.data = new DataMap();
         this.query = query;
-        this.batchQueries = (batchQueries == null ? new Query[0] : batchQueries);
+        this.batchQueries = batchQueries == null ? new Query[0] : batchQueries;
         this.routine = routine;
 
         if (this.batchQueries.length > 0) {
             this.batchSQL = new String[this.batchQueries.length];
             this.batchRows = new int[this.batchQueries.length];
 
-            for (int i = 0; i < this.batchQueries.length; i++)
-                this.batchRows[i] = -1;
+            for (int i = 0; i < this.batchQueries.length; i++) {
+				this.batchRows[i] = -1;
+			}
         }
         else if (routine != null) {
             this.batchSQL = new String[1];
